@@ -2,11 +2,11 @@
 
 **AI-Powered Criminal Network Analysis System**
 
-*Built for Smart India Hackathon 2026 — addressing NCRB Problem Statement #26189*
+*Built for Smart India Hackathon — addressing NCRB Problem Statement #26189*
 *Ministry of Home Affairs · National Crime Records Bureau · Women Safety Division*
 
 ![Status](https://img.shields.io/badge/status-in%20development-yellow)
-![Hackathon](https://img.shields.io/badge/hackathon-internal-blue)
+![Hackathon](https://img.shields.io/badge/hackathon-Smart%20India%20Hackathon-blue)
 ![License](https://img.shields.io/badge/license-TBD-lightgrey)
 ![Theme](https://img.shields.io/badge/theme-blockchain%20%26%20cybersecurity-purple)
 
@@ -36,31 +36,7 @@ purpose is to find the ones that aren't.
 
 ## Architecture
 
-```mermaid
-flowchart TB
-    subgraph Client
-        A[Next.js Frontend<br/>Dashboard + Graph Viz]
-    end
-
-    subgraph AIService [AI/NLP Microservice]
-        B[FastAPI - Python]
-        B1[LLM Entity Extraction]
-        B2[Facial Embedding - InsightFace/FaceNet]
-        B --> B1
-        B --> B2
-    end
-
-    subgraph Databases
-        C[(Supabase / Postgres<br/>Auth · Metadata · pgvector)]
-        D[(Neo4j<br/>Entities · Relationships · Centrality)]
-    end
-
-    A -->|REST| B
-    B -->|writes| D
-    B -->|writes| C
-    A -->|queries| D
-    A -->|queries| C
-```
+![Architecture Diagram](docs/assets/architecture.png)
 
 Postgres handles rows, auth, and vector similarity search. Neo4j handles relationship
 traversal and graph algorithms — centrality, pattern detection. Neo4j is the single
@@ -71,52 +47,30 @@ only references it by ID.
 
 ## Build Progress
 
-```mermaid
-gantt
-    title Netra — Build Timeline
-    dateFormat  YYYY-MM-DD
-    axisFormat  %d %b
+![Planning](https://img.shields.io/badge/Planning-100%25-brightgreen)
+![Data Generation](https://img.shields.io/badge/Data%20Generation-10%25-red)
+![Database](https://img.shields.io/badge/Database-0%25-red)
+![AI%2FNLP Backend](https://img.shields.io/badge/AI%2FNLP%20Backend-0%25-red)
+![Frontend](https://img.shields.io/badge/Frontend-0%25-red)
+![Integration](https://img.shields.io/badge/Integration-0%25-red)
 
-    section Planning
-    Problem framing & app flow     :done, p1, 2026-08-20, 4d
-    Architecture & schema lock     :done, p2, after p1, 2d
-    UI mockups (5 screens)         :done, p3, after p2, 3d
+| Segment | Working On It |
+|---|---|
+| Planning & App Flow | Team |
+| UI/UX Mockups | Sohan Darde |
+| Data Generation | Rishikesh Dhamdhere |
+| Database (Neo4j + Supabase) | Tanmay Madhavi |
+| AI/NLP Backend | Rohan Ayare & Taswi Tawde |
+| Frontend | Shubham Jadhav |
+| Integration & Demo Prep | Taswi Tawde |
 
-    section Data
-    Master graph generator         :active, d1, 2026-09-02, 3d
-    Case manifest + tiering        :d2, after d1, 2d
-    FIR/CDR/financial generation   :d3, after d2, 3d
-    Face asset generation          :d4, after d2, 2d
+Update the badge percentages as work progresses — red under 30%, yellow 30–79%, green
+80% and above. Each badge is just a URL, so editing the number is a one-line change:
 
-    section Backend
-    Neo4j schema + seed script     :b1, after d2, 3d
-    Entity extraction pipeline     :b2, after d1, 4d
-    Centrality & pattern detection :b3, after b1, 3d
-    Facial search endpoint         :b4, after d4, 3d
-
-    section Frontend
-    Ingestion screens              :f1, 2026-09-05, 3d
-    Dashboard & graph view         :f2, after f1, 4d
-    Lead injection flow            :f3, after f2, 2d
-
-    section Wrap-up
-    Integration testing            :w1, after b3, 2d
-    Demo script + report export    :w2, after w1, 2d
 ```
-
-| Segment | Status | Owner |
-|---|---|---|
-| Problem framing & app flow | Done | Team |
-| Architecture & schema design | Done | Team |
-| UI/UX mockups | Done | [Designer name] |
-| Data generation pipeline | In progress | [Your name] |
-| Neo4j schema & seed | Not started | [DB teammate] |
-| AI/NLP extraction | Not started | [ML teammate] |
-| Frontend dashboard | Not started | [Frontend teammate] |
-| Integration & demo prep | Not started | Team |
-
-Update this table as work progresses — it's the fastest way for anyone opening the repo
-to understand where things stand.
+https://img.shields.io/badge/Data%20Generation-10%25-red
+                                    ^label      ^%   ^color
+```
 
 ---
 
@@ -128,7 +82,7 @@ netra/
 ├── backend/      → FastAPI AI/NLP microservice
 ├── data/         → dummy data generators, case manifest, raw files
 ├── db/           → Neo4j schema/seed scripts, Supabase migrations
-├── docs/         → project reference docs
+├── docs/         → project reference docs + diagrams
 └── scripts/      → setup/dev utilities
 ```
 
@@ -168,19 +122,10 @@ graph-based financial crime detection, and legal-text NLP.
 
 ---
 
-## Team & Ownership
-
-| Area | Owner |
-|---|---|
-| Frontend | TBD |
-| AI/NLP Backend | TBD |
-| Database (Neo4j + Supabase) | TBD |
-| Data Ingestion & Generation | [Your name] |
-
----
-
 ## Getting Started
 
 *(to be filled in as each part comes online)*
 
 ---
+
+*Built for Smart India Hackathon, [Dates TBD]*
