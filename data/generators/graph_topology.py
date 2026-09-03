@@ -20,7 +20,7 @@ hubs = [
     {"hub_id": "H6", "kingpin_name": "Faisal Khan", "org_name": "Bandra Cell", "org_type": "trafficking", "base_location": "Bandra Apartment"},
 ]
 
-CLUSTER_SIZE = 11
+CLUSTER_SIZE = 17
 
 # ---------------------------------------------------------
 # 2. BRIDGES
@@ -226,7 +226,7 @@ for obj_id, data in list(G.nodes(data=True)):
 tier_weight = {"Kingpin": 8, "Lieutenant": 5, "Associate": 1}
 phone_weights = [tier_weight.get(t, 1) for (_, _, t) in phone_objects]
 
-TOTAL_CALLS = 3000
+TOTAL_CALLS = 4400
 call_records = []
 
 start_date = datetime.date(2022, 1, 1)
@@ -269,7 +269,7 @@ for obj_id, data in list(G.nodes(data=True)):
             tier = G.nodes[owner].get("hierarchy_tier", "Associate")
             account_objects.append((obj_id, owner, tier))
 
-TOTAL_TRANSACTIONS = 800
+TOTAL_TRANSACTIONS = 1170
 transaction_records = []
 modes = ["NEFT", "UPI", "Cash Deposit", "RTGS"]
 
