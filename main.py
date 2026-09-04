@@ -1,7 +1,11 @@
+from dotenv import load_dotenv
+load_dotenv()
+
 from fastapi import FastAPI, BackgroundTasks, UploadFile, File, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-# This line imports the logic from the new file you just created
-from services.ai_service import extract_entities_from_file
+from backend.app.services.gemini_service import extract_fir_data
+
+
 
 app = FastAPI(title="Netra AI/NLP Backend", version="1.0")
 
@@ -15,8 +19,15 @@ app.add_middleware(
 
 def process_file_task(filename: str, file_bytes: bytes):
     try:
-        result = extract_entities_from_file(filename, file_bytes)
+        print(f"Extracting POLE+O entities from {filename}...")
+        
+        # Call Rohan's function directly using the raw file bytes
+        result = extract_fir_data(file_bytes)
+        
         print(f"Task Complete. Data ready for DB: {result}")
+        
+        # TODO: write_to_neo4j(result) - Waiting on Tanmay's connection details
+        
     except Exception as e:
         print(f"AI Service Error: {str(e)}. Using updated POLE+O fallback mock data.")
         
@@ -57,7 +68,9 @@ async def upload_case_file(
     background_tasks: BackgroundTasks, 
     file: UploadFile = File(...)
 ):
+    # Read the bytes BEFORE handing off to the background task
     file_bytes = await file.read()
+    
     background_tasks.add_task(process_file_task, file.filename, file_bytes)
     
     return {
