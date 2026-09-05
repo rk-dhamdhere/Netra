@@ -1,5 +1,6 @@
 import sys
 import os
+import random as _random  # avoid clashing with graph_topology's random import
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 import time
@@ -7,7 +8,7 @@ import requests
 import pandas as pd
 from graph_topology import G
 
-FACE_SOURCE_URL = "https://thispersondoesnotexist.com"
+FACE_SOURCE_URL = "https://randomuser.me/api/portraits/{gender}/{num}.jpg"
 OUTPUT_DIR = "data/raw/photos"
 DELAY_SECONDS = 1.5  # be polite to the free service, avoid rate-limiting
 
@@ -26,10 +27,19 @@ def get_persons_needing_photos():
     return sorted(photo_person_ids)
 
 def download_face(save_path, retries=3):
+    gender = _random.choice(["men", "women"])
+    num = _random.randint(0, 99)
+    url = FACE_SOURCE_URL.format(gender=gender, num=num)
+
     for attempt in range(retries):
         try:
-            response = requests.get(FACE_SOURCE_URL, timeout=10)
+            response = requests.get(url, timeout=10)
             response.raise_for_status()
+            content_type = response.headers.get("Content-Type", "")
+            if "image" not in content_type:
+                print(f"  Attempt {attempt + 1}: got non-image content ({content_type}), retrying...")
+                time.sleep(1)
+                continue
             with open(save_path, "wb") as f:
                 f.write(response.content)
             return True
