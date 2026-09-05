@@ -48,7 +48,7 @@ only references it by ID.
 ## Build Progress
 
 ![Planning](https://img.shields.io/badge/Planning-100%25-brightgreen)
-![Data Generation](https://img.shields.io/badge/Data%20Generation-75%25-yellow)
+![Data Generation](https://img.shields.io/badge/Data%20Generation-95%25-brightgreen)
 ![Database](https://img.shields.io/badge/Database-0%25-red)
 ![AI%2FNLP Backend](https://img.shields.io/badge/AI%2FNLP%20Backend-25%25-red)
 ![Frontend](https://img.shields.io/badge/Frontend-25%25-red)
@@ -58,7 +58,7 @@ only references it by ID.
 |---|---|---|
 | Planning & App Flow | Team | Done |
 | UI/UX Mockups | Sohan Darde | Done |
-| Data Generation | Rishikesh Dhamdhere | Master graph, manifest, FIR text done; per-case CDR/financial slicing in progress |
+| Data Generation | Rishikesh Dhamdhere | Master graph, manifest, FIR text, per-case CDR/financial slicing, and photos all complete and reproducible end-to-end. Only the Neo4j seed/import script remains, pending sync with DB owner. |
 | Database (Neo4j + Supabase) | Tanmay Madhavi | Not started |
 | AI/NLP Backend | Rohan Ayare & Taswi Tawde | FastAPI upload endpoint + Gemini extraction worker initialized |
 | Frontend | Shubham Jadhav | React Flow knowledge graph UI initialized |
@@ -68,7 +68,7 @@ Update the badge percentages as work progresses — red under 30%, yellow 30–7
 80% and above. Each badge is just a URL, so editing the number is a one-line change:
 
 ```
-https://img.shields.io/badge/Data%20Generation-75%25-yellow
+https://img.shields.io/badge/Data%20Generation-95%25-brightgreen
                                     ^label      ^%   ^color
 ```
 
@@ -97,12 +97,6 @@ netra/
 | Structured Data & Auth | Supabase (Postgres + pgvector) |
 | Graph Database | Neo4j (+ Graph Data Science library for centrality) |
 | Facial Recognition | InsightFace / FaceNet |
-
----
-
-## Known Issues
-
-- **Per-case CDR slicing returns 0 matches** (`data/generators/slice_case_evidence.py`) — likely a pandas dtype mismatch: numeric-only phone number columns in the master CDR CSV appear to be read back as `int64` instead of text, so string-based lookups from the graph never match. Suspected fix: force `dtype=str` when reading `master_cdr_log.csv`. Financial slicing is unaffected since account numbers contain letters (e.g. `ACC796212`), forcing pandas to keep that column as text. Not yet fixed — flagged for next session.
 
 ---
 
