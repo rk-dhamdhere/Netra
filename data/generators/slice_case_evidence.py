@@ -14,7 +14,9 @@ def get_phones_for_entities(entity_ids):
             if data.get("relationship") == "USES":
                 obj_data = G.nodes[obj_id]
                 if obj_data.get("node_type") == "Object" and obj_data.get("type") == "phone":
-                    phones.add(obj_data.get("identifier_value"))
+                    raw = str(obj_data.get("identifier_value"))
+                    normalized = "".join(ch for ch in raw if ch.isdigit())
+                    phones.add(normalized)
     return phones
 
 def get_accounts_for_entities(entity_ids):
@@ -31,7 +33,7 @@ def get_accounts_for_entities(entity_ids):
 
 if __name__ == "__main__":
     manifest = pd.read_csv("data/manifest/case_manifest.csv", keep_default_na=False)
-    master_cdr = pd.read_csv("data/raw/cdrs/master_cdr_log.csv")
+    master_cdr = pd.read_csv("data/raw/cdrs/master_cdr_log.csv", dtype={"CALLER": str, "RECEIVER": str})
     master_financial = pd.read_csv("data/raw/financial/master_transaction_log.csv")
 
     os.makedirs("data/raw/cdrs/per_case", exist_ok=True)
@@ -49,8 +51,10 @@ if __name__ == "__main__":
 
         if "CDR" in evidence_types:
             phones = get_phones_for_entities(entity_ids)
+            normalized_caller = master_cdr["CALLER"].astype(str).apply(lambda x: "".join(ch for ch in x if ch.isdigit()))
+            normalized_receiver = master_cdr["RECEIVER"].astype(str).apply(lambda x: "".join(ch for ch in x if ch.isdigit()))
             case_cdr = master_cdr[
-                master_cdr["CALLER"].isin(phones) | master_cdr["RECEIVER"].isin(phones)
+                normalized_caller.isin(phones) | normalized_receiver.isin(phones)
             ]
             if len(case_cdr) > 0:
                 case_cdr.to_csv(f"data/raw/cdrs/per_case/{case_id}_cdr.csv", index=False)
