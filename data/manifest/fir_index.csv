@@ -1,0 +1,201 @@
+case_id,tier,category,officer,incident_date,file_path
+case_001,3,"Narcotics Offence (NDPS Act, Sec. 8)",Vasudha Natt,2024-07-15,data/raw/firs/case_001.txt
+case_002,3,Extortion (BNS Sec. 308),Pratyush Viswanathan,2025-02-20,data/raw/firs/case_002.txt
+case_003,3,Human Trafficking (BNS Sec. 143),Brijesh Bhat,2024-08-11,data/raw/firs/case_003.txt
+case_004,3,Financial Fraud / Cheating (BNS Sec. 318),Banjeet Misra,2024-07-14,data/raw/firs/case_004.txt
+case_005,3,"Narcotics Offence (NDPS Act, Sec. 8)",Ria Bobal,2024-11-06,data/raw/firs/case_005.txt
+case_006,3,Human Trafficking (BNS Sec. 143),Meghana Yohannan,2025-04-17,data/raw/firs/case_006.txt
+case_007,3,Human Trafficking (BNS Sec. 143),Dakshesh Ratta,2023-01-24,data/raw/firs/case_007.txt
+case_008,3,"Narcotics Offence (NDPS Act, Sec. 8)",Bina Raval,2023-01-14,data/raw/firs/case_008.txt
+case_009,3,Human Trafficking (BNS Sec. 143),Pallavi Ganesan,2024-11-14,data/raw/firs/case_009.txt
+case_010,3,"Narcotics Offence (NDPS Act, Sec. 8)",Janaki Varma,2024-09-01,data/raw/firs/case_010.txt
+case_011,3,Human Trafficking (BNS Sec. 143),Maanas Parmer,2025-07-13,data/raw/firs/case_011.txt
+case_012,3,Financial Fraud / Cheating (BNS Sec. 318),Joshua Bhagat,2025-06-11,data/raw/firs/case_012.txt
+case_013,3,Extortion (BNS Sec. 308),Abeer Panchal,2023-01-17,data/raw/firs/case_013.txt
+case_014,3,Human Trafficking (BNS Sec. 143),Lopa Bora,2022-07-12,data/raw/firs/case_014.txt
+case_015,3,Human Trafficking (BNS Sec. 143),Frederick Puri,2024-07-03,data/raw/firs/case_015.txt
+case_016,3,"Narcotics Offence (NDPS Act, Sec. 8)",Qasim Goswami,2023-09-14,data/raw/firs/case_016.txt
+case_017,3,Extortion (BNS Sec. 308),Faqid Dugar,2022-10-18,data/raw/firs/case_017.txt
+case_018,3,Human Trafficking (BNS Sec. 143),Ekantika Bhakta,2022-07-05,data/raw/firs/case_018.txt
+case_019,3,Human Trafficking (BNS Sec. 143),Chatresh Nair,2025-01-08,data/raw/firs/case_019.txt
+case_020,3,Human Trafficking (BNS Sec. 143),Xalak Sani,2025-11-21,data/raw/firs/case_020.txt
+case_021,3,Human Trafficking (BNS Sec. 143),Ishanvi Som,2025-07-23,data/raw/firs/case_021.txt
+case_022,3,"Narcotics Offence (NDPS Act, Sec. 8)",Arjun Saraf,2022-03-27,data/raw/firs/case_022.txt
+case_023,3,Human Trafficking (BNS Sec. 143),Daniel Sibal,2025-05-04,data/raw/firs/case_023.txt
+case_024,3,Financial Fraud / Cheating (BNS Sec. 318),Ishanvi Dugar,2024-03-22,data/raw/firs/case_024.txt
+case_025,3,"Narcotics Offence (NDPS Act, Sec. 8)",Upkaar Bhardwaj,2024-07-16,data/raw/firs/case_025.txt
+case_026,3,Human Trafficking (BNS Sec. 143),Aishani Narasimhan,2025-09-01,data/raw/firs/case_026.txt
+case_027,3,"Narcotics Offence (NDPS Act, Sec. 8)",Kashish Natt,2025-06-14,data/raw/firs/case_027.txt
+case_028,3,"Narcotics Offence (NDPS Act, Sec. 8)",Yamini Garde,2025-08-24,data/raw/firs/case_028.txt
+case_029,3,"Narcotics Offence (NDPS Act, Sec. 8)",Vaishnavi Mittal,2022-11-19,data/raw/firs/case_029.txt
+case_030,3,"Narcotics Offence (NDPS Act, Sec. 8)",Krishna Bajaj,2025-06-30,data/raw/firs/case_030.txt
+case_031,3,Financial Fraud / Cheating (BNS Sec. 318),Kamya Issac,2022-01-31,data/raw/firs/case_031.txt
+case_032,3,Human Trafficking (BNS Sec. 143),Dayita Char,2024-12-18,data/raw/firs/case_032.txt
+case_033,3,"Narcotics Offence (NDPS Act, Sec. 8)",Hardik Ganesan,2022-05-10,data/raw/firs/case_033.txt
+case_034,3,Human Trafficking (BNS Sec. 143),Ira Kala,2022-05-02,data/raw/firs/case_034.txt
+case_035,3,"Narcotics Offence (NDPS Act, Sec. 8)",Logan Bobal,2022-03-15,data/raw/firs/case_035.txt
+case_036,3,Human Trafficking (BNS Sec. 143),Bhavini Barad,2023-01-25,data/raw/firs/case_036.txt
+case_037,3,Human Trafficking (BNS Sec. 143),Manan Saran,2023-05-11,data/raw/firs/case_037.txt
+case_038,3,Human Trafficking (BNS Sec. 143),William Kalita,2025-05-13,data/raw/firs/case_038.txt
+case_039,3,Human Trafficking (BNS Sec. 143),Hemang Rama,2022-03-03,data/raw/firs/case_039.txt
+case_040,3,Financial Fraud / Cheating (BNS Sec. 318),Rudra Pandya,2024-08-08,data/raw/firs/case_040.txt
+case_041,3,Human Trafficking (BNS Sec. 143),Vidhi Rama,2023-10-31,data/raw/firs/case_041.txt
+case_042,3,"Narcotics Offence (NDPS Act, Sec. 8)",Harrison Koshy,2024-06-21,data/raw/firs/case_042.txt
+case_043,3,Human Trafficking (BNS Sec. 143),Zaid Karan,2025-04-25,data/raw/firs/case_043.txt
+case_044,3,Human Trafficking (BNS Sec. 143),Elijah Kata,2023-02-05,data/raw/firs/case_044.txt
+case_045,3,Extortion (BNS Sec. 308),Bhavika Kuruvilla,2024-11-29,data/raw/firs/case_045.txt
+case_046,3,Human Trafficking (BNS Sec. 143),Tanvi Raghavan,2023-04-24,data/raw/firs/case_046.txt
+case_047,3,"Narcotics Offence (NDPS Act, Sec. 8)",Janaki Baria,2025-08-04,data/raw/firs/case_047.txt
+case_048,3,Financial Fraud / Cheating (BNS Sec. 318),Hemani Vig,2023-08-26,data/raw/firs/case_048.txt
+case_049,3,Human Trafficking (BNS Sec. 143),Panini Borde,2024-10-20,data/raw/firs/case_049.txt
+case_050,3,"Narcotics Offence (NDPS Act, Sec. 8)",Fitan Sem,2022-01-10,data/raw/firs/case_050.txt
+case_051,1,Theft (BNS Sec. 303),Banjeet Ben,2025-09-18,data/raw/firs/case_051.txt
+case_052,1,Simple Assault (BNS Sec. 115),Siddharth Krishna,2024-07-25,data/raw/firs/case_052.txt
+case_053,1,Theft (BNS Sec. 303),Krish Shan,2024-04-13,data/raw/firs/case_053.txt
+case_054,1,Simple Assault (BNS Sec. 115),Dalbir Dugar,2025-12-20,data/raw/firs/case_054.txt
+case_055,1,Public Nuisance (BNS Sec. 296),Charan Sodhi,2023-10-08,data/raw/firs/case_055.txt
+case_056,1,Simple Assault (BNS Sec. 115),Ladli Mangal,2024-11-16,data/raw/firs/case_056.txt
+case_057,1,Theft (BNS Sec. 303),Qasim Ramakrishnan,2022-03-02,data/raw/firs/case_057.txt
+case_058,1,Theft (BNS Sec. 303),Ishwar Brar,2025-02-27,data/raw/firs/case_058.txt
+case_059,1,Theft (BNS Sec. 303),Pavani Bail,2024-03-31,data/raw/firs/case_059.txt
+case_060,1,Missing Person Report,Ucchal Bumb,2023-08-19,data/raw/firs/case_060.txt
+case_061,1,Theft (BNS Sec. 303),Yutika Vaidya,2022-05-17,data/raw/firs/case_061.txt
+case_062,1,Theft (BNS Sec. 303),Advaith Prashad,2025-11-03,data/raw/firs/case_062.txt
+case_063,1,Public Nuisance (BNS Sec. 296),Hema Sibal,2023-03-14,data/raw/firs/case_063.txt
+case_064,1,Missing Person Report,Jeevika Panchal,2022-04-18,data/raw/firs/case_064.txt
+case_065,1,Missing Person Report,Avi Dara,2024-02-08,data/raw/firs/case_065.txt
+case_066,1,Theft (BNS Sec. 303),Krisha Manda,2024-05-09,data/raw/firs/case_066.txt
+case_067,1,Public Nuisance (BNS Sec. 296),Balhaar Guha,2025-03-05,data/raw/firs/case_067.txt
+case_068,1,Simple Assault (BNS Sec. 115),Max Bhargava,2025-10-14,data/raw/firs/case_068.txt
+case_069,1,Theft (BNS Sec. 303),Darpan Contractor,2023-11-21,data/raw/firs/case_069.txt
+case_070,1,Simple Assault (BNS Sec. 115),Meera Bal,2023-09-30,data/raw/firs/case_070.txt
+case_071,1,Missing Person Report,Maanas Kulkarni,2022-02-01,data/raw/firs/case_071.txt
+case_072,1,Public Nuisance (BNS Sec. 296),Daniel Balan,2022-08-30,data/raw/firs/case_072.txt
+case_073,1,Theft (BNS Sec. 303),Deepa Das,2023-05-20,data/raw/firs/case_073.txt
+case_074,1,Theft (BNS Sec. 303),Vansha Chakraborty,2022-01-23,data/raw/firs/case_074.txt
+case_075,1,Missing Person Report,Charita Deep,2024-08-10,data/raw/firs/case_075.txt
+case_076,1,Public Nuisance (BNS Sec. 296),Oscar Bora,2022-12-30,data/raw/firs/case_076.txt
+case_077,1,Public Nuisance (BNS Sec. 296),Aachal Ramaswamy,2024-07-05,data/raw/firs/case_077.txt
+case_078,1,Missing Person Report,Aadi Srinivas,2022-09-26,data/raw/firs/case_078.txt
+case_079,1,Missing Person Report,Janaki Nori,2025-08-11,data/raw/firs/case_079.txt
+case_080,1,Missing Person Report,Ikbal Gupta,2022-08-27,data/raw/firs/case_080.txt
+case_081,1,Public Nuisance (BNS Sec. 296),Samuel Om,2024-05-11,data/raw/firs/case_081.txt
+case_082,1,Simple Assault (BNS Sec. 115),Hardik Raju,2022-01-01,data/raw/firs/case_082.txt
+case_083,1,Simple Assault (BNS Sec. 115),Sudiksha Mukhopadhyay,2025-04-28,data/raw/firs/case_083.txt
+case_084,1,Public Nuisance (BNS Sec. 296),Mohammed Kumer,2022-02-10,data/raw/firs/case_084.txt
+case_085,1,Missing Person Report,Inaya Vaidya,2023-01-19,data/raw/firs/case_085.txt
+case_086,1,Theft (BNS Sec. 303),Dalbir Khosla,2025-05-17,data/raw/firs/case_086.txt
+case_087,1,Public Nuisance (BNS Sec. 296),Bahadurjit Upadhyay,2022-03-28,data/raw/firs/case_087.txt
+case_088,1,Missing Person Report,Alexander Doctor,2023-03-13,data/raw/firs/case_088.txt
+case_089,1,Theft (BNS Sec. 303),Charles Anne,2023-06-13,data/raw/firs/case_089.txt
+case_090,1,Simple Assault (BNS Sec. 115),Vedhika Rout,2025-06-03,data/raw/firs/case_090.txt
+case_091,1,Missing Person Report,Hemal Mahajan,2023-08-30,data/raw/firs/case_091.txt
+case_092,1,Theft (BNS Sec. 303),Rachit Parsa,2022-05-31,data/raw/firs/case_092.txt
+case_093,1,Public Nuisance (BNS Sec. 296),Hemangini Bhakta,2022-07-04,data/raw/firs/case_093.txt
+case_094,1,Public Nuisance (BNS Sec. 296),Barkha Batta,2025-04-08,data/raw/firs/case_094.txt
+case_095,1,Simple Assault (BNS Sec. 115),Xavier Brar,2022-02-01,data/raw/firs/case_095.txt
+case_096,1,Missing Person Report,Yash Andra,2024-02-01,data/raw/firs/case_096.txt
+case_097,1,Missing Person Report,Urvashi Keer,2022-09-18,data/raw/firs/case_097.txt
+case_098,1,Public Nuisance (BNS Sec. 296),Arya Chaudhuri,2025-03-22,data/raw/firs/case_098.txt
+case_099,1,Public Nuisance (BNS Sec. 296),Benjamin Raman,2024-03-01,data/raw/firs/case_099.txt
+case_100,1,Public Nuisance (BNS Sec. 296),Warinder Behl,2025-07-08,data/raw/firs/case_100.txt
+case_101,1,Public Nuisance (BNS Sec. 296),Wriddhish Menon,2023-09-29,data/raw/firs/case_101.txt
+case_102,1,Public Nuisance (BNS Sec. 296),Warda Krishna,2025-06-04,data/raw/firs/case_102.txt
+case_103,1,Public Nuisance (BNS Sec. 296),Yashvi Bali,2023-01-24,data/raw/firs/case_103.txt
+case_104,1,Public Nuisance (BNS Sec. 296),Ekaraj Arora,2025-07-12,data/raw/firs/case_104.txt
+case_105,1,Missing Person Report,Suhani Chopra,2025-11-07,data/raw/firs/case_105.txt
+case_106,1,Theft (BNS Sec. 303),Maanav Sekhon,2024-09-15,data/raw/firs/case_106.txt
+case_107,1,Theft (BNS Sec. 303),Guneet Bhatt,2024-05-13,data/raw/firs/case_107.txt
+case_108,1,Theft (BNS Sec. 303),Yuvraj Andra,2022-08-01,data/raw/firs/case_108.txt
+case_109,1,Simple Assault (BNS Sec. 115),Saumya Srinivasan,2022-03-21,data/raw/firs/case_109.txt
+case_110,1,Missing Person Report,Robert Sengupta,2023-05-04,data/raw/firs/case_110.txt
+case_111,1,Missing Person Report,Harrison Mukherjee,2023-06-11,data/raw/firs/case_111.txt
+case_112,1,Missing Person Report,Unnati Kota,2025-05-06,data/raw/firs/case_112.txt
+case_113,1,Public Nuisance (BNS Sec. 296),Krisha Karan,2023-08-24,data/raw/firs/case_113.txt
+case_114,1,Public Nuisance (BNS Sec. 296),Idika Ganesan,2022-05-21,data/raw/firs/case_114.txt
+case_115,1,Missing Person Report,Meghana Dyal,2023-04-13,data/raw/firs/case_115.txt
+case_116,1,Theft (BNS Sec. 303),Advaith Butala,2025-02-19,data/raw/firs/case_116.txt
+case_117,1,Public Nuisance (BNS Sec. 296),Tanvi Srinivasan,2023-07-28,data/raw/firs/case_117.txt
+case_118,1,Theft (BNS Sec. 303),Dhruv Korpal,2023-02-22,data/raw/firs/case_118.txt
+case_119,1,Simple Assault (BNS Sec. 115),Vinaya Viswanathan,2022-05-22,data/raw/firs/case_119.txt
+case_120,1,Missing Person Report,Mugdha Kibe,2024-04-22,data/raw/firs/case_120.txt
+case_121,1,Theft (BNS Sec. 303),Suhani Sharaf,2023-05-26,data/raw/firs/case_121.txt
+case_122,1,Public Nuisance (BNS Sec. 296),Aadi Khare,2022-04-06,data/raw/firs/case_122.txt
+case_123,1,Simple Assault (BNS Sec. 115),Ojas Chahal,2023-08-01,data/raw/firs/case_123.txt
+case_124,1,Public Nuisance (BNS Sec. 296),Sudiksha Kota,2024-12-23,data/raw/firs/case_124.txt
+case_125,1,Simple Assault (BNS Sec. 115),Chaitanya Chauhan,2022-07-08,data/raw/firs/case_125.txt
+case_126,1,Missing Person Report,Eiravati Aurora,2022-10-11,data/raw/firs/case_126.txt
+case_127,1,Public Nuisance (BNS Sec. 296),Anya Mittal,2023-11-09,data/raw/firs/case_127.txt
+case_128,1,Theft (BNS Sec. 303),Girish Wable,2025-04-23,data/raw/firs/case_128.txt
+case_129,1,Missing Person Report,Fariq Malhotra,2022-02-06,data/raw/firs/case_129.txt
+case_130,1,Simple Assault (BNS Sec. 115),Ayaan Parmer,2024-01-03,data/raw/firs/case_130.txt
+case_131,2,Extortion (BNS Sec. 308),Jason Sule,2022-03-10,data/raw/firs/case_131.txt
+case_132,2,Financial Fraud / Cheating (BNS Sec. 318),Logan Iyengar,2022-02-13,data/raw/firs/case_132.txt
+case_133,2,"Narcotics Offence (NDPS Act, Sec. 8)",Bhavani D’Alia,2025-05-10,data/raw/firs/case_133.txt
+case_134,2,Extortion (BNS Sec. 308),Jhalak Anand,2025-07-26,data/raw/firs/case_134.txt
+case_135,2,"Narcotics Offence (NDPS Act, Sec. 8)",Tejas Kapadia,2022-06-03,data/raw/firs/case_135.txt
+case_136,2,Extortion (BNS Sec. 308),Harinakshi Mane,2024-09-14,data/raw/firs/case_136.txt
+case_137,2,Human Trafficking (BNS Sec. 143),Zashil Contractor,2022-05-18,data/raw/firs/case_137.txt
+case_138,2,Human Trafficking (BNS Sec. 143),Ati Bora,2023-09-30,data/raw/firs/case_138.txt
+case_139,2,Extortion (BNS Sec. 308),Pahal Bhardwaj,2023-10-16,data/raw/firs/case_139.txt
+case_140,2,Financial Fraud / Cheating (BNS Sec. 318),Gayathri Pai,2022-10-07,data/raw/firs/case_140.txt
+case_141,2,Human Trafficking (BNS Sec. 143),Girik Ganesh,2022-05-29,data/raw/firs/case_141.txt
+case_142,2,"Narcotics Offence (NDPS Act, Sec. 8)",Saksham Sachar,2022-06-04,data/raw/firs/case_142.txt
+case_143,2,Financial Fraud / Cheating (BNS Sec. 318),Anusha Mody,2024-07-16,data/raw/firs/case_143.txt
+case_144,2,Human Trafficking (BNS Sec. 143),Chandran More,2025-01-23,data/raw/firs/case_144.txt
+case_145,2,"Narcotics Offence (NDPS Act, Sec. 8)",Dhruv Naik,2024-01-24,data/raw/firs/case_145.txt
+case_146,2,Human Trafficking (BNS Sec. 143),Parth Bedi,2022-04-02,data/raw/firs/case_146.txt
+case_147,2,Human Trafficking (BNS Sec. 143),Garima Nazareth,2025-12-12,data/raw/firs/case_147.txt
+case_148,2,Financial Fraud / Cheating (BNS Sec. 318),Chameli Dash,2022-09-23,data/raw/firs/case_148.txt
+case_149,2,Extortion (BNS Sec. 308),Andrew Pant,2023-12-01,data/raw/firs/case_149.txt
+case_150,2,Human Trafficking (BNS Sec. 143),Aahana Ram,2023-12-22,data/raw/firs/case_150.txt
+case_151,2,"Narcotics Offence (NDPS Act, Sec. 8)",Vritti Bhardwaj,2022-06-23,data/raw/firs/case_151.txt
+case_152,2,Human Trafficking (BNS Sec. 143),Faras Baria,2025-11-04,data/raw/firs/case_152.txt
+case_153,2,"Narcotics Offence (NDPS Act, Sec. 8)",Indrajit Sunder,2024-08-27,data/raw/firs/case_153.txt
+case_154,2,Financial Fraud / Cheating (BNS Sec. 318),Anamika Tripathi,2022-06-09,data/raw/firs/case_154.txt
+case_155,2,Human Trafficking (BNS Sec. 143),Vedant Chhabra,2024-05-04,data/raw/firs/case_155.txt
+case_156,2,Human Trafficking (BNS Sec. 143),Baghyawati Chaudhuri,2022-03-03,data/raw/firs/case_156.txt
+case_157,2,Extortion (BNS Sec. 308),Gautam Kala,2024-10-20,data/raw/firs/case_157.txt
+case_158,2,Human Trafficking (BNS Sec. 143),Unni Toor,2025-03-19,data/raw/firs/case_158.txt
+case_159,2,"Narcotics Offence (NDPS Act, Sec. 8)",Pushti Acharya,2022-01-30,data/raw/firs/case_159.txt
+case_160,2,Financial Fraud / Cheating (BNS Sec. 318),Jagrati Ahuja,2025-07-03,data/raw/firs/case_160.txt
+case_161,2,"Narcotics Offence (NDPS Act, Sec. 8)",Urishilla Purohit,2025-09-18,data/raw/firs/case_161.txt
+case_162,2,Human Trafficking (BNS Sec. 143),Advik Sunder,2024-02-23,data/raw/firs/case_162.txt
+case_163,2,"Narcotics Offence (NDPS Act, Sec. 8)",Abdul Bhatt,2024-02-16,data/raw/firs/case_163.txt
+case_164,2,Human Trafficking (BNS Sec. 143),Bishakha Bala,2025-04-08,data/raw/firs/case_164.txt
+case_165,2,Human Trafficking (BNS Sec. 143),Bakhshi Ramaswamy,2022-01-26,data/raw/firs/case_165.txt
+case_166,2,Extortion (BNS Sec. 308),Riya Kapadia,2025-05-31,data/raw/firs/case_166.txt
+case_167,2,Financial Fraud / Cheating (BNS Sec. 318),Ira Khalsa,2022-05-28,data/raw/firs/case_167.txt
+case_168,2,Human Trafficking (BNS Sec. 143),Laksh Kata,2022-06-14,data/raw/firs/case_168.txt
+case_169,2,Financial Fraud / Cheating (BNS Sec. 318),Hamsini Choudhury,2022-07-05,data/raw/firs/case_169.txt
+case_170,2,Human Trafficking (BNS Sec. 143),Daksha Sarma,2025-08-02,data/raw/firs/case_170.txt
+case_171,2,Extortion (BNS Sec. 308),Nidra Bera,2022-08-25,data/raw/firs/case_171.txt
+case_172,2,"Narcotics Offence (NDPS Act, Sec. 8)",Divya Ramanathan,2023-06-11,data/raw/firs/case_172.txt
+case_173,2,"Narcotics Offence (NDPS Act, Sec. 8)",Bahadurjit Saran,2024-05-02,data/raw/firs/case_173.txt
+case_174,2,Human Trafficking (BNS Sec. 143),Adya Dhingra,2023-11-08,data/raw/firs/case_174.txt
+case_175,2,Extortion (BNS Sec. 308),Ishita Lala,2024-03-06,data/raw/firs/case_175.txt
+case_176,2,Human Trafficking (BNS Sec. 143),Reva Venkataraman,2025-11-22,data/raw/firs/case_176.txt
+case_177,2,Human Trafficking (BNS Sec. 143),Christopher Ben,2025-04-04,data/raw/firs/case_177.txt
+case_178,2,"Narcotics Offence (NDPS Act, Sec. 8)",Aayush Bhatti,2024-07-26,data/raw/firs/case_178.txt
+case_179,2,Financial Fraud / Cheating (BNS Sec. 318),Niharika Ben,2024-06-21,data/raw/firs/case_179.txt
+case_180,2,Human Trafficking (BNS Sec. 143),Qushi Khatri,2024-08-05,data/raw/firs/case_180.txt
+case_181,2,"Narcotics Offence (NDPS Act, Sec. 8)",Ladli Murty,2025-01-13,data/raw/firs/case_181.txt
+case_182,2,Financial Fraud / Cheating (BNS Sec. 318),George Madan,2022-06-21,data/raw/firs/case_182.txt
+case_183,2,"Narcotics Offence (NDPS Act, Sec. 8)",Advika Dugal,2024-11-28,data/raw/firs/case_183.txt
+case_184,2,Financial Fraud / Cheating (BNS Sec. 318),Jyoti Manne,2024-11-19,data/raw/firs/case_184.txt
+case_185,2,Financial Fraud / Cheating (BNS Sec. 318),Devika Hegde,2022-03-03,data/raw/firs/case_185.txt
+case_186,2,Human Trafficking (BNS Sec. 143),Geetika Morar,2023-09-28,data/raw/firs/case_186.txt
+case_187,2,"Narcotics Offence (NDPS Act, Sec. 8)",Aradhana Iyer,2025-05-16,data/raw/firs/case_187.txt
+case_188,2,Human Trafficking (BNS Sec. 143),Joshua Jaggi,2022-06-29,data/raw/firs/case_188.txt
+case_189,2,Human Trafficking (BNS Sec. 143),Barkha Gopal,2024-09-11,data/raw/firs/case_189.txt
+case_190,2,Extortion (BNS Sec. 308),Vrishti Thaker,2022-02-15,data/raw/firs/case_190.txt
+case_191,2,"Narcotics Offence (NDPS Act, Sec. 8)",Umang Munshi,2023-04-17,data/raw/firs/case_191.txt
+case_192,2,Financial Fraud / Cheating (BNS Sec. 318),Mitesh Lalla,2025-12-01,data/raw/firs/case_192.txt
+case_193,2,Human Trafficking (BNS Sec. 143),Anvi Upadhyay,2022-08-20,data/raw/firs/case_193.txt
+case_194,2,Financial Fraud / Cheating (BNS Sec. 318),Riya Nazareth,2024-10-15,data/raw/firs/case_194.txt
+case_195,2,Human Trafficking (BNS Sec. 143),Aarush Chopra,2025-06-12,data/raw/firs/case_195.txt
+case_196,2,Extortion (BNS Sec. 308),Andrew Jha,2025-09-13,data/raw/firs/case_196.txt
+case_197,2,Human Trafficking (BNS Sec. 143),Jyoti Brar,2024-09-22,data/raw/firs/case_197.txt
+case_198,2,Human Trafficking (BNS Sec. 143),Ekansh Deep,2023-06-08,data/raw/firs/case_198.txt
+case_199,2,"Narcotics Offence (NDPS Act, Sec. 8)",Qadim Bala,2022-01-24,data/raw/firs/case_199.txt
+case_200,2,Human Trafficking (BNS Sec. 143),Abha Jha,2024-01-24,data/raw/firs/case_200.txt
