@@ -5,6 +5,7 @@ import datetime
 
 random.seed(42)
 fake = Faker('en_IN')
+fake.seed_instance(42)
 
 G = nx.DiGraph()  # directed, since POLE+O relationships have direction
 
