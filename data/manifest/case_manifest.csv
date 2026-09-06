@@ -1,10 +1,10 @@
 case_id,tier,hub_id,num_entities,entities_involved,evidence_types,bridge_entities,linked_cases
-case_001,3,H1,14,p_108;p_009;p_011;p_006;p_001;p_012;p_103;p_017;p_005;p_002;p_114;p_013;p_007;p_112,FIR;CDR;Financial;Photo,p_103;p_108;p_112;p_114,case_002;case_003;case_004;case_005
-case_002,3,H2,14,p_019;p_018;p_021;p_113;p_103;p_031;p_028;p_030;p_109;p_024;p_104;p_033;p_034;p_029,FIR;CDR;Financial;Photo,p_103;p_104;p_109;p_113,case_001;case_003;case_004;case_006
-case_003,3,H3,14,p_036;p_108;p_045;p_038;p_046;p_047;p_110;p_048;p_044;p_035;p_104;p_041;p_105;p_050,FIR;CDR;Financial;Photo,p_104;p_105;p_108;p_110,case_001;case_002;case_004;case_005
-case_004,3,H4,15,p_064;p_066;p_060;p_067;p_053;p_059;p_054;p_106;p_111;p_114;p_109;p_058;p_105;p_065;p_056,FIR;CDR;Financial;Photo,p_105;p_106;p_109;p_111;p_114,case_001;case_002;case_003;case_005;case_006
-case_005,3,H5,14,p_077;p_070;p_082;p_079;p_078;p_106;p_107;p_083;p_110;p_085;p_074;p_084;p_072;p_112,FIR;CDR;Financial;Photo,p_106;p_107;p_110;p_112,case_001;case_003;case_004;case_006
-case_006,3,H6,13,p_096;p_091;p_087;p_113;p_107;p_101;p_092;p_094;p_111;p_100;p_093;p_095;p_099,FIR;CDR;Financial;Photo,p_107;p_111;p_113,case_002;case_004;case_005
+case_001,3,H1,14,p_012;p_103;p_108;p_013;p_007;p_005;p_017;p_002;p_009;p_011;p_112;p_006;p_001;p_114,FIR;CDR;Financial;Photo,p_103;p_108;p_112;p_114,case_002;case_003;case_004;case_005
+case_002,3,H2,14,p_018;p_030;p_103;p_024;p_104;p_019;p_028;p_109;p_113;p_034;p_033;p_031;p_021;p_029,FIR;CDR;Financial;Photo,p_103;p_104;p_109;p_113,case_001;case_003;case_004;case_006
+case_003,3,H3,14,p_048;p_044;p_038;p_046;p_041;p_104;p_047;p_105;p_035;p_045;p_110;p_050;p_108;p_036,FIR;CDR;Financial;Photo,p_104;p_105;p_108;p_110,case_001;case_002;case_004;case_005
+case_004,3,H4,15,p_059;p_065;p_106;p_053;p_105;p_109;p_064;p_111;p_060;p_056;p_066;p_058;p_054;p_114;p_067,FIR;CDR;Financial;Photo,p_105;p_106;p_109;p_111;p_114,case_001;case_002;case_003;case_005;case_006
+case_005,3,H5,14,p_074;p_085;p_106;p_082;p_079;p_077;p_078;p_110;p_072;p_112;p_084;p_083;p_070;p_107,FIR;CDR;Financial;Photo,p_106;p_107;p_110;p_112,case_001;case_003;case_004;case_006
+case_006,3,H6,13,p_099;p_087;p_113;p_093;p_092;p_100;p_095;p_111;p_096;p_091;p_101;p_094;p_107,FIR;CDR;Financial;Photo,p_107;p_111;p_113,case_002;case_004;case_005
 case_007,3,H3,11,p_040;p_042;p_036;p_044;p_039;p_043;p_050;p_051;p_045;p_047;p_046,FIR;CDR;Financial;Photo,,
 case_008,3,H1,9,p_017;p_014;p_003;p_013;p_006;p_015;p_008;p_007;p_001,FIR;CDR;Financial;Photo,,
 case_009,3,H6,9,p_096;p_102;p_097;p_091;p_095;p_093;p_098;p_100;p_087,FIR;CDR;Financial;Photo,,

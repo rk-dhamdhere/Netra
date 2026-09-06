@@ -1,0 +1,3897 @@
+[
+  {
+    "case_id": "case_001",
+    "tier": 3,
+    "hub_id": "H1",
+    "num_entities": 14,
+    "entities_involved": [
+      "p_012",
+      "p_103",
+      "p_108",
+      "p_013",
+      "p_007",
+      "p_005",
+      "p_017",
+      "p_002",
+      "p_009",
+      "p_011",
+      "p_112",
+      "p_006",
+      "p_001",
+      "p_114"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR",
+      "Financial",
+      "Photo"
+    ],
+    "bridge_entities": [
+      "p_103",
+      "p_108",
+      "p_112",
+      "p_114"
+    ],
+    "linked_cases": [
+      "case_002",
+      "case_003",
+      "case_004",
+      "case_005"
+    ]
+  },
+  {
+    "case_id": "case_002",
+    "tier": 3,
+    "hub_id": "H2",
+    "num_entities": 14,
+    "entities_involved": [
+      "p_018",
+      "p_030",
+      "p_103",
+      "p_024",
+      "p_104",
+      "p_019",
+      "p_028",
+      "p_109",
+      "p_113",
+      "p_034",
+      "p_033",
+      "p_031",
+      "p_021",
+      "p_029"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR",
+      "Financial",
+      "Photo"
+    ],
+    "bridge_entities": [
+      "p_103",
+      "p_104",
+      "p_109",
+      "p_113"
+    ],
+    "linked_cases": [
+      "case_001",
+      "case_003",
+      "case_004",
+      "case_006"
+    ]
+  },
+  {
+    "case_id": "case_003",
+    "tier": 3,
+    "hub_id": "H3",
+    "num_entities": 14,
+    "entities_involved": [
+      "p_048",
+      "p_044",
+      "p_038",
+      "p_046",
+      "p_041",
+      "p_104",
+      "p_047",
+      "p_105",
+      "p_035",
+      "p_045",
+      "p_110",
+      "p_050",
+      "p_108",
+      "p_036"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR",
+      "Financial",
+      "Photo"
+    ],
+    "bridge_entities": [
+      "p_104",
+      "p_105",
+      "p_108",
+      "p_110"
+    ],
+    "linked_cases": [
+      "case_001",
+      "case_002",
+      "case_004",
+      "case_005"
+    ]
+  },
+  {
+    "case_id": "case_004",
+    "tier": 3,
+    "hub_id": "H4",
+    "num_entities": 15,
+    "entities_involved": [
+      "p_059",
+      "p_065",
+      "p_106",
+      "p_053",
+      "p_105",
+      "p_109",
+      "p_064",
+      "p_111",
+      "p_060",
+      "p_056",
+      "p_066",
+      "p_058",
+      "p_054",
+      "p_114",
+      "p_067"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR",
+      "Financial",
+      "Photo"
+    ],
+    "bridge_entities": [
+      "p_105",
+      "p_106",
+      "p_109",
+      "p_111",
+      "p_114"
+    ],
+    "linked_cases": [
+      "case_001",
+      "case_002",
+      "case_003",
+      "case_005",
+      "case_006"
+    ]
+  },
+  {
+    "case_id": "case_005",
+    "tier": 3,
+    "hub_id": "H5",
+    "num_entities": 14,
+    "entities_involved": [
+      "p_074",
+      "p_085",
+      "p_106",
+      "p_082",
+      "p_079",
+      "p_077",
+      "p_078",
+      "p_110",
+      "p_072",
+      "p_112",
+      "p_084",
+      "p_083",
+      "p_070",
+      "p_107"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR",
+      "Financial",
+      "Photo"
+    ],
+    "bridge_entities": [
+      "p_106",
+      "p_107",
+      "p_110",
+      "p_112"
+    ],
+    "linked_cases": [
+      "case_001",
+      "case_003",
+      "case_004",
+      "case_006"
+    ]
+  },
+  {
+    "case_id": "case_006",
+    "tier": 3,
+    "hub_id": "H6",
+    "num_entities": 13,
+    "entities_involved": [
+      "p_099",
+      "p_087",
+      "p_113",
+      "p_093",
+      "p_092",
+      "p_100",
+      "p_095",
+      "p_111",
+      "p_096",
+      "p_091",
+      "p_101",
+      "p_094",
+      "p_107"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR",
+      "Financial",
+      "Photo"
+    ],
+    "bridge_entities": [
+      "p_107",
+      "p_111",
+      "p_113"
+    ],
+    "linked_cases": [
+      "case_002",
+      "case_004",
+      "case_005"
+    ]
+  },
+  {
+    "case_id": "case_007",
+    "tier": 3,
+    "hub_id": "H3",
+    "num_entities": 11,
+    "entities_involved": [
+      "p_040",
+      "p_042",
+      "p_036",
+      "p_044",
+      "p_039",
+      "p_043",
+      "p_050",
+      "p_051",
+      "p_045",
+      "p_047",
+      "p_046"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR",
+      "Financial",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_008",
+    "tier": 3,
+    "hub_id": "H1",
+    "num_entities": 9,
+    "entities_involved": [
+      "p_017",
+      "p_014",
+      "p_003",
+      "p_013",
+      "p_006",
+      "p_015",
+      "p_008",
+      "p_007",
+      "p_001"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR",
+      "Financial",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_009",
+    "tier": 3,
+    "hub_id": "H6",
+    "num_entities": 9,
+    "entities_involved": [
+      "p_096",
+      "p_102",
+      "p_097",
+      "p_091",
+      "p_095",
+      "p_093",
+      "p_098",
+      "p_100",
+      "p_087"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR",
+      "Financial",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_010",
+    "tier": 3,
+    "hub_id": "H1",
+    "num_entities": 12,
+    "entities_involved": [
+      "p_016",
+      "p_003",
+      "p_001",
+      "p_012",
+      "p_014",
+      "p_005",
+      "p_011",
+      "p_010",
+      "p_008",
+      "p_013",
+      "p_006",
+      "p_004"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR",
+      "Financial",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_011",
+    "tier": 3,
+    "hub_id": "H6",
+    "num_entities": 13,
+    "entities_involved": [
+      "p_086",
+      "p_100",
+      "p_091",
+      "p_088",
+      "p_095",
+      "p_087",
+      "p_093",
+      "p_102",
+      "p_089",
+      "p_090",
+      "p_097",
+      "p_101",
+      "p_092"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR",
+      "Financial",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_012",
+    "tier": 3,
+    "hub_id": "H4",
+    "num_entities": 14,
+    "entities_involved": [
+      "p_067",
+      "p_054",
+      "p_068",
+      "p_059",
+      "p_058",
+      "p_060",
+      "p_056",
+      "p_066",
+      "p_064",
+      "p_062",
+      "p_057",
+      "p_055",
+      "p_061",
+      "p_063"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR",
+      "Financial",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_013",
+    "tier": 3,
+    "hub_id": "H2",
+    "num_entities": 10,
+    "entities_involved": [
+      "p_020",
+      "p_023",
+      "p_034",
+      "p_021",
+      "p_028",
+      "p_031",
+      "p_018",
+      "p_025",
+      "p_032",
+      "p_022"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR",
+      "Financial",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_014",
+    "tier": 3,
+    "hub_id": "H3",
+    "num_entities": 8,
+    "entities_involved": [
+      "p_039",
+      "p_048",
+      "p_043",
+      "p_040",
+      "p_044",
+      "p_047",
+      "p_050",
+      "p_037"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR",
+      "Financial",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_015",
+    "tier": 3,
+    "hub_id": "H6",
+    "num_entities": 8,
+    "entities_involved": [
+      "p_100",
+      "p_098",
+      "p_092",
+      "p_102",
+      "p_099",
+      "p_087",
+      "p_093",
+      "p_101"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR",
+      "Financial",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_016",
+    "tier": 3,
+    "hub_id": "H1",
+    "num_entities": 11,
+    "entities_involved": [
+      "p_003",
+      "p_007",
+      "p_008",
+      "p_017",
+      "p_002",
+      "p_006",
+      "p_010",
+      "p_001",
+      "p_013",
+      "p_011",
+      "p_005"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR",
+      "Financial",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_017",
+    "tier": 3,
+    "hub_id": "H2",
+    "num_entities": 9,
+    "entities_involved": [
+      "p_029",
+      "p_018",
+      "p_019",
+      "p_031",
+      "p_021",
+      "p_027",
+      "p_024",
+      "p_020",
+      "p_022"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR",
+      "Financial",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_018",
+    "tier": 3,
+    "hub_id": "H3",
+    "num_entities": 13,
+    "entities_involved": [
+      "p_050",
+      "p_038",
+      "p_036",
+      "p_048",
+      "p_042",
+      "p_047",
+      "p_046",
+      "p_045",
+      "p_039",
+      "p_049",
+      "p_044",
+      "p_035",
+      "p_037"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR",
+      "Financial",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_019",
+    "tier": 3,
+    "hub_id": "H6",
+    "num_entities": 12,
+    "entities_involved": [
+      "p_101",
+      "p_091",
+      "p_094",
+      "p_086",
+      "p_089",
+      "p_100",
+      "p_102",
+      "p_088",
+      "p_097",
+      "p_099",
+      "p_092",
+      "p_090"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR",
+      "Financial",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_020",
+    "tier": 3,
+    "hub_id": "H3",
+    "num_entities": 9,
+    "entities_involved": [
+      "p_043",
+      "p_046",
+      "p_049",
+      "p_037",
+      "p_040",
+      "p_038",
+      "p_051",
+      "p_045",
+      "p_044"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR",
+      "Financial",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_021",
+    "tier": 3,
+    "hub_id": "H3",
+    "num_entities": 11,
+    "entities_involved": [
+      "p_041",
+      "p_042",
+      "p_048",
+      "p_051",
+      "p_046",
+      "p_038",
+      "p_047",
+      "p_043",
+      "p_050",
+      "p_040",
+      "p_044"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR",
+      "Financial",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_022",
+    "tier": 3,
+    "hub_id": "H1",
+    "num_entities": 8,
+    "entities_involved": [
+      "p_009",
+      "p_016",
+      "p_005",
+      "p_004",
+      "p_012",
+      "p_010",
+      "p_006",
+      "p_008"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR",
+      "Financial",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_023",
+    "tier": 3,
+    "hub_id": "H6",
+    "num_entities": 13,
+    "entities_involved": [
+      "p_097",
+      "p_088",
+      "p_089",
+      "p_087",
+      "p_100",
+      "p_093",
+      "p_098",
+      "p_091",
+      "p_096",
+      "p_102",
+      "p_090",
+      "p_092",
+      "p_086"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR",
+      "Financial",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_024",
+    "tier": 3,
+    "hub_id": "H4",
+    "num_entities": 13,
+    "entities_involved": [
+      "p_054",
+      "p_055",
+      "p_066",
+      "p_058",
+      "p_064",
+      "p_063",
+      "p_067",
+      "p_059",
+      "p_068",
+      "p_065",
+      "p_061",
+      "p_057",
+      "p_060"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR",
+      "Financial",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_025",
+    "tier": 3,
+    "hub_id": "H1",
+    "num_entities": 14,
+    "entities_involved": [
+      "p_015",
+      "p_013",
+      "p_012",
+      "p_002",
+      "p_017",
+      "p_003",
+      "p_016",
+      "p_011",
+      "p_001",
+      "p_010",
+      "p_005",
+      "p_004",
+      "p_014",
+      "p_006"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR",
+      "Financial",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_026",
+    "tier": 3,
+    "hub_id": "H6",
+    "num_entities": 13,
+    "entities_involved": [
+      "p_090",
+      "p_102",
+      "p_086",
+      "p_100",
+      "p_098",
+      "p_097",
+      "p_096",
+      "p_087",
+      "p_094",
+      "p_088",
+      "p_089",
+      "p_095",
+      "p_091"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR",
+      "Financial",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_027",
+    "tier": 3,
+    "hub_id": "H1",
+    "num_entities": 12,
+    "entities_involved": [
+      "p_007",
+      "p_010",
+      "p_009",
+      "p_004",
+      "p_013",
+      "p_016",
+      "p_006",
+      "p_005",
+      "p_015",
+      "p_017",
+      "p_008",
+      "p_002"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR",
+      "Financial",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_028",
+    "tier": 3,
+    "hub_id": "H1",
+    "num_entities": 13,
+    "entities_involved": [
+      "p_015",
+      "p_014",
+      "p_016",
+      "p_009",
+      "p_003",
+      "p_017",
+      "p_013",
+      "p_012",
+      "p_010",
+      "p_001",
+      "p_007",
+      "p_004",
+      "p_002"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR",
+      "Financial",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_029",
+    "tier": 3,
+    "hub_id": "H5",
+    "num_entities": 8,
+    "entities_involved": [
+      "p_073",
+      "p_074",
+      "p_071",
+      "p_076",
+      "p_078",
+      "p_080",
+      "p_070",
+      "p_077"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR",
+      "Financial",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_030",
+    "tier": 3,
+    "hub_id": "H1",
+    "num_entities": 13,
+    "entities_involved": [
+      "p_017",
+      "p_016",
+      "p_013",
+      "p_015",
+      "p_002",
+      "p_009",
+      "p_001",
+      "p_004",
+      "p_010",
+      "p_005",
+      "p_011",
+      "p_007",
+      "p_008"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR",
+      "Financial",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_031",
+    "tier": 3,
+    "hub_id": "H4",
+    "num_entities": 8,
+    "entities_involved": [
+      "p_054",
+      "p_066",
+      "p_057",
+      "p_061",
+      "p_060",
+      "p_065",
+      "p_064",
+      "p_055"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR",
+      "Financial",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_032",
+    "tier": 3,
+    "hub_id": "H6",
+    "num_entities": 12,
+    "entities_involved": [
+      "p_100",
+      "p_101",
+      "p_094",
+      "p_089",
+      "p_097",
+      "p_102",
+      "p_090",
+      "p_098",
+      "p_099",
+      "p_093",
+      "p_087",
+      "p_095"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR",
+      "Financial",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_033",
+    "tier": 3,
+    "hub_id": "H1",
+    "num_entities": 14,
+    "entities_involved": [
+      "p_015",
+      "p_011",
+      "p_002",
+      "p_016",
+      "p_004",
+      "p_007",
+      "p_017",
+      "p_013",
+      "p_005",
+      "p_014",
+      "p_012",
+      "p_008",
+      "p_003",
+      "p_006"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR",
+      "Financial",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_034",
+    "tier": 3,
+    "hub_id": "H3",
+    "num_entities": 10,
+    "entities_involved": [
+      "p_049",
+      "p_042",
+      "p_046",
+      "p_036",
+      "p_041",
+      "p_050",
+      "p_037",
+      "p_038",
+      "p_045",
+      "p_047"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR",
+      "Financial",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_035",
+    "tier": 3,
+    "hub_id": "H5",
+    "num_entities": 14,
+    "entities_involved": [
+      "p_079",
+      "p_082",
+      "p_072",
+      "p_074",
+      "p_084",
+      "p_070",
+      "p_081",
+      "p_069",
+      "p_085",
+      "p_076",
+      "p_083",
+      "p_077",
+      "p_078",
+      "p_075"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR",
+      "Financial",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_036",
+    "tier": 3,
+    "hub_id": "H3",
+    "num_entities": 12,
+    "entities_involved": [
+      "p_051",
+      "p_037",
+      "p_036",
+      "p_047",
+      "p_038",
+      "p_049",
+      "p_046",
+      "p_039",
+      "p_044",
+      "p_035",
+      "p_041",
+      "p_045"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR",
+      "Financial",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_037",
+    "tier": 3,
+    "hub_id": "H3",
+    "num_entities": 10,
+    "entities_involved": [
+      "p_048",
+      "p_043",
+      "p_041",
+      "p_037",
+      "p_050",
+      "p_047",
+      "p_044",
+      "p_042",
+      "p_040",
+      "p_036"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR",
+      "Financial",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_038",
+    "tier": 3,
+    "hub_id": "H3",
+    "num_entities": 8,
+    "entities_involved": [
+      "p_040",
+      "p_048",
+      "p_049",
+      "p_036",
+      "p_039",
+      "p_035",
+      "p_045",
+      "p_050"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR",
+      "Financial",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_039",
+    "tier": 3,
+    "hub_id": "H3",
+    "num_entities": 9,
+    "entities_involved": [
+      "p_042",
+      "p_037",
+      "p_039",
+      "p_048",
+      "p_036",
+      "p_051",
+      "p_035",
+      "p_040",
+      "p_043"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR",
+      "Financial",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_040",
+    "tier": 3,
+    "hub_id": "H4",
+    "num_entities": 12,
+    "entities_involved": [
+      "p_056",
+      "p_053",
+      "p_060",
+      "p_063",
+      "p_055",
+      "p_067",
+      "p_054",
+      "p_068",
+      "p_052",
+      "p_062",
+      "p_065",
+      "p_059"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR",
+      "Financial",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_041",
+    "tier": 3,
+    "hub_id": "H6",
+    "num_entities": 12,
+    "entities_involved": [
+      "p_102",
+      "p_092",
+      "p_090",
+      "p_093",
+      "p_094",
+      "p_096",
+      "p_088",
+      "p_100",
+      "p_091",
+      "p_086",
+      "p_097",
+      "p_099"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR",
+      "Financial",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_042",
+    "tier": 3,
+    "hub_id": "H1",
+    "num_entities": 8,
+    "entities_involved": [
+      "p_017",
+      "p_007",
+      "p_009",
+      "p_008",
+      "p_004",
+      "p_014",
+      "p_002",
+      "p_016"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR",
+      "Financial",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_043",
+    "tier": 3,
+    "hub_id": "H6",
+    "num_entities": 15,
+    "entities_involved": [
+      "p_098",
+      "p_095",
+      "p_097",
+      "p_089",
+      "p_099",
+      "p_091",
+      "p_102",
+      "p_088",
+      "p_092",
+      "p_100",
+      "p_086",
+      "p_087",
+      "p_094",
+      "p_090",
+      "p_101"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR",
+      "Financial",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_044",
+    "tier": 3,
+    "hub_id": "H6",
+    "num_entities": 12,
+    "entities_involved": [
+      "p_099",
+      "p_091",
+      "p_086",
+      "p_087",
+      "p_096",
+      "p_092",
+      "p_094",
+      "p_090",
+      "p_089",
+      "p_095",
+      "p_100",
+      "p_098"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR",
+      "Financial",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_045",
+    "tier": 3,
+    "hub_id": "H2",
+    "num_entities": 10,
+    "entities_involved": [
+      "p_026",
+      "p_032",
+      "p_018",
+      "p_022",
+      "p_023",
+      "p_030",
+      "p_034",
+      "p_029",
+      "p_021",
+      "p_033"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR",
+      "Financial",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_046",
+    "tier": 3,
+    "hub_id": "H3",
+    "num_entities": 11,
+    "entities_involved": [
+      "p_046",
+      "p_040",
+      "p_035",
+      "p_050",
+      "p_041",
+      "p_036",
+      "p_042",
+      "p_039",
+      "p_043",
+      "p_038",
+      "p_051"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR",
+      "Financial",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_047",
+    "tier": 3,
+    "hub_id": "H5",
+    "num_entities": 8,
+    "entities_involved": [
+      "p_071",
+      "p_077",
+      "p_082",
+      "p_070",
+      "p_085",
+      "p_075",
+      "p_078",
+      "p_069"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR",
+      "Financial",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_048",
+    "tier": 3,
+    "hub_id": "H4",
+    "num_entities": 8,
+    "entities_involved": [
+      "p_061",
+      "p_068",
+      "p_062",
+      "p_055",
+      "p_053",
+      "p_067",
+      "p_060",
+      "p_054"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR",
+      "Financial",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_049",
+    "tier": 3,
+    "hub_id": "H6",
+    "num_entities": 14,
+    "entities_involved": [
+      "p_096",
+      "p_101",
+      "p_088",
+      "p_090",
+      "p_097",
+      "p_095",
+      "p_102",
+      "p_100",
+      "p_086",
+      "p_092",
+      "p_091",
+      "p_093",
+      "p_099",
+      "p_087"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR",
+      "Financial",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_050",
+    "tier": 3,
+    "hub_id": "H5",
+    "num_entities": 8,
+    "entities_involved": [
+      "p_076",
+      "p_071",
+      "p_069",
+      "p_083",
+      "p_084",
+      "p_079",
+      "p_074",
+      "p_070"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR",
+      "Financial",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_051",
+    "tier": 1,
+    "hub_id": "H2",
+    "num_entities": 2,
+    "entities_involved": [
+      "p_109",
+      "p_032"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [
+      "p_109"
+    ],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_052",
+    "tier": 1,
+    "hub_id": "H3",
+    "num_entities": 1,
+    "entities_involved": [
+      "p_110"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [
+      "p_110"
+    ],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_053",
+    "tier": 1,
+    "hub_id": "H4",
+    "num_entities": 1,
+    "entities_involved": [
+      "p_111"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [
+      "p_111"
+    ],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_054",
+    "tier": 1,
+    "hub_id": "H1",
+    "num_entities": 1,
+    "entities_involved": [
+      "p_103"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [
+      "p_103"
+    ],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_055",
+    "tier": 1,
+    "hub_id": "H1",
+    "num_entities": 1,
+    "entities_involved": [
+      "p_112"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [
+      "p_112"
+    ],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_056",
+    "tier": 1,
+    "hub_id": "H1",
+    "num_entities": 1,
+    "entities_involved": [
+      "p_108"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [
+      "p_108"
+    ],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_057",
+    "tier": 1,
+    "hub_id": "H5",
+    "num_entities": 2,
+    "entities_involved": [
+      "p_107",
+      "p_084"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [
+      "p_107"
+    ],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_058",
+    "tier": 1,
+    "hub_id": "H2",
+    "num_entities": 2,
+    "entities_involved": [
+      "p_104",
+      "p_020"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [
+      "p_104"
+    ],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_059",
+    "tier": 1,
+    "hub_id": "H4",
+    "num_entities": 1,
+    "entities_involved": [
+      "p_106"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [
+      "p_106"
+    ],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_060",
+    "tier": 1,
+    "hub_id": "H2",
+    "num_entities": 1,
+    "entities_involved": [
+      "p_025"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_061",
+    "tier": 1,
+    "hub_id": "H6",
+    "num_entities": 2,
+    "entities_involved": [
+      "p_101",
+      "p_098"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_062",
+    "tier": 1,
+    "hub_id": "H1",
+    "num_entities": 2,
+    "entities_involved": [
+      "p_010",
+      "p_002"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_063",
+    "tier": 1,
+    "hub_id": "H5",
+    "num_entities": 1,
+    "entities_involved": [
+      "p_071"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_064",
+    "tier": 1,
+    "hub_id": "H5",
+    "num_entities": 1,
+    "entities_involved": [
+      "p_079"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_065",
+    "tier": 1,
+    "hub_id": "H3",
+    "num_entities": 2,
+    "entities_involved": [
+      "p_039",
+      "p_035"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_066",
+    "tier": 1,
+    "hub_id": "H4",
+    "num_entities": 1,
+    "entities_involved": [
+      "p_067"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_067",
+    "tier": 1,
+    "hub_id": "H3",
+    "num_entities": 1,
+    "entities_involved": [
+      "p_041"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_068",
+    "tier": 1,
+    "hub_id": "H6",
+    "num_entities": 2,
+    "entities_involved": [
+      "p_095",
+      "p_102"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_069",
+    "tier": 1,
+    "hub_id": "H4",
+    "num_entities": 2,
+    "entities_involved": [
+      "p_066",
+      "p_055"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_070",
+    "tier": 1,
+    "hub_id": "H5",
+    "num_entities": 1,
+    "entities_involved": [
+      "p_078"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_071",
+    "tier": 1,
+    "hub_id": "H1",
+    "num_entities": 2,
+    "entities_involved": [
+      "p_001",
+      "p_010"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_072",
+    "tier": 1,
+    "hub_id": "H4",
+    "num_entities": 1,
+    "entities_involved": [
+      "p_068"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_073",
+    "tier": 1,
+    "hub_id": "H4",
+    "num_entities": 2,
+    "entities_involved": [
+      "p_064",
+      "p_058"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_074",
+    "tier": 1,
+    "hub_id": "H2",
+    "num_entities": 1,
+    "entities_involved": [
+      "p_020"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_075",
+    "tier": 1,
+    "hub_id": "H2",
+    "num_entities": 2,
+    "entities_involved": [
+      "p_029",
+      "p_022"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_076",
+    "tier": 1,
+    "hub_id": "H5",
+    "num_entities": 2,
+    "entities_involved": [
+      "p_072",
+      "p_080"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_077",
+    "tier": 1,
+    "hub_id": "H2",
+    "num_entities": 2,
+    "entities_involved": [
+      "p_033",
+      "p_030"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_078",
+    "tier": 1,
+    "hub_id": "H1",
+    "num_entities": 1,
+    "entities_involved": [
+      "p_001"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_079",
+    "tier": 1,
+    "hub_id": "H4",
+    "num_entities": 2,
+    "entities_involved": [
+      "p_064",
+      "p_061"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_080",
+    "tier": 1,
+    "hub_id": "H6",
+    "num_entities": 1,
+    "entities_involved": [
+      "p_099"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_081",
+    "tier": 1,
+    "hub_id": "H3",
+    "num_entities": 2,
+    "entities_involved": [
+      "p_045",
+      "p_038"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_082",
+    "tier": 1,
+    "hub_id": "H3",
+    "num_entities": 1,
+    "entities_involved": [
+      "p_045"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_083",
+    "tier": 1,
+    "hub_id": "H3",
+    "num_entities": 2,
+    "entities_involved": [
+      "p_038",
+      "p_041"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_084",
+    "tier": 1,
+    "hub_id": "H6",
+    "num_entities": 1,
+    "entities_involved": [
+      "p_095"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_085",
+    "tier": 1,
+    "hub_id": "H3",
+    "num_entities": 2,
+    "entities_involved": [
+      "p_037",
+      "p_047"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_086",
+    "tier": 1,
+    "hub_id": "H4",
+    "num_entities": 1,
+    "entities_involved": [
+      "p_063"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_087",
+    "tier": 1,
+    "hub_id": "H4",
+    "num_entities": 2,
+    "entities_involved": [
+      "p_053",
+      "p_060"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_088",
+    "tier": 1,
+    "hub_id": "H1",
+    "num_entities": 1,
+    "entities_involved": [
+      "p_010"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_089",
+    "tier": 1,
+    "hub_id": "H6",
+    "num_entities": 1,
+    "entities_involved": [
+      "p_093"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_090",
+    "tier": 1,
+    "hub_id": "H3",
+    "num_entities": 2,
+    "entities_involved": [
+      "p_051",
+      "p_045"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_091",
+    "tier": 1,
+    "hub_id": "H2",
+    "num_entities": 2,
+    "entities_involved": [
+      "p_031",
+      "p_018"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_092",
+    "tier": 1,
+    "hub_id": "H6",
+    "num_entities": 2,
+    "entities_involved": [
+      "p_092",
+      "p_088"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_093",
+    "tier": 1,
+    "hub_id": "H1",
+    "num_entities": 2,
+    "entities_involved": [
+      "p_015",
+      "p_005"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_094",
+    "tier": 1,
+    "hub_id": "H6",
+    "num_entities": 2,
+    "entities_involved": [
+      "p_101",
+      "p_087"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_095",
+    "tier": 1,
+    "hub_id": "H5",
+    "num_entities": 1,
+    "entities_involved": [
+      "p_074"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_096",
+    "tier": 1,
+    "hub_id": "H4",
+    "num_entities": 2,
+    "entities_involved": [
+      "p_062",
+      "p_061"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_097",
+    "tier": 1,
+    "hub_id": "H3",
+    "num_entities": 2,
+    "entities_involved": [
+      "p_043",
+      "p_047"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_098",
+    "tier": 1,
+    "hub_id": "H6",
+    "num_entities": 1,
+    "entities_involved": [
+      "p_095"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_099",
+    "tier": 1,
+    "hub_id": "H4",
+    "num_entities": 2,
+    "entities_involved": [
+      "p_055",
+      "p_057"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_100",
+    "tier": 1,
+    "hub_id": "H6",
+    "num_entities": 1,
+    "entities_involved": [
+      "p_088"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_101",
+    "tier": 1,
+    "hub_id": "H2",
+    "num_entities": 2,
+    "entities_involved": [
+      "p_025",
+      "p_032"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_102",
+    "tier": 1,
+    "hub_id": "H3",
+    "num_entities": 2,
+    "entities_involved": [
+      "p_048",
+      "p_039"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_103",
+    "tier": 1,
+    "hub_id": "H5",
+    "num_entities": 1,
+    "entities_involved": [
+      "p_076"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_104",
+    "tier": 1,
+    "hub_id": "H1",
+    "num_entities": 1,
+    "entities_involved": [
+      "p_011"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_105",
+    "tier": 1,
+    "hub_id": "H5",
+    "num_entities": 1,
+    "entities_involved": [
+      "p_079"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_106",
+    "tier": 1,
+    "hub_id": "H2",
+    "num_entities": 2,
+    "entities_involved": [
+      "p_026",
+      "p_024"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_107",
+    "tier": 1,
+    "hub_id": "H1",
+    "num_entities": 2,
+    "entities_involved": [
+      "p_013",
+      "p_014"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_108",
+    "tier": 1,
+    "hub_id": "H6",
+    "num_entities": 1,
+    "entities_involved": [
+      "p_098"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_109",
+    "tier": 1,
+    "hub_id": "H3",
+    "num_entities": 2,
+    "entities_involved": [
+      "p_036",
+      "p_050"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_110",
+    "tier": 1,
+    "hub_id": "H3",
+    "num_entities": 2,
+    "entities_involved": [
+      "p_039",
+      "p_041"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_111",
+    "tier": 1,
+    "hub_id": "H1",
+    "num_entities": 2,
+    "entities_involved": [
+      "p_008",
+      "p_013"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_112",
+    "tier": 1,
+    "hub_id": "H4",
+    "num_entities": 2,
+    "entities_involved": [
+      "p_065",
+      "p_061"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_113",
+    "tier": 1,
+    "hub_id": "H1",
+    "num_entities": 1,
+    "entities_involved": [
+      "p_002"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_114",
+    "tier": 1,
+    "hub_id": "H4",
+    "num_entities": 2,
+    "entities_involved": [
+      "p_067",
+      "p_052"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_115",
+    "tier": 1,
+    "hub_id": "H1",
+    "num_entities": 2,
+    "entities_involved": [
+      "p_017",
+      "p_015"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_116",
+    "tier": 1,
+    "hub_id": "H4",
+    "num_entities": 1,
+    "entities_involved": [
+      "p_055"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_117",
+    "tier": 1,
+    "hub_id": "H2",
+    "num_entities": 1,
+    "entities_involved": [
+      "p_022"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_118",
+    "tier": 1,
+    "hub_id": "H5",
+    "num_entities": 1,
+    "entities_involved": [
+      "p_083"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_119",
+    "tier": 1,
+    "hub_id": "H1",
+    "num_entities": 1,
+    "entities_involved": [
+      "p_001"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_120",
+    "tier": 1,
+    "hub_id": "H2",
+    "num_entities": 1,
+    "entities_involved": [
+      "p_019"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_121",
+    "tier": 1,
+    "hub_id": "H6",
+    "num_entities": 2,
+    "entities_involved": [
+      "p_090",
+      "p_094"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_122",
+    "tier": 1,
+    "hub_id": "H5",
+    "num_entities": 2,
+    "entities_involved": [
+      "p_072",
+      "p_085"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_123",
+    "tier": 1,
+    "hub_id": "H1",
+    "num_entities": 2,
+    "entities_involved": [
+      "p_017",
+      "p_007"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_124",
+    "tier": 1,
+    "hub_id": "H4",
+    "num_entities": 2,
+    "entities_involved": [
+      "p_059",
+      "p_052"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_125",
+    "tier": 1,
+    "hub_id": "H1",
+    "num_entities": 2,
+    "entities_involved": [
+      "p_015",
+      "p_009"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_126",
+    "tier": 1,
+    "hub_id": "H3",
+    "num_entities": 1,
+    "entities_involved": [
+      "p_050"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_127",
+    "tier": 1,
+    "hub_id": "H5",
+    "num_entities": 1,
+    "entities_involved": [
+      "p_076"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_128",
+    "tier": 1,
+    "hub_id": "H1",
+    "num_entities": 2,
+    "entities_involved": [
+      "p_010",
+      "p_002"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_129",
+    "tier": 1,
+    "hub_id": "H1",
+    "num_entities": 1,
+    "entities_involved": [
+      "p_016"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_130",
+    "tier": 1,
+    "hub_id": "H6",
+    "num_entities": 2,
+    "entities_involved": [
+      "p_088",
+      "p_094"
+    ],
+    "evidence_types": [
+      "FIR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_131",
+    "tier": 2,
+    "hub_id": "H2",
+    "num_entities": 6,
+    "entities_involved": [
+      "p_029",
+      "p_025",
+      "p_033",
+      "p_018",
+      "p_034",
+      "p_023"
+    ],
+    "evidence_types": [
+      "FIR",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_132",
+    "tier": 2,
+    "hub_id": "H4",
+    "num_entities": 5,
+    "entities_involved": [
+      "p_064",
+      "p_058",
+      "p_052",
+      "p_068",
+      "p_056"
+    ],
+    "evidence_types": [
+      "FIR",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_133",
+    "tier": 2,
+    "hub_id": "H5",
+    "num_entities": 3,
+    "entities_involved": [
+      "p_075",
+      "p_084",
+      "p_072"
+    ],
+    "evidence_types": [
+      "FIR",
+      "Financial"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_134",
+    "tier": 2,
+    "hub_id": "H2",
+    "num_entities": 4,
+    "entities_involved": [
+      "p_032",
+      "p_025",
+      "p_022",
+      "p_030"
+    ],
+    "evidence_types": [
+      "FIR",
+      "Financial"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_135",
+    "tier": 2,
+    "hub_id": "H1",
+    "num_entities": 6,
+    "entities_involved": [
+      "p_006",
+      "p_008",
+      "p_016",
+      "p_007",
+      "p_011",
+      "p_001"
+    ],
+    "evidence_types": [
+      "FIR",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_136",
+    "tier": 2,
+    "hub_id": "H2",
+    "num_entities": 6,
+    "entities_involved": [
+      "p_019",
+      "p_024",
+      "p_018",
+      "p_027",
+      "p_020",
+      "p_033"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_137",
+    "tier": 2,
+    "hub_id": "H6",
+    "num_entities": 3,
+    "entities_involved": [
+      "p_091",
+      "p_098",
+      "p_093"
+    ],
+    "evidence_types": [
+      "FIR",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_138",
+    "tier": 2,
+    "hub_id": "H3",
+    "num_entities": 3,
+    "entities_involved": [
+      "p_037",
+      "p_040",
+      "p_050"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_139",
+    "tier": 2,
+    "hub_id": "H2",
+    "num_entities": 6,
+    "entities_involved": [
+      "p_019",
+      "p_027",
+      "p_028",
+      "p_029",
+      "p_024",
+      "p_023"
+    ],
+    "evidence_types": [
+      "FIR",
+      "Financial"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_140",
+    "tier": 2,
+    "hub_id": "H4",
+    "num_entities": 4,
+    "entities_involved": [
+      "p_055",
+      "p_052",
+      "p_053",
+      "p_056"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_141",
+    "tier": 2,
+    "hub_id": "H3",
+    "num_entities": 6,
+    "entities_involved": [
+      "p_038",
+      "p_041",
+      "p_050",
+      "p_040",
+      "p_047",
+      "p_039"
+    ],
+    "evidence_types": [
+      "FIR",
+      "Financial"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_142",
+    "tier": 2,
+    "hub_id": "H1",
+    "num_entities": 3,
+    "entities_involved": [
+      "p_016",
+      "p_007",
+      "p_006"
+    ],
+    "evidence_types": [
+      "FIR",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_143",
+    "tier": 2,
+    "hub_id": "H4",
+    "num_entities": 4,
+    "entities_involved": [
+      "p_062",
+      "p_063",
+      "p_067",
+      "p_059"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_144",
+    "tier": 2,
+    "hub_id": "H6",
+    "num_entities": 6,
+    "entities_involved": [
+      "p_093",
+      "p_098",
+      "p_086",
+      "p_092",
+      "p_100",
+      "p_102"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_145",
+    "tier": 2,
+    "hub_id": "H1",
+    "num_entities": 5,
+    "entities_involved": [
+      "p_007",
+      "p_003",
+      "p_015",
+      "p_010",
+      "p_006"
+    ],
+    "evidence_types": [
+      "FIR",
+      "Financial"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_146",
+    "tier": 2,
+    "hub_id": "H3",
+    "num_entities": 5,
+    "entities_involved": [
+      "p_036",
+      "p_043",
+      "p_046",
+      "p_049",
+      "p_048"
+    ],
+    "evidence_types": [
+      "FIR",
+      "Financial"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_147",
+    "tier": 2,
+    "hub_id": "H3",
+    "num_entities": 5,
+    "entities_involved": [
+      "p_035",
+      "p_037",
+      "p_051",
+      "p_048",
+      "p_038"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_148",
+    "tier": 2,
+    "hub_id": "H4",
+    "num_entities": 6,
+    "entities_involved": [
+      "p_064",
+      "p_060",
+      "p_066",
+      "p_058",
+      "p_059",
+      "p_054"
+    ],
+    "evidence_types": [
+      "FIR",
+      "Financial"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_149",
+    "tier": 2,
+    "hub_id": "H2",
+    "num_entities": 3,
+    "entities_involved": [
+      "p_027",
+      "p_022",
+      "p_034"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_150",
+    "tier": 2,
+    "hub_id": "H3",
+    "num_entities": 5,
+    "entities_involved": [
+      "p_049",
+      "p_046",
+      "p_047",
+      "p_051",
+      "p_044"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_151",
+    "tier": 2,
+    "hub_id": "H5",
+    "num_entities": 4,
+    "entities_involved": [
+      "p_081",
+      "p_074",
+      "p_072",
+      "p_075"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_152",
+    "tier": 2,
+    "hub_id": "H6",
+    "num_entities": 3,
+    "entities_involved": [
+      "p_101",
+      "p_096",
+      "p_088"
+    ],
+    "evidence_types": [
+      "FIR",
+      "Financial"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_153",
+    "tier": 2,
+    "hub_id": "H1",
+    "num_entities": 3,
+    "entities_involved": [
+      "p_009",
+      "p_003",
+      "p_004"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_154",
+    "tier": 2,
+    "hub_id": "H4",
+    "num_entities": 6,
+    "entities_involved": [
+      "p_066",
+      "p_057",
+      "p_055",
+      "p_054",
+      "p_058",
+      "p_059"
+    ],
+    "evidence_types": [
+      "FIR",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_155",
+    "tier": 2,
+    "hub_id": "H6",
+    "num_entities": 4,
+    "entities_involved": [
+      "p_089",
+      "p_095",
+      "p_090",
+      "p_100"
+    ],
+    "evidence_types": [
+      "FIR",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_156",
+    "tier": 2,
+    "hub_id": "H3",
+    "num_entities": 5,
+    "entities_involved": [
+      "p_043",
+      "p_051",
+      "p_038",
+      "p_042",
+      "p_049"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_157",
+    "tier": 2,
+    "hub_id": "H2",
+    "num_entities": 4,
+    "entities_involved": [
+      "p_022",
+      "p_027",
+      "p_032",
+      "p_033"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_158",
+    "tier": 2,
+    "hub_id": "H3",
+    "num_entities": 3,
+    "entities_involved": [
+      "p_047",
+      "p_043",
+      "p_038"
+    ],
+    "evidence_types": [
+      "FIR",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_159",
+    "tier": 2,
+    "hub_id": "H5",
+    "num_entities": 4,
+    "entities_involved": [
+      "p_072",
+      "p_083",
+      "p_069",
+      "p_070"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_160",
+    "tier": 2,
+    "hub_id": "H4",
+    "num_entities": 4,
+    "entities_involved": [
+      "p_066",
+      "p_063",
+      "p_052",
+      "p_056"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_161",
+    "tier": 2,
+    "hub_id": "H1",
+    "num_entities": 3,
+    "entities_involved": [
+      "p_007",
+      "p_017",
+      "p_015"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_162",
+    "tier": 2,
+    "hub_id": "H3",
+    "num_entities": 4,
+    "entities_involved": [
+      "p_049",
+      "p_043",
+      "p_047",
+      "p_051"
+    ],
+    "evidence_types": [
+      "FIR",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_163",
+    "tier": 2,
+    "hub_id": "H1",
+    "num_entities": 3,
+    "entities_involved": [
+      "p_012",
+      "p_007",
+      "p_001"
+    ],
+    "evidence_types": [
+      "FIR",
+      "Financial"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_164",
+    "tier": 2,
+    "hub_id": "H3",
+    "num_entities": 4,
+    "entities_involved": [
+      "p_036",
+      "p_041",
+      "p_039",
+      "p_035"
+    ],
+    "evidence_types": [
+      "FIR",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_165",
+    "tier": 2,
+    "hub_id": "H6",
+    "num_entities": 4,
+    "entities_involved": [
+      "p_086",
+      "p_096",
+      "p_092",
+      "p_101"
+    ],
+    "evidence_types": [
+      "FIR",
+      "Financial"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_166",
+    "tier": 2,
+    "hub_id": "H2",
+    "num_entities": 5,
+    "entities_involved": [
+      "p_020",
+      "p_024",
+      "p_018",
+      "p_030",
+      "p_025"
+    ],
+    "evidence_types": [
+      "FIR",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_167",
+    "tier": 2,
+    "hub_id": "H4",
+    "num_entities": 3,
+    "entities_involved": [
+      "p_065",
+      "p_055",
+      "p_064"
+    ],
+    "evidence_types": [
+      "FIR",
+      "Financial"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_168",
+    "tier": 2,
+    "hub_id": "H6",
+    "num_entities": 4,
+    "entities_involved": [
+      "p_088",
+      "p_091",
+      "p_092",
+      "p_097"
+    ],
+    "evidence_types": [
+      "FIR",
+      "Financial"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_169",
+    "tier": 2,
+    "hub_id": "H4",
+    "num_entities": 5,
+    "entities_involved": [
+      "p_061",
+      "p_065",
+      "p_052",
+      "p_056",
+      "p_063"
+    ],
+    "evidence_types": [
+      "FIR",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_170",
+    "tier": 2,
+    "hub_id": "H3",
+    "num_entities": 6,
+    "entities_involved": [
+      "p_048",
+      "p_035",
+      "p_051",
+      "p_047",
+      "p_049",
+      "p_040"
+    ],
+    "evidence_types": [
+      "FIR",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_171",
+    "tier": 2,
+    "hub_id": "H2",
+    "num_entities": 6,
+    "entities_involved": [
+      "p_030",
+      "p_024",
+      "p_018",
+      "p_033",
+      "p_020",
+      "p_031"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_172",
+    "tier": 2,
+    "hub_id": "H1",
+    "num_entities": 6,
+    "entities_involved": [
+      "p_012",
+      "p_015",
+      "p_013",
+      "p_003",
+      "p_014",
+      "p_001"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_173",
+    "tier": 2,
+    "hub_id": "H5",
+    "num_entities": 4,
+    "entities_involved": [
+      "p_081",
+      "p_071",
+      "p_078",
+      "p_083"
+    ],
+    "evidence_types": [
+      "FIR",
+      "Financial"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_174",
+    "tier": 2,
+    "hub_id": "H6",
+    "num_entities": 4,
+    "entities_involved": [
+      "p_090",
+      "p_097",
+      "p_102",
+      "p_088"
+    ],
+    "evidence_types": [
+      "FIR",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_175",
+    "tier": 2,
+    "hub_id": "H2",
+    "num_entities": 3,
+    "entities_involved": [
+      "p_021",
+      "p_030",
+      "p_025"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_176",
+    "tier": 2,
+    "hub_id": "H3",
+    "num_entities": 4,
+    "entities_involved": [
+      "p_036",
+      "p_050",
+      "p_040",
+      "p_035"
+    ],
+    "evidence_types": [
+      "FIR",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_177",
+    "tier": 2,
+    "hub_id": "H6",
+    "num_entities": 6,
+    "entities_involved": [
+      "p_088",
+      "p_091",
+      "p_096",
+      "p_098",
+      "p_089",
+      "p_095"
+    ],
+    "evidence_types": [
+      "FIR",
+      "Financial"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_178",
+    "tier": 2,
+    "hub_id": "H5",
+    "num_entities": 4,
+    "entities_involved": [
+      "p_084",
+      "p_074",
+      "p_078",
+      "p_072"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_179",
+    "tier": 2,
+    "hub_id": "H4",
+    "num_entities": 4,
+    "entities_involved": [
+      "p_064",
+      "p_063",
+      "p_053",
+      "p_054"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_180",
+    "tier": 2,
+    "hub_id": "H6",
+    "num_entities": 4,
+    "entities_involved": [
+      "p_087",
+      "p_102",
+      "p_096",
+      "p_099"
+    ],
+    "evidence_types": [
+      "FIR",
+      "Financial"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_181",
+    "tier": 2,
+    "hub_id": "H1",
+    "num_entities": 6,
+    "entities_involved": [
+      "p_015",
+      "p_010",
+      "p_011",
+      "p_007",
+      "p_005",
+      "p_016"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_182",
+    "tier": 2,
+    "hub_id": "H4",
+    "num_entities": 6,
+    "entities_involved": [
+      "p_063",
+      "p_066",
+      "p_060",
+      "p_059",
+      "p_054",
+      "p_052"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_183",
+    "tier": 2,
+    "hub_id": "H5",
+    "num_entities": 6,
+    "entities_involved": [
+      "p_083",
+      "p_076",
+      "p_084",
+      "p_081",
+      "p_078",
+      "p_085"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_184",
+    "tier": 2,
+    "hub_id": "H4",
+    "num_entities": 6,
+    "entities_involved": [
+      "p_055",
+      "p_054",
+      "p_067",
+      "p_057",
+      "p_058",
+      "p_065"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_185",
+    "tier": 2,
+    "hub_id": "H4",
+    "num_entities": 3,
+    "entities_involved": [
+      "p_053",
+      "p_056",
+      "p_068"
+    ],
+    "evidence_types": [
+      "FIR",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_186",
+    "tier": 2,
+    "hub_id": "H3",
+    "num_entities": 3,
+    "entities_involved": [
+      "p_036",
+      "p_047",
+      "p_045"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_187",
+    "tier": 2,
+    "hub_id": "H1",
+    "num_entities": 3,
+    "entities_involved": [
+      "p_004",
+      "p_007",
+      "p_003"
+    ],
+    "evidence_types": [
+      "FIR",
+      "Financial"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_188",
+    "tier": 2,
+    "hub_id": "H3",
+    "num_entities": 4,
+    "entities_involved": [
+      "p_042",
+      "p_037",
+      "p_048",
+      "p_040"
+    ],
+    "evidence_types": [
+      "FIR",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_189",
+    "tier": 2,
+    "hub_id": "H3",
+    "num_entities": 4,
+    "entities_involved": [
+      "p_045",
+      "p_043",
+      "p_049",
+      "p_048"
+    ],
+    "evidence_types": [
+      "FIR",
+      "Financial"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_190",
+    "tier": 2,
+    "hub_id": "H2",
+    "num_entities": 5,
+    "entities_involved": [
+      "p_034",
+      "p_033",
+      "p_021",
+      "p_027",
+      "p_022"
+    ],
+    "evidence_types": [
+      "FIR",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_191",
+    "tier": 2,
+    "hub_id": "H5",
+    "num_entities": 4,
+    "entities_involved": [
+      "p_079",
+      "p_080",
+      "p_069",
+      "p_072"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_192",
+    "tier": 2,
+    "hub_id": "H4",
+    "num_entities": 4,
+    "entities_involved": [
+      "p_060",
+      "p_062",
+      "p_066",
+      "p_058"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_193",
+    "tier": 2,
+    "hub_id": "H3",
+    "num_entities": 3,
+    "entities_involved": [
+      "p_051",
+      "p_036",
+      "p_045"
+    ],
+    "evidence_types": [
+      "FIR",
+      "Financial"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_194",
+    "tier": 2,
+    "hub_id": "H4",
+    "num_entities": 3,
+    "entities_involved": [
+      "p_060",
+      "p_064",
+      "p_063"
+    ],
+    "evidence_types": [
+      "FIR",
+      "Financial"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_195",
+    "tier": 2,
+    "hub_id": "H3",
+    "num_entities": 6,
+    "entities_involved": [
+      "p_046",
+      "p_039",
+      "p_040",
+      "p_049",
+      "p_047",
+      "p_036"
+    ],
+    "evidence_types": [
+      "FIR",
+      "Financial"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_196",
+    "tier": 2,
+    "hub_id": "H2",
+    "num_entities": 4,
+    "entities_involved": [
+      "p_019",
+      "p_027",
+      "p_031",
+      "p_026"
+    ],
+    "evidence_types": [
+      "FIR",
+      "Financial"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_197",
+    "tier": 2,
+    "hub_id": "H3",
+    "num_entities": 5,
+    "entities_involved": [
+      "p_035",
+      "p_036",
+      "p_038",
+      "p_037",
+      "p_039"
+    ],
+    "evidence_types": [
+      "FIR",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_198",
+    "tier": 2,
+    "hub_id": "H6",
+    "num_entities": 6,
+    "entities_involved": [
+      "p_099",
+      "p_097",
+      "p_100",
+      "p_086",
+      "p_088",
+      "p_093"
+    ],
+    "evidence_types": [
+      "FIR",
+      "CDR"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_199",
+    "tier": 2,
+    "hub_id": "H5",
+    "num_entities": 3,
+    "entities_involved": [
+      "p_069",
+      "p_070",
+      "p_085"
+    ],
+    "evidence_types": [
+      "FIR",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  },
+  {
+    "case_id": "case_200",
+    "tier": 2,
+    "hub_id": "H3",
+    "num_entities": 5,
+    "entities_involved": [
+      "p_038",
+      "p_046",
+      "p_043",
+      "p_051",
+      "p_041"
+    ],
+    "evidence_types": [
+      "FIR",
+      "Photo"
+    ],
+    "bridge_entities": [],
+    "linked_cases": []
+  }
+]

@@ -45,31 +45,64 @@ only references it by ID.
 
 ---
 
+## Dataset & Methodology
+
+Real FIR, CDR, and financial data is legally restricted and inaccessible for a hackathon
+build (as noted in the problem statement itself), so Netra's demo runs entirely on
+purpose-built synthetic data — designed to be structurally realistic, not randomly
+generated.
+
+**How the dataset is built:**
+- A master network of **114 fictional people** across **6 criminal hubs**, each with
+  phones, vehicles, bank accounts, and organizational ties, modeled on the **POLE+O**
+  ontology (Person, Object, Location, Event, Organization) — an established framework
+  used in real law-enforcement intelligence analysis.
+- **200 individual case files**, deliberately split across three tiers (basic, moderate,
+  high-value) to mirror how real casework is distributed — most cases are small and
+  look unrelated; only a subset are large and richly connected.
+- **12 "bridge" individuals** are deliberately planted to connect otherwise-separate
+  criminal hubs — through a shared phone, bank account, vehicle, or associate — so
+  that a meaningful number of the 200 cases are secretly linked, exactly the kind of
+  hidden connection Netra is built to surface.
+- Every dataset component (FIR narratives, call detail records, financial transactions,
+  suspect photos) is generated from this same underlying network, so names, numbers,
+  and accounts stay consistent across every file rather than being independently
+  randomized.
+- The full pipeline includes an automated validation script that checks manifest
+  integrity, entity references, tier rules, bridge consistency, and file completeness
+  end-to-end — the dataset is verified internally consistent, not just assumed to be.
+
+This design means the demo doesn't just show a system that *could* work — it can prove,
+on request, that a specific planted connection between two "unrelated" cases was
+actually found by the system, not staged after the fact.
+
+---
+
 ## Build Progress
 
 ![Planning](https://img.shields.io/badge/Planning-100%25-brightgreen)
-![Data Generation](https://img.shields.io/badge/Data%20Generation-10%25-red)
+![Data Generation](https://img.shields.io/badge/Data%20Generation-100%25-brightgreen)
 ![Database](https://img.shields.io/badge/Database-0%25-red)
-![AI%2FNLP Backend](https://img.shields.io/badge/AI%2FNLP%20Backend-0%25-red)
-![Frontend](https://img.shields.io/badge/Frontend-0%25-red)
+![AI%2FNLP Backend](https://img.shields.io/badge/AI%2FNLP%20Backend-25%25-red)
+![Frontend](https://img.shields.io/badge/Frontend-25%25-red)
 ![Integration](https://img.shields.io/badge/Integration-0%25-red)
 
-| Segment | Working On It |
-|---|---|
-| Planning & App Flow | Team |
-| UI/UX Mockups | Sohan Darde |
-| Data Generation | Rishikesh Dhamdhere |
-| Database (Neo4j + Supabase) | Tanmay Madhavi |
-| AI/NLP Backend | Rohan Ayare & Taswi Tawde |
-| Frontend | Shubham Jadhav |
-| Integration & Demo Prep | Taswi Tawde |
+| Segment | Working On It | Notes |
+|---|---|---|
+| Planning & App Flow | Team | Done |
+| UI/UX Mockups | Sohan Darde | Done |
+| Data Generation | Rishikesh Dhamdhere | Complete: master graph, manifest, FIR/CDR/financial data, photos, JSON exports, and automated validation all built and verified |
+| Database (Neo4j + Supabase) | Tanmay Madhavi | Not started |
+| AI/NLP Backend | Rohan Ayare & Taswi Tawde | FastAPI upload endpoint + Gemini extraction worker initialized |
+| Frontend | Shubham Jadhav | React Flow knowledge graph UI initialized |
+| Integration & Demo Prep | Taswi Tawde | Not started |
 
 Update the badge percentages as work progresses — red under 30%, yellow 30–79%, green
 80% and above. Each badge is just a URL, so editing the number is a one-line change:
 
 ```
-https://img.shields.io/badge/Data%20Generation-10%25-red
-                                    ^label      ^%   ^color
+https://img.shields.io/badge/Data%20Generation-100%25-brightgreen
+                                    ^label      ^%    ^color
 ```
 
 ---
@@ -119,6 +152,19 @@ graph-based financial crime detection, and legal-text NLP.
 - [Named Entity Recognition and Resolution in Legal Text](https://www.researchgate.net/publication/220745968_Named_Entity_Recognition_and_Resolution_in_Legal_Text) — foundational approach to extracting and resolving named entities from legal documents.
 - [Named Entity Recognition in Indian court judgments](https://huggingface.co/opennyaiorg/en_legal_ner_trf) (Kalamkar et al., 2022) — Indian-context legal NER model and dataset, directly applicable to FIR-style text.
 - [Named-Entity Recognition for Portuguese Police Reports](https://www.dcc.fc.up.pt/~mantunes/papers/jiue2018.pdf) — one of the few papers specifically on extracting entities from police report text rather than generic documents.
+
+---
+
+## Future Scope
+
+- Integration with real case-management systems, pending appropriate inter-agency data
+  sharing agreements and compliance review
+- Multi-language FIR support, given first-information reports are frequently filed in
+  regional languages rather than English
+- A lightweight field-officer mobile companion for on-the-ground lead submission
+- Expanded facial recognition to handle low-quality CCTV footage, not just clear photos
+- Audit logging and chain-of-custody tracking, required for any evidence used in
+  actual court proceedings
 
 ---
 
