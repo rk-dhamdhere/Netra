@@ -13,6 +13,7 @@ node_modules/
 
 # Generated data (regenerate locally, don't commit large files)
 data/raw/
+data/manifest/case_bundles/
 
 # OS junk
 .DS_Store

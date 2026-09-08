@@ -4,7 +4,7 @@ load_dotenv()
 from fastapi import FastAPI, BackgroundTasks, UploadFile, File, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from backend.app.services.gemini_service import extract_fir_data
-
+from backend.app.services.neo4j_service import write_to_neo4j
 
 
 app = FastAPI(title="Netra AI/NLP Backend", version="1.0")
@@ -21,47 +21,33 @@ def process_file_task(filename: str, file_bytes: bytes):
     try:
         print(f"Extracting POLE+O entities from {filename}...")
         
-        # Call Rohan's function directly using the raw file bytes
-        result = extract_fir_data(file_bytes)
+        # 1. Get Pydantic models from Gemini
+        raw_result = extract_fir_data(file_bytes)
         
-        print(f"Task Complete. Data ready for DB: {result}")
+        # 2. Convert to dictionary for Neo4j
+        dict_result = raw_result.model_dump() 
         
-        # TODO: write_to_neo4j(result) - Waiting on Tanmay's connection details
+        print(f"Extraction complete! Sending to DB...")
+        
+        # 3. Push to graph database
+        write_to_neo4j(dict_result)
         
     except Exception as e:
-        print(f"AI Service Error: {str(e)}. Using updated POLE+O fallback mock data.")
+        print(f"AI Service Error: {str(e)}")
         
-        # This exact structure includes the new required properties from the updated contract
         mock_data = {
-            "nodes": [
-                {
-                    "label": "Person", 
-                    "id": "p1", 
-                    "name": "Rahul Sharma", 
-                    "risk_score": 85, 
-                    "hierarchy_tier": 2, 
-                    "is_kingpin": False
-                },
-                {
-                    "label": "Organization", 
-                    "id": "o1", 
-                    "name": "Shadow Syndicate", 
-                    "org_type": "Gang"
-                },
-                {
-                    "label": "Location", 
-                    "id": "l1", 
-                    "address": "Andheri West", 
-                    "lat": 19.136, 
-                    "lng": 72.827, 
-                    "tower_id": "T-404"
-                }
+            "persons": [
+                {"id": "p1", "name": "Rahul Sharma", "risk_score": 85, "hierarchy_tier": "Kingpin"}
             ],
-            "edges": [
+            "objects": [
+                {"id": "o1", "type": "Organization", "identifier_value": "Shadow Syndicate"}
+            ],
+            "relationships": [
                 {"source_id": "p1", "target_id": "o1", "relation_type": "AFFILIATED_WITH"}
             ]
         }
-        print(f"Fallback Data generated: {mock_data}")
+        print("Fallback Data generated. Sending to DB...")
+        write_to_neo4j(mock_data)
         
 @app.post("/api/v1/upload-case-file")
 async def upload_case_file(
