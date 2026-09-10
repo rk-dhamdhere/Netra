@@ -6,6 +6,14 @@ from fastapi.middleware.cors import CORSMiddleware
 from backend.app.services.gemini_service import extract_fir_data
 from backend.app.services.neo4j_service import write_to_neo4j
 
+from fastapi import FastAPI
+from backend.app.routes import graph_routes # Adjust this import based on your folder structure!
+
+app = FastAPI()
+
+# Include your new router
+app.include_router(graph_routes.router, prefix="/api/v1")
+
 
 app = FastAPI(title="Netra AI/NLP Backend", version="1.0")
 
