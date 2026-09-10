@@ -39,12 +39,20 @@ import { NetraTargetIcon } from "../../components/NetraLogo";
 import NetworkGraph from "../../components/NetworkGraph";
 import StepperNav from "../../components/StepperNav";
 
+const evidenceSlides = [
+  ["05-04-2024 Sat 20:17:35", "CAM-42", "94%", "#TGT-1193", "2026-09-02 14:32:11 · Andheri East", "Camera 03", "CCTV-Cam-42", "2026-09-02 14:32"],
+  ["05-04-2024 Sat 20:19:08", "CAM-42", "91%", "#TGT-1193", "2026-09-02 14:34:06 · Andheri East", "Camera 03", "CCTV-Cam-42", "2026-09-02 14:34"],
+  ["05-04-2024 Sat 20:21:42", "CAM-42", "89%", "#TGT-1193", "2026-09-02 14:36:40 · Andheri East", "Camera 03", "CCTV-Cam-42", "2026-09-02 14:36"],
+  ["05-04-2024 Sat 20:24:17", "CAM-42", "86%", "#TGT-1193", "2026-09-02 14:39:15 · Andheri East", "Camera 03", "CCTV-Cam-42", "2026-09-02 14:39"],
+] as const;
+
 export default function EvidenceReviewPage() {
   const [activeModule, setActiveModule] = useState<"suspects" | "graph" | "geo" | "dossier" | "cross">("suspects");
   const [currentSlide, setCurrentSlide] = useState(1);
   const [approved, setApproved] = useState(false);
   const [showSec65BModal, setShowSec65BModal] = useState(false);
   const [showSitrepModal, setShowSitrepModal] = useState(false);
+  const currentEvidence = evidenceSlides[currentSlide - 1];
 
   const scrollToSection = (sectionId: "suspects" | "graph" | "geo" | "dossier" | "cross") => {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -307,21 +315,21 @@ export default function EvidenceReviewPage() {
                     </div>
 
                     <div className="relative z-10 flex items-center justify-between text-[10px] font-mono text-white/90">
-                      <span className="font-semibold">05-04-2024 Sat 20:17:35</span>
+                      <span className="font-semibold">{currentEvidence[0]}</span>
                       <div className="flex items-center gap-2">
                         <span className="flex items-center gap-1 text-red-500 font-bold bg-black/60 px-1.5 py-0.5 rounded">
                           <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-ping" />
                           REC
                         </span>
                         <span className="bg-black/60 px-1.5 py-0.5 rounded font-bold text-slate-300">
-                          CAM-42
+                          {currentEvidence[1]}
                         </span>
                       </div>
                     </div>
 
                     <div className="relative z-20 mx-auto my-auto w-28 sm:w-32 h-36 sm:h-40 border-2 border-emerald-400 bg-emerald-500/10 rounded-sm flex flex-col justify-between p-1 shadow-lg shadow-emerald-500/20">
                       <div className="self-start -mt-3.5 -ml-1 bg-emerald-500 text-slate-950 font-black text-[9px] px-1.5 py-0.5 rounded-xs shadow-xs uppercase tracking-tight flex items-center gap-1">
-                        <span>AI Facial Match: 94%</span>
+                        <span>AI Facial Match: {currentEvidence[2]}</span>
                       </div>
 
                       <div className="w-full flex-1 flex flex-col items-center justify-center opacity-85">
@@ -330,16 +338,16 @@ export default function EvidenceReviewPage() {
                       </div>
 
                       <div className="text-[8px] font-mono text-emerald-300 text-right self-end bg-black/70 px-1 rounded">
-                        ID: #TGT-1193
+                        ID: {currentEvidence[3]}
                       </div>
                     </div>
 
                     <div className="relative z-10 flex items-center justify-between text-[10px] font-mono text-white/80">
                       <span className="bg-black/60 px-1.5 py-0.5 rounded">
-                        2026-09-02 14:32:11 · Andheri East
+                        {currentEvidence[4]}
                       </span>
                       <span className="bg-black/60 px-1.5 py-0.5 rounded">
-                        Camera 03
+                        {currentEvidence[5]}
                       </span>
                     </div>
                   </div>
@@ -353,11 +361,13 @@ export default function EvidenceReviewPage() {
                       <ChevronLeft className="w-4 h-4" />
                     </button>
                     <div className="flex items-center gap-1 text-[11px] font-mono text-slate-600 font-semibold">
-                      <span className="w-2 h-2 rounded-full bg-slate-800" />
-                      <span className="w-2 h-2 rounded-full bg-slate-300" />
-                      <span className="w-2 h-2 rounded-full bg-slate-300" />
-                      <span className="w-2 h-2 rounded-full bg-slate-300" />
-                      <span className="ml-2">1 / 4</span>
+                      {evidenceSlides.map((_, index) => (
+                        <span
+                          key={index}
+                          className={`w-2 h-2 rounded-full ${index === currentSlide - 1 ? "bg-slate-800" : "bg-slate-300"}`}
+                        />
+                      ))}
+                      <span className="ml-2">{currentSlide} / {evidenceSlides.length}</span>
                     </div>
                     <button
                       type="button"
@@ -369,7 +379,7 @@ export default function EvidenceReviewPage() {
                   </div>
 
                   <div className="pt-2 mt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500 font-medium">
-                    <span>Source: CCTV-Cam-42 | Timestamp: 2026-09-02 14:32</span>
+                    <span>Source: {currentEvidence[6]} | Timestamp: {currentEvidence[7]}</span>
                     <span className="text-emerald-700 font-bold flex items-center gap-1">
                       <Check className="w-3.5 h-3.5 text-emerald-600 stroke-[3]" />
                       <span>Hash OK</span>

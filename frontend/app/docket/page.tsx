@@ -52,7 +52,6 @@ export default function CaseDocketPage() {
   const [showAddSection, setShowAddSection] = useState(false);
 
   const [runOcr, setRunOcr] = useState(true);
-  const [autoTranslate, setAutoTranslate] = useState(false);
 
   const removeSection = (secToRemove: string) => {
     setSections(sections.filter((s) => s !== secToRemove));
@@ -351,26 +350,6 @@ export default function CaseDocketPage() {
                   </button>
                 </div>
 
-                {/* Translation Toggle */}
-                <div className="flex items-center justify-between text-xs">
-                  <span className="font-semibold text-slate-700 flex items-center gap-1.5">
-                    <span className="text-slate-500 font-bold text-[10px]">अ/A</span>
-                    Auto-Translate to English (from Hindi/Regional)
-                  </span>
-                  <button
-                    type="button"
-                    onClick={() => setAutoTranslate(!autoTranslate)}
-                    className={`w-9 h-5 rounded-full transition-colors relative cursor-pointer ${
-                      autoTranslate ? "bg-blue-600" : "bg-slate-300"
-                    }`}
-                  >
-                    <span
-                      className={`absolute top-0.5 w-4 h-4 rounded-full bg-white transition-transform ${
-                        autoTranslate ? "right-0.5" : "left-0.5"
-                      }`}
-                    />
-                  </button>
-                </div>
               </div>
 
             </div>

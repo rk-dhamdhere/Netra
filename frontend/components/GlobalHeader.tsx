@@ -41,12 +41,16 @@ export default function GlobalHeader(_props: GlobalHeaderProps) {
               badge: "Badge #IN-9842",
               initials: "RS",
             }}
-            onProfile={() => {}}
-            onAccessRBAC={() => {}}
+            onProfile={() => router.push("/profile")}
+            onAccessRBAC={() => router.push("/access")}
             onAuditTrail={() => router.push("/audit")}
-            onSettings={() => {}}
-            onHelp={() => {}}
-            onLogout={() => router.push("/")}
+            onSettings={() => router.push("/settings")}
+            onHelp={() => router.push("/help")}
+            onLogout={() => {
+              window.localStorage.removeItem("netra-authenticated");
+              window.sessionStorage.clear();
+              router.push("/");
+            }}
           />
         </div>
       </div>
