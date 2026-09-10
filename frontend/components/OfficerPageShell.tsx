@@ -26,11 +26,11 @@ export default function OfficerPageShell({ eyebrow, title, description, children
           <ArrowLeft className="h-4 w-4" />
           {backLabel}
         </Link>
-        <div className="mb-6 flex items-start gap-3">
-          <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#0c162c] text-white">
+        <div className="mb-6 flex items-center gap-3">
+          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#0c162c] text-white">
             <ShieldCheck className="h-5 w-5 text-blue-400" />
           </div>
-          <div>
+          <div className="pt-1">
             <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-blue-700">{eyebrow}</p>
             <h1 className="mt-1 text-2xl font-bold tracking-tight text-slate-950">{title}</h1>
             <p className="mt-1 max-w-2xl text-sm text-slate-500">{description}</p>
