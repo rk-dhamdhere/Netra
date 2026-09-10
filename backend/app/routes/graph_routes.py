@@ -15,8 +15,9 @@ async def get_graph_data():
     # @Tanmay: Write your Cypher query here to pull the POLE+O nodes and relationships.
     # The query needs to return the nodes and edges so we can map them to the frontend.
     cypher_query = """
-    // TANMAY'S CYPHER QUERY GOES HERE
-    // e.g., MATCH (n)-[r]->(m) RETURN n, r, m
+    MATCH (n)
+    OPTIONAL MATCH (n)-[r]->(m)
+    RETURN collect(DISTINCT n) AS nodes, collect(DISTINCT r) AS edges
     """
     
     try:
