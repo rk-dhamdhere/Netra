@@ -16,10 +16,10 @@ class Object(BaseModel):
 
 class Location(BaseModel):
     id: str
-    address: str
-    lat: Optional[float]
-    lng: Optional[float]
-    tower_id: Optional[str]
+    name: str  # e.g., "Andheri West Drop Zone"
+    activity_type: Optional[str] = Field(default="Unknown", description="Type of criminal activity")
+    latitude: Optional[float] = None
+    longitude: Optional[float] = None
 
 class Event(BaseModel):
     id: str
