@@ -2,6 +2,7 @@ import os
 import time
 from datetime import datetime
 from dotenv import load_dotenv
+from backend.app.services.geocoding_service import fetch_coordinates
 
 # NEW Google GenAI SDK Imports
 from google import genai
@@ -27,7 +28,10 @@ def get_mock_fallback_payload() -> GraphExtraction:
             { "id": "OBJ-901", "type": "Vehicle", "identifier_value": "MH-04-AB-1234", "is_burner": False },
             { "id": "OBJ-902", "type": "BankAccount", "identifier_value": "AC-9988221144", "is_burner": True }
         ],
-        "locations": [],
+        "locations": [
+            { "id": "L-301", "name": "Thane Railway Station", "activity_type": "Contraband Drop", "latitude": 19.1860, "longitude": 72.9759 },
+            { "id": "L-302", "name": "Bhiwandi Warehouses", "activity_type": "Syndicate Meeting", "latitude": 19.3002, "longitude": 73.0601 }
+        ],
         "events": [],
         "organizations": [],
         "relationships": [
@@ -43,9 +47,23 @@ def extract_fir_data(fir_text: str, max_retries: int = 3) -> GraphExtraction:
     base_delay = 1.0
 
     prompt = f"""
-    You are an elite intelligence analyst extracting structured criminal network data.
-    Extract all Persons, Objects, and Relationships from the text below.
-    Map strictly to the requested schema.
+    You are an elite intelligence analyst for the Netra law enforcement platform.
+    Your objective is to extract structured criminal network data (POLE+O) from the provided text.
+    Map the extracted data strictly to the requested schema using the following analytical rules:
+
+    ANALYTICAL RULES:
+    1. Persons & Risk Scores:
+       - Kingpin/Mastermind: score 85-100. Set is_kingpin to true.
+       - Lieutenant/Financier: score 60-84. Set is_kingpin to false.
+       - Mule/Driver/Street-level: score 20-59. Set is_kingpin to false.
+       - Unknown/Bystander: score 0-19.
+    2. Objects & Burners:
+       - If a phone is described as prepaid, temporary, or untraceable, set is_burner to true.
+       - If a vehicle is stolen or has fake plates, set is_burner to true.
+    3. Locations:
+       - Categorize activity_type into strict buckets: "Contraband Drop", "Safehouse", "Meeting Point", "Financial Hub", or "Crime Scene".
+    4. Relationships:
+       - Use standardized relation_type strings in all caps (e.g., ASSOCIATE_OF, OWNS_VEHICLE, OPERATES_ACCOUNT, SPOTTED_AT).
 
     Case Text:
     {fir_text}
@@ -62,7 +80,19 @@ def extract_fir_data(fir_text: str, max_retries: int = 3) -> GraphExtraction:
                     response_schema=GraphExtraction,
                 ),
             )
-            return GraphExtraction.model_validate_json(response.text)
+            
+            # Parse the AI JSON into your strict Pydantic model
+            graph_data = GraphExtraction.model_validate_json(response.text)
+            
+            # --- THE HEATMAP ENRICHMENT PIPELINE ---
+            print("[SYSTEM] Enriching locations for frontend heatmap...")
+            for location in graph_data.locations:
+                if location.name:
+                    lat, lng = fetch_coordinates(location.name)
+                    location.latitude = lat
+                    location.longitude = lng
+                    
+            return graph_data
 
         except Exception as e:
             timestamp = datetime.now().strftime("%H:%M:%S")
@@ -75,11 +105,25 @@ def extract_fir_data(fir_text: str, max_retries: int = 3) -> GraphExtraction:
     print(f"[{timestamp}] [SYSTEM] API unavailable. Triggering fallback payload.")
     return get_mock_fallback_payload()
 
+
 def extract_multimodal_evidence(file_path: str, mime_type: str, max_retries: int = 3) -> GraphExtraction:
     """
-    Uploads binary evidence files (PDF/Audio) directly to Gemini's File API
-    and parses out the POLE+O graph extraction schema.
-    """
+        You are an elite intelligence analyst for the Netra law enforcement platform.
+        Analyze the attached evidence document or audio recording thoroughly.
+        Extract all Persons, Objects, Locations, Events, Organizations, and Relationships into the structured schema.
+
+        ANALYTICAL RULES:
+        1. Persons (Hierarchy & Risk):
+           - Evaluate behavior. If issuing orders or moving large funds: tier "Kingpin", risk 85-100, is_kingpin=true.
+           - If following orders or acting as a proxy: tier "Mule/Associate", risk 20-60, is_kingpin=false.
+        2. Objects:
+           - Flag temporary phones, stolen vehicles, or shell accounts with is_burner=true.
+        3. Locations:
+           - Assign a clear activity_type: "Contraband Drop", "Safehouse", "Meeting Point", "Financial Hub", or "Crime Scene".
+        4. Relationships:
+           - Identify direct links and standardize the relation_type (e.g., COMMUNICATES_WITH, TRANSFERS_FUNDS_TO). 
+           - If a timestamp or amount is mentioned (e.g., "transferred 50k on Tuesday"), include it in the relationship properties.
+        """
     attempt = 0
     base_delay = 1.0
     evidence_file = None
@@ -91,7 +135,7 @@ def extract_multimodal_evidence(file_path: str, mime_type: str, max_retries: int
 
         prompt = """
         Analyze this evidence document or recording thoroughly.
-        Extract all identifiable Persons, Objects, and direct Relationships
+        Extract all identifiable Persons, Objects, Locations, and direct Relationships
         into the structured schema.
         """
 
@@ -109,7 +153,19 @@ def extract_multimodal_evidence(file_path: str, mime_type: str, max_retries: int
 
                 # Clean up Google's server after processing
                 client.files.delete(name=evidence_file.name)
-                return GraphExtraction.model_validate_json(response.text)
+                
+                # Parse the AI JSON into your strict Pydantic model
+                graph_data = GraphExtraction.model_validate_json(response.text)
+                
+                # --- THE HEATMAP ENRICHMENT PIPELINE ---
+                print("[SYSTEM] Enriching locations for frontend heatmap...")
+                for location in graph_data.locations:
+                    if location.name:
+                        lat, lng = fetch_coordinates(location.name)
+                        location.latitude = lat
+                        location.longitude = lng
+                        
+                return graph_data
 
             except Exception as e:
                 timestamp = datetime.now().strftime("%H:%M:%S")
