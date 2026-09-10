@@ -4,11 +4,22 @@ from backend.app.services.gemini_service import extract_multimodal_evidence
 
 def create_sample_fir_pdf(filename: str):
     c = canvas.Canvas(filename)
-    c.drawString(100, 750, "CONFIDENTIAL // CRIME INVESTIGATION REPORT")
-    c.drawString(100, 720, "FIR No: 2026/CR-0914")
-    c.drawString(100, 690, "Suspect: Ajay Rathod (Alias: Boss)")
-    c.drawString(100, 660, "Associate: Sameer Shaikh operating burner vehicle DL-4C-9912.")
-    c.drawString(100, 630, "Details: Ajay Rathod transferred funds to bank account AC-551122.")
+    c.drawString(100, 750, "INTELLIGENCE REPORT - CONFIDENTIAL")
+    
+    # Testing the Kingpin Rule
+    c.drawString(100, 710, "Target 1: Vikram Desai. Surveillance confirms he is the mastermind")
+    c.drawString(100, 690, "directing all financial operations and issuing orders.")
+    
+    # Testing the Mule Rule
+    c.drawString(100, 650, "Target 2: Rahul Sharma. A low-level driver who acts as a proxy.")
+    
+    # Testing the Burner Rule & Map Geocoding Rule
+    c.drawString(100, 610, "On Tuesday, Sharma was spotted at the Viviana Mall in Thane")
+    c.drawString(100, 590, "using a prepaid, untraceable flip phone to coordinate a drop.")
+    
+    # Testing Relationships
+    c.drawString(100, 550, "Desai subsequently transferred 500,000 INR to a shell bank account.")
+    
     c.save()
 
 if __name__ == "__main__":
