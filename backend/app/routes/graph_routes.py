@@ -1,19 +1,23 @@
+import os
 from fastapi import APIRouter, HTTPException
-# Assuming you have a database connection dependency or setup in your project
-# from app.database import get_neo4j_driver 
+from neo4j import GraphDatabase
+from dotenv import load_dotenv
+
+load_dotenv()
 
 router = APIRouter()
+
+NEO4J_URI = os.getenv("NEO4J_URI", "bolt://localhost:7687")
+NEO4J_USER = os.getenv("NEO4J_USER", "neo4j")
+NEO4J_PASSWORD = os.getenv("NEO4J_PASSWORD", "dev_password")
+
+driver = GraphDatabase.driver(NEO4J_URI, auth=(NEO4J_USER, NEO4J_PASSWORD))
 
 @router.get("/graph-data")
 async def get_graph_data():
     """
     Fetches the POLE+O graph topology for the React Flow frontend.
-    Database querying is handed off to Tanmay's Cypher logic.
     """
-    
-    # 1. THE PLACEHOLDER FOR TANMAY
-    # @Tanmay: Write your Cypher query here to pull the POLE+O nodes and relationships.
-    # The query needs to return the nodes and edges so we can map them to the frontend.
     cypher_query = """
     MATCH (n)
     OPTIONAL MATCH (n)-[r]->(m)
@@ -21,24 +25,42 @@ async def get_graph_data():
     """
     
     try:
-        # 2. YOUR BACKEND PLUMBING
-        # (This is pseudo-code for your Neo4j driver connection)
-        # driver = get_neo4j_driver()
-        # with driver.session() as session:
-        #     result = session.run(cypher_query)
-        #     records = result.data()
-        
-        # 3. REACT FLOW JSON FORMATTING (Your job to serve the frontend)
-        # React Flow requires a strict JSON structure with 'nodes' and 'edges' arrays.
-        formatted_graph = {
-            "nodes": [],
-            "edges": []
-        }
-        
-        # NOTE: Once Tanmay writes the query, you two will quickly loop through 
-        # his 'records' here and append them to the formatted_graph arrays.
-        
-        return formatted_graph
+        with driver.session() as session:
+            result = session.run(cypher_query)
+            record = result.single()
+            
+            if not record:
+                return {"nodes": [], "edges": []}
+            
+            raw_nodes = record["nodes"] or []
+            raw_edges = record["edges"] or []
+            
+            # Map Neo4j nodes to React Flow format
+            nodes = [
+                {
+                    "id": str(node.get("id", node.element_id)),
+                    "data": dict(node),
+                    "position": {"x": 100, "y": 100}
+                }
+                for node in raw_nodes
+            ]
+            
+            # Map Neo4j relationships to React Flow format
+            edges = [
+                {
+                    "id": str(rel.element_id),
+                    "source": str(rel.start_node.get("id", rel.start_node.element_id)),
+                    "target": str(rel.end_node.get("id", rel.end_node.element_id)),
+                    "label": rel.type,
+                    "data": dict(rel)
+                }
+                for rel in raw_edges
+            ]
+            
+            return {
+                "nodes": nodes,
+                "edges": edges
+            }
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Database connection failed: {str(e)}")
