@@ -187,3 +187,30 @@ def extract_multimodal_evidence(file_path: str, mime_type: str, max_retries: int
 
     print("[SYSTEM] Multimodal extraction failed. Returning fallback payload.")
     return get_mock_fallback_payload()
+
+from google import genai
+from PIL import Image
+
+def extract_128d_face_vector(image_path: str) -> list[float]:
+    """
+    Extracts a 128-dimensional biometric vector from a mugshot via the Gemini API.
+    Bypasses local C++ compilation entirely.
+    """
+    try:
+        # Load the mugshot image
+        img = Image.open(image_path)
+        
+        # Call the Gemini Embedding 2 multimodal model
+        result = genai.embed_content(
+            model="models/gemini-embedding-2",
+            content=img,
+            task_type="retrieval_document",
+            output_dimensionality=128
+        )
+        
+        # Returns a flat Python list of exactly 128 floats for Neo4j
+        return result['embedding']
+        
+    except Exception as e:
+        print(f"[ERROR] API Facial processing failed: {e}")
+        return []
