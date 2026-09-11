@@ -188,28 +188,40 @@ def extract_multimodal_evidence(file_path: str, mime_type: str, max_retries: int
     print("[SYSTEM] Multimodal extraction failed. Returning fallback payload.")
     return get_mock_fallback_payload()
 
+import os
+import pathlib
+from dotenv import load_dotenv
 from google import genai
 from PIL import Image
 
+# Force-load the .env file from the backend folder
+env_path = pathlib.Path(__file__).resolve().parent.parent.parent / ".env"
+load_dotenv(dotenv_path=env_path)
+
 def extract_128d_face_vector(image_path: str) -> list[float]:
     """
-    Extracts a 128-dimensional biometric vector from a mugshot via the Gemini API.
-    Bypasses local C++ compilation entirely.
+    Extracts a 128-dimensional biometric vector using explicitly resolved environment variables.
     """
     try:
-        # Load the mugshot image
         img = Image.open(image_path)
         
-        # Call the Gemini Embedding 2 multimodal model
-        result = genai.embed_content(
+        api_key = os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")
+        if not api_key:
+            print(f"[ERROR] API key not found. Checked path: {env_path}")
+            return []
+            
+        client = genai.Client(api_key=api_key)
+        
+        response = client.models.embed_content(
             model="models/gemini-embedding-2",
-            content=img,
-            task_type="retrieval_document",
-            output_dimensionality=128
+            contents=img,
+            config={
+                "task_type": "RETRIEVAL_DOCUMENT",
+                "output_dimensionality": 128
+            }
         )
         
-        # Returns a flat Python list of exactly 128 floats for Neo4j
-        return result['embedding']
+        return response.embeddings[0].values
         
     except Exception as e:
         print(f"[ERROR] API Facial processing failed: {e}")

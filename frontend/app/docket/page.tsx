@@ -30,28 +30,24 @@ import {
 } from "lucide-react";
 import GlobalHeader from "../../components/GlobalHeader";
 import StepperNav from "../../components/StepperNav";
+import { API_BASE_URL, parseApiError } from "../../lib/api";
 
 export default function CaseDocketPage() {
-  const [jurisdiction, setJurisdiction] = useState("Delhi NCR — Special Cell / Federal");
-  const [firNumber, setFirNumber] = useState("FIR / 001 / 2024 / DL");
-  const [ioId, setIoId] = useState("IN-9842");
-  const [priority, setPriority] = useState("CRITICAL");
-  const [firDate, setFirDate] = useState("2024-01-12");
-  const [offenseDate, setOffenseDate] = useState("2024-01-08");
+  const [jurisdiction, setJurisdiction] = useState("");
+  const [firNumber, setFirNumber] = useState("");
+  const [ioId, setIoId] = useState("");
+  const [priority, setPriority] = useState("");
+  const [firDate, setFirDate] = useState("");
+  const [offenseDate, setOffenseDate] = useState("");
 
-  const [sections, setSections] = useState<string[]>([
-    "420 IPC",
-    "467 IPC",
-    "120B IPC",
-    "468 IPC",
-    "BNS 316",
-    "IT Act 66C",
-    "PMLA 3",
-  ]);
+  const [sections, setSections] = useState<string[]>([]);
   const [newSection, setNewSection] = useState("");
   const [showAddSection, setShowAddSection] = useState(false);
 
   const [runOcr, setRunOcr] = useState(true);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [uploadState, setUploadState] = useState<"idle" | "uploading" | "success" | "error">("idle");
+  const [uploadMessage, setUploadMessage] = useState("");
 
   const removeSection = (secToRemove: string) => {
     setSections(sections.filter((s) => s !== secToRemove));
@@ -62,6 +58,29 @@ export default function CaseDocketPage() {
       setSections([...sections, newSection.trim()]);
       setNewSection("");
       setShowAddSection(false);
+    }
+  };
+
+  const handleFirUpload = async (file: File | undefined) => {
+    if (!file) return;
+    setSelectedFile(file);
+    setUploadState("uploading");
+    setUploadMessage("");
+
+    const formData = new FormData();
+    formData.append("file", file);
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/v1/upload-case-file`, {
+        method: "POST",
+        body: formData,
+      });
+      if (!response.ok) throw new Error(await parseApiError(response));
+      const result = await response.json();
+      setUploadState("success");
+      setUploadMessage(result.message || "File accepted for AI extraction.");
+    } catch (error) {
+      setUploadState("error");
+      setUploadMessage(error instanceof Error ? error.message : "Upload failed.");
     }
   };
 
@@ -275,7 +294,8 @@ export default function CaseDocketPage() {
               </label>
 
               {/* Drag and drop box */}
-              <div className="border-2 border-dashed border-slate-300 hover:border-blue-500 rounded-xl p-4 text-center bg-slate-50/60 hover:bg-blue-50/30 transition-all flex flex-col items-center justify-center">
+              <label className="border-2 border-dashed border-slate-300 hover:border-blue-500 rounded-xl p-4 text-center bg-slate-50/60 hover:bg-blue-50/30 transition-all flex flex-col items-center justify-center cursor-pointer">
+                <input type="file" className="sr-only" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" onChange={(event) => handleFirUpload(event.target.files?.[0])} />
                 <div className="w-9 h-9 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center mb-1.5">
                   <UploadCloud className="w-5 h-5" />
                 </div>
@@ -288,43 +308,28 @@ export default function CaseDocketPage() {
                 <div className="text-[9px] text-slate-400 mt-0.5">
                   Max 50MB per file · Encrypted upload via NIC gateway
                 </div>
-                <button
-                  type="button"
-                  className="mt-2.5 px-3 py-1 bg-[#0c162c] hover:bg-[#152342] text-white text-xs font-semibold rounded-md shadow-xs transition-colors cursor-pointer"
-                >
+                <span className="mt-2.5 px-3 py-1 bg-[#0c162c] hover:bg-[#152342] text-white text-xs font-semibold rounded-md shadow-xs transition-colors">
                   Browse Files
-                </button>
-              </div>
+                </span>
+                {selectedFile && <span className="mt-2 text-[10px] font-semibold text-slate-600">{selectedFile.name}</span>}
+                {uploadMessage && <span className={`mt-1 text-[10px] font-semibold ${uploadState === "error" ? "text-red-600" : "text-emerald-700"}`}>{uploadMessage}</span>}
+              </label>
 
               {/* Uploaded Files list */}
               <div className="space-y-1.5 pt-1">
-                {/* File 1 */}
-                <div className="flex items-center justify-between p-2 rounded-lg bg-slate-50 border border-slate-200 text-xs">
-                  <div className="flex items-center gap-2">
-                    <FileCheck2 className="w-4 h-4 text-blue-600" />
-                    <div>
-                      <span className="font-semibold text-slate-800">FIR_DL_001_2024_signed.pdf</span>
-                      <span className="text-[10px] text-slate-400 ml-1.5">2.4 MB</span>
+                {selectedFile ? (
+                  <div className="flex items-center justify-between p-2 rounded-lg bg-slate-50 border border-slate-200 text-xs">
+                    <div className="flex items-center gap-2">
+                      <FileCheck2 className="w-4 h-4 text-blue-600" />
+                      <span className="font-semibold text-slate-800">{selectedFile.name}</span>
                     </div>
+                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded border ${uploadState === "error" ? "text-red-700 bg-red-50 border-red-200" : uploadState === "success" ? "text-emerald-700 bg-emerald-50 border-emerald-200" : "text-amber-700 bg-amber-50 border-amber-200"}`}>
+                      {uploadState === "success" ? "Uploaded" : uploadState === "error" ? "Upload failed" : "Uploading..."}
+                    </span>
                   </div>
-                  <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
-                    Uploaded
-                  </span>
-                </div>
-
-                {/* File 2 */}
-                <div className="flex items-center justify-between p-2 rounded-lg bg-slate-50 border border-slate-200 text-xs">
-                  <div className="flex items-center gap-2">
-                    <FileText className="w-4 h-4 text-amber-600" />
-                    <div>
-                      <span className="font-semibold text-slate-800">Witness_Statement_Arora.pdf</span>
-                      <span className="text-[10px] text-slate-400 ml-1.5">1.1 MB</span>
-                    </div>
-                  </div>
-                  <span className="text-[10px] font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded border border-amber-200 animate-pulse">
-                    Uploading...
-                  </span>
-                </div>
+                ) : (
+                  <div className="p-2 text-center text-xs text-slate-500">No files uploaded</div>
+                )}
               </div>
 
               {/* Toggles */}
@@ -435,60 +440,9 @@ export default function CaseDocketPage() {
               {/* Header metadata tag */}
               <div className="font-mono text-[10px] text-slate-500 pb-1 border-b border-slate-200 flex items-center gap-2">
                 <FileText className="w-3 h-3" />
-                <span>CASE NARRATIVE — FIR/001/2024/DL — CONFIDENTIAL — IO: IN-9842 — 12 JAN 2024 14:32 IST</span>
+                <span>CASE NARRATIVE — No case narrative available</span>
               </div>
-
-              <p>
-                On the basis of specific intelligence received by the Special Cell, CGO Complex, New Delhi, regarding a highly organized cyber fraud and hawala ring operating under the alias &quot;Operation Black Lotus,&quot; a team led by the undersigned Investigating Officer commenced a covert surveillance operation on 08 January 2024.
-              </p>
-
-              <p>
-                Primary suspect{" "}
-                <span className="bg-blue-100 text-blue-900 font-semibold px-1.5 py-0.5 rounded border border-blue-300 inline-block shadow-2xs">
-                  KARIM ANSARI (alias &quot;The Broker&quot;)
-                </span>{" "}
-                was identified through IMEI triangulation and CDR analysis. Subject was observed making repeated calls to{" "}
-                <span className="bg-blue-100 text-blue-900 font-semibold px-1.5 py-0.5 rounded border border-blue-300 inline-block shadow-2xs">
-                  PRIYA MALHOTRA
-                </span>{" "}
-                and{" "}
-                <span className="bg-blue-100 text-blue-900 font-semibold px-1.5 py-0.5 rounded border border-blue-300 inline-block shadow-2xs">
-                  UNIT COMMANDER &quot;FALCON&quot;
-                </span>{" "}
-                (identity pending verification).
-              </p>
-
-              <p>
-                Financial transactions traced to{" "}
-                <span className="bg-amber-100 text-amber-950 font-semibold px-1.5 py-0.5 rounded border border-amber-300 inline-block shadow-2xs">
-                  Hawala Nexus — Sadar Bazar, Delhi
-                </span>{" "}
-                and{" "}
-                <span className="bg-amber-100 text-amber-950 font-semibold px-1.5 py-0.5 rounded border border-amber-300 inline-block shadow-2xs">
-                  Drop Location — Lajpat Nagar Market
-                </span>{" "}
-                totaling ₹4.7 Crore in unaccounted transfers across 9 shell accounts at 3 nationalized banks.
-              </p>
-
-              <p>
-                Vehicle{" "}
-                <span className="bg-emerald-100 text-emerald-950 font-semibold px-1.5 py-0.5 rounded border border-emerald-300 inline-block shadow-2xs">
-                  DL-3C-AB-9214 (White Toyota Innova)
-                </span>{" "}
-                was spotted at all three identified drop locations between 06:00–09:00 hrs on multiple dates. CCTV frames obtained from{" "}
-                <span className="bg-amber-100 text-amber-950 font-semibold px-1.5 py-0.5 rounded border border-amber-300 inline-block shadow-2xs">
-                  Nehru Place Metro Station
-                </span>{" "}
-                confirm presence.
-              </p>
-
-              <p>
-                Informant Code DELTA-7 reports that the network&apos;s financial controller operates from{" "}
-                <span className="bg-amber-100 text-amber-950 font-semibold px-1.5 py-0.5 rounded border border-amber-300 inline-block shadow-2xs">
-                  Office Tower B, Cyber Hub Gurugram
-                </span>{" "}
-                and uses VoIP routing through a Pakistan-based server to evade interception. Multi-agency coordination with ED, CBI, and IB recommended immediately.
-              </p>
+              <p className="text-slate-500">Enter or upload case information to populate the narrative.</p>
 
             </div>
 
@@ -500,52 +454,11 @@ export default function CaseDocketPage() {
                   <span className="text-xs font-bold text-slate-900">Auto-Extracted Entities</span>
                 </div>
                 <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#0c162c] text-white">
-                  14 entities found
+                  0 entities found
                 </span>
               </div>
 
-              {/* Tag Cloud */}
-              <div className="flex flex-wrap gap-1.5 text-[11px]">
-                <span className="px-2 py-1 rounded bg-blue-50 text-blue-800 border border-blue-200 font-semibold flex items-center gap-1">
-                  <User className="w-3 h-3 text-blue-600" />
-                  Karim Ansari — Person
-                </span>
-
-                <span className="px-2 py-1 rounded bg-blue-50 text-blue-800 border border-blue-200 font-semibold flex items-center gap-1">
-                  <User className="w-3 h-3 text-blue-600" />
-                  Priya Malhotra — Person
-                </span>
-
-                <span className="px-2 py-1 rounded bg-emerald-50 text-emerald-800 border border-emerald-200 font-semibold flex items-center gap-1">
-                  <Car className="w-3 h-3 text-emerald-600" />
-                  DL-3C-AB-9214 — Vehicle
-                </span>
-
-                <span className="px-2 py-1 rounded bg-amber-50 text-amber-900 border border-amber-200 font-semibold flex items-center gap-1">
-                  <MapPin className="w-3 h-3 text-amber-600" />
-                  Sadar Bazar, Delhi — Location
-                </span>
-
-                <span className="px-2 py-1 rounded bg-amber-50 text-amber-900 border border-amber-200 font-semibold flex items-center gap-1">
-                  <MapPin className="w-3 h-3 text-amber-600" />
-                  Lajpat Nagar — Location
-                </span>
-
-                <span className="px-2 py-1 rounded bg-amber-50 text-amber-900 border border-amber-200 font-semibold flex items-center gap-1">
-                  <MapPin className="w-3 h-3 text-amber-600" />
-                  Cyber Hub Gurugram — Location
-                </span>
-
-                <span className="px-2 py-1 rounded bg-purple-50 text-purple-800 border border-purple-200 font-semibold flex items-center gap-1">
-                  <Building className="w-3 h-3 text-purple-600" />
-                  Shell Account ×9 — FinEnt
-                </span>
-
-                <span className="px-2 py-1 rounded bg-cyan-50 text-cyan-800 border border-cyan-200 font-semibold flex items-center gap-1">
-                  <Phone className="w-3 h-3 text-cyan-600" />
-                  +91-98XXX-XXXXX — Phone
-                </span>
-              </div>
+              <div className="text-xs text-slate-500">No entities available</div>
             </div>
 
           </div>
@@ -557,13 +470,13 @@ export default function CaseDocketPage() {
           
           {/* Status checklist */}
           <div className="flex items-center gap-4 flex-wrap text-xs text-slate-600 font-medium">
-            <div className="flex items-center gap-1.5 text-emerald-700 font-semibold">
-              <Check className="w-4 h-4 text-emerald-600" />
-              <span>FIR uploaded &amp; OCR complete</span>
+            <div className="flex items-center gap-1.5 text-slate-500 font-semibold">
+              <FileCheck2 className="w-4 h-4 text-slate-400" />
+              <span>{uploadState === "success" ? "Document uploaded" : "No document uploaded"}</span>
             </div>
             <div className="flex items-center gap-1.5 text-blue-700 font-semibold">
               <Sparkles className="w-4 h-4 text-blue-600" />
-              <span>14 entities tagged for graph analysis</span>
+              <span>0 entities tagged for graph analysis</span>
             </div>
           </div>
 

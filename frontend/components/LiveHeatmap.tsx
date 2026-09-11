@@ -16,87 +16,14 @@ interface Hotspot {
   details: string;
 }
 
-const defaultHotspots: Hotspot[] = [
-  {
-    id: "hs-1",
-    name: "Andheri East — Cell-40291",
-    category: "Cell Tower & Cash Drop",
-    lat: 19.1136,
-    lng: 72.8697,
-    intensity: 0.95,
-    radius: 950,
-    riskLevel: "CRITICAL",
-    pings: 8419,
-    details: "Exhibit A-04 Facial Match (94%) & primary IMEI triangulation point",
-  },
-  {
-    id: "hs-2",
-    name: "Sadar Bazar — Hawala Hub",
-    category: "Hawala Drop Point",
-    lat: 28.6562,
-    lng: 77.2090,
-    intensity: 0.90,
-    radius: 1200,
-    riskLevel: "CRITICAL",
-    pings: 14200,
-    details: "₹4.7 Cr Hawala loop routing via 9 shell accounts",
-  },
-  {
-    id: "hs-3",
-    name: "Lajpat Nagar Central Market",
-    category: "SIM-Swap Operational Zone",
-    lat: 28.5677,
-    lng: 77.2433,
-    intensity: 0.75,
-    radius: 700,
-    riskLevel: "HIGH",
-    pings: 3120,
-    details: "Vehicle DL-3C-AB-9214 repeated early morning transit",
-  },
-  {
-    id: "hs-4",
-    name: "Cyber Hub Gurugram",
-    category: "VoIP Proxy & Controller Office",
-    lat: 28.4950,
-    lng: 77.0895,
-    intensity: 0.85,
-    radius: 850,
-    riskLevel: "HIGH",
-    pings: 5640,
-    details: "International VoIP proxy relay to evade direct interception",
-  },
-  {
-    id: "hs-5",
-    name: "Nehru Place Metro & Commercial Complex",
-    category: "Digital Hardware Transfer",
-    lat: 28.5494,
-    lng: 77.2519,
-    intensity: 0.65,
-    radius: 600,
-    riskLevel: "MEDIUM",
-    pings: 2480,
-    details: "Seized laptop E01 handover and burner device activation",
-  },
-  {
-    id: "hs-6",
-    name: "Bandra Cyber Police Precinct",
-    category: "Jurisdiction Control Post",
-    lat: 19.0596,
-    lng: 72.8295,
-    intensity: 0.40,
-    radius: 500,
-    riskLevel: "MEDIUM",
-    pings: 1100,
-    details: "Interrogation command node & FIR intake station",
-  },
-];
+const defaultHotspots: Hotspot[] = [];
 
 export default function LiveHeatmap() {
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<any>(null);
   const [activeSector, setActiveSector] = useState<"MUMBAI" | "DELHI" | "ALL">("MUMBAI");
   const [showHeatCircles, setShowHeatCircles] = useState(true);
-  const [selectedHotspot, setSelectedHotspot] = useState<Hotspot | null>(defaultHotspots[0]);
+  const [selectedHotspot, setSelectedHotspot] = useState<Hotspot | null>(null);
   const [mapTheme, setMapTheme] = useState<"ESRI_DARK" | "OSM_NIGHT">("ESRI_DARK");
   const layersRef = useRef<{ esri: any; esriLabels: any; osmNight: any }>({ esri: null, esriLabels: null, osmNight: null });
 

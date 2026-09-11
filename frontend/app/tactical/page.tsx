@@ -28,16 +28,16 @@ import StepperNav from "../../components/StepperNav";
 import NetworkGraph from "../../components/NetworkGraph";
 
 export default function TacticalDashboardPage() {
-  const [selectedEntity, setSelectedEntity] = useState({
-    name: "Karim Ansari",
-    role: "Primary Hawala Bridge / Target",
-    id: "ENT-2024-001",
-    aadhaar: "XXXX-XXXX-4291",
-    phone: "+91-98XXX-41122",
-    riskScore: 96,
-    riskLevel: "CRITICAL",
-    connections: 14,
-    flaggedAmount: "₹4.7 Crore",
+  const [selectedEntity] = useState({
+    name: "No entity selected",
+    role: "Awaiting investigation data",
+    id: "—",
+    aadhaar: "—",
+    phone: "—",
+    riskScore: 0,
+    riskLevel: "NO DATA",
+    connections: 0,
+    flaggedAmount: "₹0",
   });
 
   const [filterType, setFilterType] = useState("ALL");
@@ -46,14 +46,14 @@ export default function TacticalDashboardPage() {
     <div className="min-h-screen bg-[#f1f5f9] flex flex-col antialiased text-slate-800">
       {/* Global Header */}
       <GlobalHeader 
-        caseId="Case FIR-2026-08417" 
+        caseId="" 
         classification="CONFIDENTIAL" 
       />
 
       {/* Stepper Navigation */}
       <StepperNav 
         currentStep={5} 
-        caseSubtitle="Case FIR-2026-08417 · Multi-Agency AI Tactical Intelligence Graph" 
+        caseSubtitle="No active case selected · Multi-Agency AI Tactical Intelligence Graph" 
       />
 
       {/* Subheader Banner */}
@@ -80,7 +80,7 @@ export default function TacticalDashboardPage() {
               <span>GNN Confidence: 94.8%</span>
             </div>
             <div className="font-mono text-[11px] text-slate-600 bg-slate-100 px-2.5 py-1 rounded-md border border-slate-200">
-              86 Nodes · 142 Linkages
+              0 Nodes · 0 Linkages
             </div>
           </div>
 
@@ -95,7 +95,7 @@ export default function TacticalDashboardPage() {
           <div className="bg-white rounded-xl border border-slate-200 p-3 shadow-xs flex items-center justify-between">
             <div>
               <span className="text-[10px] uppercase font-bold text-slate-500">Tracked Entities</span>
-              <div className="text-xl font-black text-slate-900">86 Nodes</div>
+              <div className="text-xl font-black text-slate-900">0 Nodes</div>
             </div>
             <div className="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
               <Users className="w-4 h-4" />
@@ -105,7 +105,7 @@ export default function TacticalDashboardPage() {
           <div className="bg-white rounded-xl border border-slate-200 p-3 shadow-xs flex items-center justify-between">
             <div>
               <span className="text-[10px] uppercase font-bold text-slate-500">Hawala Loops</span>
-              <div className="text-xl font-black text-red-600">₹4.7 Cr</div>
+              <div className="text-xl font-black text-red-600">₹0</div>
             </div>
             <div className="w-8 h-8 rounded-lg bg-red-50 text-red-600 flex items-center justify-center">
               <Building2 className="w-4 h-4" />
@@ -115,7 +115,7 @@ export default function TacticalDashboardPage() {
           <div className="bg-white rounded-xl border border-slate-200 p-3 shadow-xs flex items-center justify-between">
             <div>
               <span className="text-[10px] uppercase font-bold text-slate-500">Tower Intercepts</span>
-              <div className="text-xl font-black text-emerald-600">8,419 Pings</div>
+              <div className="text-xl font-black text-emerald-600">0 Pings</div>
             </div>
             <div className="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center">
               <Phone className="w-4 h-4" />
@@ -125,7 +125,7 @@ export default function TacticalDashboardPage() {
           <div className="bg-white rounded-xl border border-slate-200 p-3 shadow-xs flex items-center justify-between">
             <div>
               <span className="text-[10px] uppercase font-bold text-slate-500">CCTV Facial Match</span>
-              <div className="text-xl font-black text-amber-600">94.0% Match</div>
+              <div className="text-xl font-black text-amber-600">No data</div>
             </div>
             <div className="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center">
               <CheckCircle2 className="w-4 h-4" />
@@ -188,15 +188,13 @@ export default function TacticalDashboardPage() {
                 <span className="text-xs font-bold text-slate-900 uppercase">
                   Entity Inspector
                 </span>
-                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-red-100 text-red-800 border border-red-200">
-                  CRITICAL RISK (96)
+                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200">
+                  NO DATA
                 </span>
               </div>
 
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold text-base shadow-sm">
-                  KA
-                </div>
+                <div className="w-12 h-12 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center font-bold text-base shadow-sm">—</div>
                 <div>
                   <div className="font-bold text-sm text-slate-900">{selectedEntity.name}</div>
                   <div className="text-xs text-slate-500">{selectedEntity.role}</div>
@@ -241,27 +239,7 @@ export default function TacticalDashboardPage() {
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
               </div>
 
-              <div className="space-y-2 text-xs">
-                <div className="p-2.5 rounded-lg bg-red-50 border border-red-200">
-                  <div className="font-bold text-red-900 flex items-center gap-1">
-                    <AlertTriangle className="w-3.5 h-3.5 text-red-600" />
-                    <span>High Centrality Linkage</span>
-                  </div>
-                  <p className="text-[11px] text-red-800 mt-0.5">
-                    Node ENT-1188 (&quot;Salim Bhai&quot;) connected to 14 mule accounts across 3 nationalized banks.
-                  </p>
-                </div>
-
-                <div className="p-2.5 rounded-lg bg-amber-50 border border-amber-200">
-                  <div className="font-bold text-amber-900 flex items-center gap-1">
-                    <Phone className="w-3.5 h-3.5 text-amber-600" />
-                    <span>Tower Handshake Logged</span>
-                  </div>
-                  <p className="text-[11px] text-amber-800 mt-0.5">
-                    IMEI 86392004 registered at Cell-40291 (Andheri East) within 400m of Exhibit A-04.
-                  </p>
-                </div>
-              </div>
+              <div className="py-6 text-center text-xs text-slate-500">No graph alerts available</div>
             </div>
 
           </div>

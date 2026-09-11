@@ -37,32 +37,7 @@ interface SitrepMessage {
 }
 
 export default function FieldIntelUpdatePage() {
-  const [messages, setMessages] = useState<SitrepMessage[]>([
-    {
-      id: "1",
-      sender: "Insp. V. Kulkarni",
-      unit: "SOG Alpha",
-      time: "00:36 IST",
-      text: "Target vehicle MH-02-AB-1234 identified at Western Express Highway Toll. Maintaining covert trailing distance.",
-      type: "urgent",
-    },
-    {
-      id: "2",
-      sender: "SI R. Mehra",
-      unit: "Cyber Cell",
-      time: "00:38 IST",
-      text: "Primary IMEI 86392004XXXXX registered on Cell-ID 40291 (Andheri East). Handshake confirmed.",
-      type: "info",
-    },
-    {
-      id: "3",
-      sender: "Control Room",
-      unit: "NCRB Command",
-      time: "00:39 IST",
-      text: "Sec 41A CrPC notice and detention authorization transmitted to SOG Team Alpha.",
-      type: "action",
-    },
-  ]);
+  const [messages, setMessages] = useState<SitrepMessage[]>([]);
 
   const [newMessage, setNewMessage] = useState("");
   const [apnrLocked, setApnrLocked] = useState(true);
@@ -72,8 +47,8 @@ export default function FieldIntelUpdatePage() {
     if (newMessage.trim()) {
       const msg: SitrepMessage = {
         id: Date.now().toString(),
-        sender: "Insp. Rajesh Sharma, IPS",
-        unit: "Supervisory IO",
+        sender: "Current operator",
+        unit: "Field dispatch",
         time: "Just now",
         text: newMessage.trim(),
         type: "action",
@@ -87,14 +62,14 @@ export default function FieldIntelUpdatePage() {
     <div className="min-h-screen bg-[#f1f5f9] flex flex-col antialiased text-slate-800">
       {/* Global Header */}
       <GlobalHeader 
-        caseId="Case FIR-2026-08417" 
+        caseId="" 
         classification="CONFIDENTIAL" 
       />
 
       {/* Stepper Navigation */}
       <StepperNav 
         currentStep={6} 
-        caseSubtitle="Case FIR-2026-08417 · Realtime Ground Team SITREP & Field Dispatch Active" 
+        caseSubtitle="No active case selected · Realtime Ground Team SITREP & Field Dispatch"
       />
 
       {/* Subheader Banner */}
@@ -115,13 +90,12 @@ export default function FieldIntelUpdatePage() {
             </div>
           </div>
 
-          <div className="flex items-center gap-3 text-xs font-semibold">
-            <div className="flex items-center gap-1.5 text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
-              <span>Ground Intercept Units: 3 Deployed</span>
+            <div className="flex items-center gap-3 text-xs font-semibold">
+              <div className="flex items-center gap-1.5 text-slate-700 bg-slate-50 px-2.5 py-1 rounded-md border border-slate-200">
+                <span>No deployed ground units</span>
             </div>
             <div className="font-mono text-[11px] text-slate-600 bg-slate-100 px-2.5 py-1 rounded-md border border-slate-200">
-              GPS Vector Sync: Active
+                GPS Vector Sync: No data
             </div>
           </div>
 
@@ -139,15 +113,15 @@ export default function FieldIntelUpdatePage() {
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="bg-emerald-600 text-white font-bold text-[10px] px-2 py-0.5 rounded uppercase tracking-wider">
-                  LIVE INTERCEPT
+                <span className="bg-slate-500 text-white font-bold text-[10px] px-2 py-0.5 rounded uppercase tracking-wider">
+                  NO DATA
                 </span>
                 <span className="text-xs text-slate-200 font-bold">
-                  SOG Team Alpha closing in on Target Vikram alias Vicky
+                  No active field intercept
                 </span>
               </div>
               <p className="text-xs text-slate-400 mt-0.5 font-normal">
-                Vehicle MH-02-AB-1234 moving North on Kurla Link Road · Last ANPR trigger: 00:36 IST (98.6% plate confidence)
+                No field telemetry available
               </p>
             </div>
           </div>
@@ -155,8 +129,8 @@ export default function FieldIntelUpdatePage() {
           <div className="flex items-center gap-2 shrink-0">
             <button
               type="button"
-              onClick={() => alert("Emergency Perimeter Lock Broadcasted to all Regional PCR Vans.")}
-              className="px-3.5 py-1.5 rounded-lg bg-red-600 hover:bg-red-700 text-white text-xs font-bold shadow-xs transition-colors cursor-pointer"
+              disabled
+              className="px-3.5 py-1.5 rounded-lg bg-slate-400 text-white text-xs font-bold shadow-xs cursor-not-allowed"
             >
               Seal Road Perimeter
             </button>
@@ -177,58 +151,12 @@ export default function FieldIntelUpdatePage() {
                     Deployed Ground Squads
                   </h2>
                 </div>
-                <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
-                  3 ACTIVE
+                <span className="text-[10px] font-bold text-slate-600 bg-slate-50 px-2 py-0.5 rounded border border-slate-200">
+                  0 ACTIVE
                 </span>
               </div>
 
-              {/* Squad 1 */}
-              <div className="p-3 rounded-lg bg-emerald-50/50 border border-emerald-200 space-y-1.5">
-                <div className="flex items-center justify-between">
-                  <span className="font-bold text-xs text-slate-900">Squad Alpha — SOG Mumbai</span>
-                  <span className="text-[10px] font-bold text-emerald-700 bg-emerald-100 px-1.5 py-0.5 rounded">
-                    In Pursuit
-                  </span>
-                </div>
-                <div className="text-[11px] text-slate-600">
-                  Leader: Insp. V. Kulkarni (4 Operatives)
-                </div>
-                <div className="text-[10px] text-slate-500 font-mono">
-                  Location: Western Express Toll Plaza (300m behind target)
-                </div>
-              </div>
-
-              {/* Squad 2 */}
-              <div className="p-3 rounded-lg bg-blue-50/50 border border-blue-200 space-y-1.5">
-                <div className="flex items-center justify-between">
-                  <span className="font-bold text-xs text-slate-900">Squad Bravo — Cyber Triangulation</span>
-                  <span className="text-[10px] font-bold text-blue-700 bg-blue-100 px-1.5 py-0.5 rounded">
-                    Live RF Lock
-                  </span>
-                </div>
-                <div className="text-[11px] text-slate-600">
-                  Leader: Sub-Inspector R. Mehra
-                </div>
-                <div className="text-[10px] text-slate-500 font-mono">
-                  Cell Tower: DEL-40291 (Signal: -58 dBm Strong)
-                </div>
-              </div>
-
-              {/* Squad 3 */}
-              <div className="p-3 rounded-lg bg-slate-50 border border-slate-200 space-y-1.5">
-                <div className="flex items-center justify-between">
-                  <span className="font-bold text-xs text-slate-900">Squad Charlie — Special Cell Delhi</span>
-                  <span className="text-[10px] font-bold text-slate-600 bg-slate-200 px-1.5 py-0.5 rounded">
-                    Staged
-                  </span>
-                </div>
-                <div className="text-[11px] text-slate-600">
-                  Target: Sadar Bazar Hawala Hub (Simultaneous Raid)
-                </div>
-                <div className="text-[10px] text-slate-500 font-mono">
-                  Status: Awaiting GO Command
-                </div>
-              </div>
+              <div className="rounded-lg border border-dashed border-slate-300 p-6 text-center text-xs text-slate-500">No deployed ground squads</div>
             </div>
 
             {/* Statutory Warrant Authority Card */}
@@ -238,14 +166,14 @@ export default function FieldIntelUpdatePage() {
                   <ShieldCheck className="w-4 h-4 text-emerald-600" />
                   Legal Authority Matrix
                 </span>
-                <span className="text-[10px] font-bold text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded border border-indigo-200">
-                  Sec 41A CrPC
+                <span className="text-[10px] font-bold text-slate-600 bg-slate-50 px-2 py-0.5 rounded border border-slate-200">
+                  No authority data
                 </span>
               </div>
               <div className="text-xs text-slate-600 space-y-1">
-                <div>• Interrogation Warrant: <strong className="text-slate-800">W-2024-0098</strong></div>
-                <div>• Telecom Intercept Order: <strong className="text-slate-800">LI/DL/2024/00441</strong></div>
-                <div>• FSL Evidence Integrity: <strong className="text-emerald-700">100% Hash Verified</strong></div>
+                <div>• Interrogation Warrant: <strong className="text-slate-500">—</strong></div>
+                <div>• Telecom Intercept Order: <strong className="text-slate-500">—</strong></div>
+                <div>• FSL Evidence Integrity: <strong className="text-slate-500">No data</strong></div>
               </div>
             </div>
 
@@ -263,51 +191,34 @@ export default function FieldIntelUpdatePage() {
                     Automated Number Plate Recognition (ANPR / APPR)
                   </span>
                 </div>
-                <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
-                  98.6% MATCH
+                <span className="text-[10px] font-bold text-slate-600 bg-slate-50 px-2 py-0.5 rounded border border-slate-200">
+                  NO DETECTIONS
                 </span>
               </div>
 
               {/* ANPR Camera Frame */}
-              <div className="relative rounded-lg overflow-hidden bg-slate-900 border border-slate-800 aspect-16/9 flex flex-col justify-between p-3 select-none">
+              <div className="relative rounded-lg overflow-hidden bg-slate-900 border border-slate-800 aspect-16/9 flex items-center justify-center p-3 select-none">
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-slate-900 to-black/80 pointer-events-none" />
                 
                 {/* Visual highway surveillance texture */}
                 <div className="absolute inset-0 opacity-30 bg-[radial-gradient(#475569_1px,transparent_1px)] [background-size:16px_16px]" />
 
-                {/* Car Silhouette in frame */}
-                <div className="relative z-10 mx-auto my-auto flex flex-col items-center">
-                  <div className="w-48 h-20 bg-slate-800 rounded-lg border-2 border-emerald-400/80 p-2 flex flex-col justify-between shadow-[0_0_20px_rgba(16,185,129,0.3)]">
-                    <div className="flex justify-between text-[9px] font-mono text-emerald-400">
-                      <span>ANPR-CAM-09</span>
-                      <span>CONF: 98.6%</span>
-                    </div>
-                    {/* License Plate Box */}
-                    <div className="bg-yellow-400 text-slate-950 font-mono font-black text-xs px-2 py-0.5 rounded border-2 border-slate-900 self-center tracking-wider">
-                      MH 02 AB 1234
-                    </div>
-                  </div>
-                </div>
-
-                <div className="relative z-10 flex items-center justify-between text-[10px] font-mono text-slate-300">
-                  <span>Toll Plaza Camera 04 · Lane 3</span>
-                  <span className="bg-black/60 px-1.5 py-0.5 rounded text-emerald-400">00:36:12 IST</span>
-                </div>
+                <span className="relative z-10 text-xs text-slate-300">No ANPR detections available</span>
               </div>
 
               {/* Vehicle Tracking Telemetry */}
               <div className="grid grid-cols-3 gap-2 text-xs font-mono">
                 <div className="p-2 rounded bg-slate-50 border border-slate-200">
                   <span className="text-[10px] text-slate-500 block">CURRENT SPEED</span>
-                  <span className="text-slate-900 font-bold">42 KM/H</span>
+                  <span className="text-slate-500 font-bold">No data</span>
                 </div>
                 <div className="p-2 rounded bg-slate-50 border border-slate-200">
                   <span className="text-[10px] text-slate-500 block">HEADING</span>
-                  <span className="text-slate-900 font-bold">042° NE (Kurla)</span>
+                  <span className="text-slate-500 font-bold">No data</span>
                 </div>
                 <div className="p-2 rounded bg-slate-50 border border-slate-200">
                   <span className="text-[10px] text-slate-500 block">LAST CONTACT</span>
-                  <span className="text-emerald-700 font-bold">14s ago</span>
+                  <span className="text-slate-500 font-bold">No data</span>
                 </div>
               </div>
             </div>
@@ -315,8 +226,8 @@ export default function FieldIntelUpdatePage() {
             {/* Rapid Intercept Trigger Button */}
             <button
               type="button"
-              onClick={() => alert("SOG Alpha instructed to execute lawful vehicle stop at Intersection 14.")}
-              className="w-full py-2.5 px-4 bg-emerald-700 hover:bg-emerald-800 text-white rounded-lg text-xs font-bold shadow-md transition-colors cursor-pointer flex items-center justify-center gap-2"
+              disabled
+              className="w-full py-2.5 px-4 bg-slate-400 text-white rounded-lg text-xs font-bold shadow-md cursor-not-allowed flex items-center justify-center gap-2"
             >
               <Car className="w-4 h-4" />
               <span>Authorize Ground Intercept at Next Signal</span>
@@ -335,13 +246,14 @@ export default function FieldIntelUpdatePage() {
                     Field SITREP Dispatch
                   </h2>
                 </div>
-                <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
-                  ENCRYPTED
+                <span className="text-[10px] font-bold text-slate-600 bg-slate-50 px-2 py-0.5 rounded border border-slate-200">
+                  NO DATA
                 </span>
               </div>
 
               {/* Message Feed */}
               <div className="space-y-2.5 flex-1 max-h-[320px] overflow-y-auto pr-1 text-xs">
+                {messages.length === 0 && <div className="py-8 text-center text-slate-500">No field SITREP messages</div>}
                 {messages.map((msg) => (
                   <div 
                     key={msg.id}
@@ -388,14 +300,14 @@ export default function FieldIntelUpdatePage() {
         {/* Bottom Actions Bar */}
         <div className="bg-white rounded-xl border border-slate-200 p-3.5 shadow-md flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
           <div className="flex items-center gap-4 text-[11px] text-slate-600 font-medium">
-            <span className="text-emerald-700 font-semibold flex items-center gap-1">
+              <span className="text-slate-500 font-semibold flex items-center gap-1">
               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-              <span>Full Docket Sealed</span>
+              <span>No docket sealed</span>
             </span>
             <span>•</span>
-            <span>Sec 65B Electronic Certificate Issued</span>
+            <span>Sec 65B certificate: No data</span>
             <span>•</span>
-            <span>All Comms Audit-Logged</span>
+            <span>No communications logged</span>
           </div>
 
           <div className="flex items-center gap-2.5 w-full sm:w-auto justify-end">
