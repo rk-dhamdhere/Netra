@@ -38,10 +38,21 @@ purpose is to find the ones that aren't.
 
 ![Architecture Diagram](docs/assets/architecture.png)
 
-Postgres handles rows, auth, and vector similarity search. Neo4j handles relationship
-traversal and graph algorithms — centrality, pattern detection. Neo4j is the single
-source of truth for entities and relationships; Postgres never duplicates that data,
-only references it by ID.
+Postgres (with pgvector) handles rows, auth, and vector similarity search. Neo4j handles
+relationship traversal and graph algorithms — centrality, pattern detection. Neo4j is the
+single source of truth for entities and relationships; Postgres never duplicates that
+data, only references it by ID.
+
+**Live endpoints (backend, running locally via Docker):**
+
+| Method | Endpoint | Purpose |
+|---|---|---|
+| `POST` | `/api/v1/upload-case-file` | Accepts a case file (FIR text/PDF), runs AI extraction in the background, writes results to Neo4j |
+| `POST` | `/api/v1/search-face` | Facial recognition search via pgvector nearest-neighbor matching |
+| `GET` | `/api/v1/graph-data` | Returns the full graph topology, shaped for the React Flow frontend |
+
+Each team member runs their own local Neo4j + Postgres instance via `docker compose up -d`
+— there is no shared central database during development.
 
 ---
 
@@ -72,6 +83,11 @@ generated.
   integrity, entity references, tier rules, bridge consistency, and file completeness
   end-to-end — the dataset is verified internally consistent, not just assumed to be.
 
+**Verified against the live system:** a pilot batch of 5 real generated FIR files was
+uploaded through the actual `/api/v1/upload-case-file` endpoint and accepted successfully
+end-to-end, confirming the synthetic dataset is compatible with the live ingestion
+pipeline, not just internally valid on its own.
+
 This design means the demo doesn't just show a system that *could* work — it can prove,
 on request, that a specific planted connection between two "unrelated" cases was
 actually found by the system, not staged after the fact.
@@ -82,27 +98,27 @@ actually found by the system, not staged after the fact.
 
 ![Planning](https://img.shields.io/badge/Planning-100%25-brightgreen)
 ![Data Generation](https://img.shields.io/badge/Data%20Generation-100%25-brightgreen)
-![Database](https://img.shields.io/badge/Database-0%25-red)
-![AI%2FNLP Backend](https://img.shields.io/badge/AI%2FNLP%20Backend-25%25-red)
-![Frontend](https://img.shields.io/badge/Frontend-25%25-red)
-![Integration](https://img.shields.io/badge/Integration-0%25-red)
+![Database](https://img.shields.io/badge/Database-70%25-yellow)
+![AI%2FNLP Backend](https://img.shields.io/badge/AI%2FNLP%20Backend-80%25-yellow)
+![Frontend](https://img.shields.io/badge/Frontend-60%25-yellow)
+![Integration](https://img.shields.io/badge/Integration-30%25-red)
 
 | Segment | Working On It | Notes |
 |---|---|---|
 | Planning & App Flow | Team | Done |
 | UI/UX Mockups | Sohan Darde | Done |
-| Data Generation | Rishikesh Dhamdhere | Complete: master graph, manifest, FIR/CDR/financial data, photos, JSON exports, and automated validation all built and verified |
-| Database (Neo4j + Supabase) | Tanmay Madhavi | Not started |
-| AI/NLP Backend | Rohan Ayare & Taswi Tawde | FastAPI upload endpoint + Gemini extraction worker initialized |
-| Frontend | Shubham Jadhav | React Flow knowledge graph UI initialized |
-| Integration & Demo Prep | Taswi Tawde | Not started |
+| Data Generation | Rishikesh Dhamdhere | Complete: master graph, manifest, FIR/CDR/financial data, photos, JSON exports, automated validation, and a working bulk-upload test script — all verified end-to-end |
+| Database (Neo4j + Supabase) | Tanmay Madhavi | Docker infra live, Neo4j ingestion and fallback schema working; each teammate runs their own local instance |
+| AI/NLP Backend | Rohan Ayare & Taswi Tawde | Gemini extraction pipeline (with PDF/audio multimodal support and local failover logic) integrated with FastAPI and Neo4j; face-search via pgvector working |
+| Frontend | Shubham Jadhav | Full Next.js app scaffolded with dashboard, docket, custody, audit, intel, review, and settings pages; graph visualization component in place |
+| Integration & Demo Prep | Taswi Tawde | Full pipeline (upload → extraction → Neo4j → graph) confirmed reachable; end-to-end verification against real synthetic data in progress |
 
 Update the badge percentages as work progresses — red under 30%, yellow 30–79%, green
 80% and above. Each badge is just a URL, so editing the number is a one-line change:
 
 ```
-https://img.shields.io/badge/Data%20Generation-100%25-brightgreen
-                                    ^label      ^%    ^color
+https://img.shields.io/badge/Database-70%25-yellow
+                                ^label ^%   ^color
 ```
 
 ---
@@ -111,12 +127,13 @@ https://img.shields.io/badge/Data%20Generation-100%25-brightgreen
 
 ```
 netra/
-├── frontend/     → Next.js dashboard
-├── backend/      → FastAPI AI/NLP microservice
+├── frontend/     → Next.js dashboard (multi-page: dashboard, docket, custody, intel, etc.)
+├── backend/      → FastAPI AI/NLP microservice (Gemini extraction, Neo4j, pgvector, geocoding)
 ├── data/         → dummy data generators, case manifest, raw files
 ├── db/           → Neo4j schema/seed scripts, Supabase migrations
 ├── docs/         → project reference docs + diagrams
-└── scripts/      → setup/dev utilities
+├── scripts/      → setup/dev utilities
+└── docker-compose.yml → local Neo4j + Postgres/pgvector setup
 ```
 
 ---
@@ -125,11 +142,12 @@ netra/
 
 | Layer | Technology |
 |---|---|
-| Frontend | Next.js (App Router), TypeScript, Tailwind, Cytoscape.js |
-| AI/NLP Backend | Python, FastAPI, LLM APIs |
-| Structured Data & Auth | Supabase (Postgres + pgvector) |
+| Frontend | Next.js (App Router), TypeScript, Tailwind, React Flow |
+| AI/NLP Backend | Python, FastAPI, Google GenAI SDK (Gemini) |
+| Structured Data & Auth | PostgreSQL + pgvector |
 | Graph Database | Neo4j (+ Graph Data Science library for centrality) |
-| Facial Recognition | InsightFace / FaceNet |
+| Facial Recognition | pgvector nearest-neighbor face embedding search |
+| Local Infrastructure | Docker Compose |
 
 ---
 
@@ -170,7 +188,24 @@ graph-based financial crime detection, and legal-text NLP.
 
 ## Getting Started
 
-*(to be filled in as each part comes online)*
+**Backend:**
+```bash
+pip install -r requirements.txt
+docker compose up -d
+uvicorn main:app --reload
+```
+
+Copy `.env.example` to `.env` and fill in your local Neo4j and Postgres credentials before
+starting — each teammate runs their own local database via Docker, not a shared instance.
+
+**Frontend:**
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Once running, visit `http://localhost:8000/docs` for the live backend API reference.
 
 ---
 
