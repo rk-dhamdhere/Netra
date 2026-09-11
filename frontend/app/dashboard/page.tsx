@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { 
   Search, 
-  ArrowRight, 
   Plus, 
   FileText, 
   ShieldCheck, 
@@ -233,13 +232,6 @@ export default function DashboardPage() {
                   ))}
                 </div>
 
-                <Link
-                  href="/docket"
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#0c162c] hover:bg-[#152342] text-white text-[11px] font-semibold shadow-xs transition-colors border border-slate-700 whitespace-nowrap"
-                >
-                  <span>Intake Case Docket</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
               </div>
             </div>
 
