@@ -37,32 +37,7 @@ interface SitrepMessage {
 }
 
 export default function FieldIntelUpdatePage() {
-  const [messages, setMessages] = useState<SitrepMessage[]>([
-    {
-      id: "1",
-      sender: "Insp. V. Kulkarni",
-      unit: "SOG Alpha",
-      time: "00:36 IST",
-      text: "Target vehicle MH-02-AB-1234 identified at Western Express Highway Toll. Maintaining covert trailing distance.",
-      type: "urgent",
-    },
-    {
-      id: "2",
-      sender: "SI R. Mehra",
-      unit: "Cyber Cell",
-      time: "00:38 IST",
-      text: "Primary IMEI 86392004XXXXX registered on Cell-ID 40291 (Andheri East). Handshake confirmed.",
-      type: "info",
-    },
-    {
-      id: "3",
-      sender: "Control Room",
-      unit: "NCRB Command",
-      time: "00:39 IST",
-      text: "Sec 41A CrPC notice and detention authorization transmitted to SOG Team Alpha.",
-      type: "action",
-    },
-  ]);
+  const [messages, setMessages] = useState<SitrepMessage[]>([]);
 
   const [newMessage, setNewMessage] = useState("");
   const [apnrLocked, setApnrLocked] = useState(true);
@@ -87,14 +62,14 @@ export default function FieldIntelUpdatePage() {
     <div className="min-h-screen bg-[#f1f5f9] flex flex-col antialiased text-slate-800">
       {/* Global Header */}
       <GlobalHeader 
-        caseId="Case FIR-2026-08417" 
+        caseId="" 
         classification="CONFIDENTIAL" 
       />
 
       {/* Stepper Navigation */}
       <StepperNav 
         currentStep={6} 
-        caseSubtitle="Case FIR-2026-08417 · Realtime Ground Team SITREP & Field Dispatch Active" 
+        caseSubtitle="No active case selected · Realtime Ground Team SITREP & Field Dispatch"
       />
 
       {/* Subheader Banner */}
@@ -143,11 +118,11 @@ export default function FieldIntelUpdatePage() {
                   LIVE INTERCEPT
                 </span>
                 <span className="text-xs text-slate-200 font-bold">
-                  SOG Team Alpha closing in on Target Vikram alias Vicky
+                  No active field intercept
                 </span>
               </div>
               <p className="text-xs text-slate-400 mt-0.5 font-normal">
-                Vehicle MH-02-AB-1234 moving North on Kurla Link Road · Last ANPR trigger: 00:36 IST (98.6% plate confidence)
+                No field telemetry available
               </p>
             </div>
           </div>
@@ -223,7 +198,7 @@ export default function FieldIntelUpdatePage() {
                   </span>
                 </div>
                 <div className="text-[11px] text-slate-600">
-                  Target: Sadar Bazar Hawala Hub (Simultaneous Raid)
+                  No target assignment
                 </div>
                 <div className="text-[10px] text-slate-500 font-mono">
                   Status: Awaiting GO Command
@@ -243,7 +218,7 @@ export default function FieldIntelUpdatePage() {
                 </span>
               </div>
               <div className="text-xs text-slate-600 space-y-1">
-                <div>• Interrogation Warrant: <strong className="text-slate-800">W-2024-0098</strong></div>
+                <div>• Interrogation Warrant: <strong className="text-slate-500">—</strong></div>
                 <div>• Telecom Intercept Order: <strong className="text-slate-800">LI/DL/2024/00441</strong></div>
                 <div>• FSL Evidence Integrity: <strong className="text-emerald-700">100% Hash Verified</strong></div>
               </div>

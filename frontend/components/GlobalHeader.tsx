@@ -35,22 +35,10 @@ export default function GlobalHeader(_props: GlobalHeaderProps) {
 
         <div className="flex items-center gap-4">
           <ProfileDropdown
-            user={{
-              name: "Insp. Rajesh Sharma",
-              role: "IPS — Senior Investigating Officer",
-              badge: "Badge #IN-9842",
-              initials: "RS",
-            }}
-            onProfile={() => router.push("/profile")}
             onAccessRBAC={() => router.push("/access")}
             onAuditTrail={() => router.push("/audit")}
             onSettings={() => router.push("/settings")}
             onHelp={() => router.push("/help")}
-            onLogout={() => {
-              window.localStorage.removeItem("netra-authenticated");
-              window.sessionStorage.clear();
-              router.push("/");
-            }}
           />
         </div>
       </div>

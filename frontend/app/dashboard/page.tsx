@@ -34,86 +34,7 @@ interface CaseItem {
   lastUpdated: string;
 }
 
-const casesData: CaseItem[] = [
-  {
-    firNumber: "FIR/001/2024/DL",
-    jurisdiction: "Delhi NCR — Special Cell",
-    targetName: "Karim Ansari",
-    alias: "The Broker",
-    sections: ["420 IPC", "120B IPC", "PMLA 3", "IT Act 66C"],
-    riskScore: 96,
-    riskLevel: "CRITICAL",
-    intelSources: ["CDR (35.6k)", "FININT (₹4.7Cr)", "Mugshot Match"],
-    status: "Ready for Evidence Intake",
-    statusColor: "emerald",
-    lastUpdated: "12m ago",
-  },
-  {
-    firNumber: "FIR-2026-08417",
-    jurisdiction: "Mumbai Zone — Crime Branch",
-    targetName: "Vikram alias Vicky",
-    alias: "Handler Node 1188",
-    sections: ["Sec 41A CrPC", "467 IPC", "120B IPC", "BNS 316"],
-    riskScore: 87,
-    riskLevel: "HIGH",
-    intelSources: ["CCTV (94% Match)", "Cell Tower Ping", "NATGRID"],
-    status: "AI Dossier Generated",
-    statusColor: "blue",
-    lastUpdated: "28m ago",
-  },
-  {
-    firNumber: "FIR/049/2024/MH",
-    jurisdiction: "Cyber Police Station — Bandra",
-    targetName: "Priya Malhotra",
-    alias: "Financial Mule Coord",
-    sections: ["IT Act 66D", "420 IPC", "PMLA 4"],
-    riskScore: 82,
-    riskLevel: "HIGH",
-    intelSources: ["UPI Logs (PhonePe)", "9 Shell Accounts"],
-    status: "FIU-IND Suspicious Alert",
-    statusColor: "amber",
-    lastUpdated: "1h ago",
-  },
-  {
-    firNumber: "FIR/112/2024/KA",
-    jurisdiction: "Bengaluru Central — CCB",
-    targetName: "Unknown — Alias FALCON",
-    alias: "Unit Commander",
-    sections: ["121A IPC", "UAPA 18", "IT Act 66F"],
-    riskScore: 94,
-    riskLevel: "CRITICAL",
-    intelSources: ["VoIP Pakistan Relay", "IPDR Dump"],
-    status: "Intercept Warrant Active",
-    statusColor: "red",
-    lastUpdated: "2h ago",
-  },
-  {
-    firNumber: "FIR/089/2024/GJ",
-    jurisdiction: "Ahmedabad Crime Branch",
-    targetName: "Mohammed Salim Shere",
-    alias: "Logistics Hub",
-    sections: ["379 IPC", "411 IPC", "BNS 303"],
-    riskScore: 64,
-    riskLevel: "MEDIUM",
-    intelSources: ["Vehicle Telematics", "Seized Laptop E01"],
-    status: "Arrested — Hash Verified",
-    statusColor: "emerald",
-    lastUpdated: "3h ago",
-  },
-  {
-    firNumber: "FIR/204/2024/WB",
-    jurisdiction: "Kolkata STF",
-    targetName: "Rajan Dubey",
-    alias: "SIM Swap Onboarder",
-    sections: ["468 IPC", "471 IPC"],
-    riskScore: 58,
-    riskLevel: "MEDIUM",
-    intelSources: ["Aadhaar e-KYC Logs", "14 SIMs Dump"],
-    status: "In Custody",
-    statusColor: "slate",
-    lastUpdated: "5h ago",
-  },
-];
+const casesData: CaseItem[] = [];
 
 export default function DashboardPage() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -149,42 +70,9 @@ export default function DashboardPage() {
             
             {/* Officer Security Clearance Card */}
             <div className="bg-white rounded-xl border border-slate-200 p-4 shadow-xs">
-              <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-                <div className="flex items-center gap-2">
-                  <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-                  <span className="text-xs font-bold text-slate-900 uppercase tracking-wide">
-                    Officer Terminal Status
-                  </span>
-                </div>
-                <span className="text-[10px] font-bold px-2 py-0.5 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded">
-                  AUTHENTICATED
-                </span>
-              </div>
-
-              <div className="mt-3 space-y-2 text-xs">
-                <div className="flex justify-between py-1 border-b border-slate-50">
-                  <span className="text-slate-500">Investigating Officer</span>
-                  <span className="font-semibold text-slate-900">Insp. Rajesh Sharma, IPS</span>
-                </div>
-                <div className="flex justify-between py-1 border-b border-slate-50">
-                  <span className="text-slate-500">Jurisdiction</span>
-                  <span className="font-semibold text-slate-900">Federal Special Cell / NCR</span>
-                </div>
-                <div className="flex justify-between py-1 border-b border-slate-50">
-                  <span className="text-slate-500">Security Clearance</span>
-                  <span className="font-semibold text-indigo-700 bg-indigo-50 px-1.5 py-0.5 rounded">
-                    Level-4 (Restricted SCI)
-                  </span>
-                </div>
-                <div className="flex justify-between py-1">
-                  <span className="text-slate-500">NIC Node &amp; Vault</span>
-                  <span className="font-mono text-[11px] text-slate-700">DEL-SRV-09 (AES-256)</span>
-                </div>
-              </div>
-
               <Link
                 href="/docket"
-                className="mt-4 w-full flex items-center justify-center gap-2 py-2.5 px-3 bg-[#0c162c] hover:bg-[#152342] text-white rounded-lg text-xs font-semibold shadow-xs transition-colors"
+                className="w-full flex items-center justify-center gap-2 py-2.5 px-3 bg-[#0c162c] hover:bg-[#152342] text-white rounded-lg text-xs font-semibold shadow-xs transition-colors"
               >
                 <Plus className="w-4 h-4 text-blue-400" />
                 <span>Create New Case Docket</span>
@@ -200,9 +88,9 @@ export default function DashboardPage() {
                   <span>Active Dockets</span>
                   <FileText className="w-4 h-4 text-blue-600" />
                 </div>
-                <div className="text-2xl font-black text-slate-900">14</div>
+                <div className="text-2xl font-black text-slate-900">0</div>
                 <div className="text-[10px] text-emerald-600 font-semibold mt-1 flex items-center gap-1">
-                  <span>+3 New this week</span>
+                  <span>No new dockets</span>
                 </div>
               </div>
 
@@ -212,9 +100,9 @@ export default function DashboardPage() {
                   <span>Tracked Entities</span>
                   <Users className="w-4 h-4 text-amber-600" />
                 </div>
-                <div className="text-2xl font-black text-slate-900">86</div>
+                <div className="text-2xl font-black text-slate-900">0</div>
                 <div className="text-[10px] text-red-600 font-semibold mt-1 flex items-center gap-1">
-                  <span>5 High Priority</span>
+                  <span>No priority entities</span>
                 </div>
               </div>
 
@@ -224,9 +112,9 @@ export default function DashboardPage() {
                   <span>Arrests Sealed</span>
                   <ShieldCheck className="w-4 h-4 text-emerald-600" />
                 </div>
-                <div className="text-2xl font-black text-slate-900">47</div>
+                <div className="text-2xl font-black text-slate-900">0</div>
                 <div className="text-[10px] text-slate-500 font-medium mt-1">
-                  94.2% conviction rate
+                  No conviction data
                 </div>
               </div>
 
@@ -236,9 +124,9 @@ export default function DashboardPage() {
                   <span>Flagged FININT</span>
                   <Activity className="w-4 h-4 text-indigo-600" />
                 </div>
-                <div className="text-2xl font-black text-slate-900">₹4.7 Cr</div>
+                <div className="text-2xl font-black text-slate-900">₹0</div>
                 <div className="text-[10px] text-amber-600 font-semibold mt-1">
-                  9 Shell accounts
+                  No flagged accounts
                 </div>
               </div>
 
@@ -371,6 +259,13 @@ export default function DashboardPage() {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-100">
+                    {filteredCases.length === 0 && (
+                      <tr>
+                        <td colSpan={7} className="py-10 px-3.5 text-center text-slate-500">
+                          No active investigation dockets
+                        </td>
+                      </tr>
+                    )}
                     {filteredCases.map((item) => {
                       return (
                         <tr
@@ -473,7 +368,7 @@ export default function DashboardPage() {
 
               {/* Table Footer */}
               <div className="p-3 bg-slate-50/70 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-500 gap-2">
-                <span>Showing 1 to {filteredCases.length} of 14 Active Federal Investigation Dockets</span>
+                <span>Showing {filteredCases.length} active federal investigation dockets</span>
                 <div className="flex items-center gap-1 text-[10px] font-medium text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
                   <ShieldCheck className="w-3 h-3 text-emerald-600" />
                   <span>NIC GovCloud Live Sync Active</span>

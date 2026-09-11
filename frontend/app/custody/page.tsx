@@ -28,9 +28,9 @@ import StepperNav from "../../components/StepperNav";
 import { API_BASE_URL, parseApiError } from "../../lib/api";
 
 export default function ChainOfCustodyPage() {
-  const [operator, setOperator] = useState("Reliance Jio");
-  const [warrantNo, setWarrantNo] = useState("LI/DL/2024/00441");
-  const [bankName, setBankName] = useState("HDFC Bank — Corporate Banking Division");
+  const [operator, setOperator] = useState("");
+  const [warrantNo, setWarrantNo] = useState("");
+  const [bankName, setBankName] = useState("");
   const [mugshotFile, setMugshotFile] = useState<File | null>(null);
   const [mugshotState, setMugshotState] = useState<"idle" | "processing" | "success" | "error">("idle");
   const [mugshotMessage, setMugshotMessage] = useState("");
@@ -63,7 +63,7 @@ export default function ChainOfCustodyPage() {
       {/* Stepper Navigation */}
       <StepperNav 
         currentStep={3} 
-        caseSubtitle="Case CID-2024-001 · FIR/001/2024/DL · Evidence Vault Active" 
+        caseSubtitle="No active case selected · Evidence Vault"
       />
 
       {/* Subheader with Evidence Progress */}
@@ -80,7 +80,7 @@ export default function ChainOfCustodyPage() {
                   Chain of Custody &amp; Evidence Staging
                 </h1>
                 <p className="text-[11px] text-slate-500 font-medium">
-                  Case CID-2024-001 · FIR/001/2024/DL · Step 3 of 6 · All uploads encrypted via NIC SecureVault
+                  No active case selected · Step 3 of 6 · All uploads encrypted via NIC SecureVault
                 </p>
               </div>
             </div>
@@ -91,7 +91,7 @@ export default function ChainOfCustodyPage() {
                 <span>Evidence Integrity: 100%</span>
               </div>
               <div className="font-mono text-slate-600 bg-slate-100 px-2 py-1 rounded border border-slate-200 text-[11px]">
-                # Custody ID: CUS-2024-001-A
+                No custody record selected
               </div>
             </div>
           </div>
@@ -141,11 +141,11 @@ export default function ChainOfCustodyPage() {
                 <div className="flex items-center justify-between p-2 rounded-lg bg-slate-50 border border-slate-200">
                   <div className="flex items-center gap-2">
                     <FileSpreadsheet className="w-4 h-4 text-emerald-600 shrink-0" />
-                    <span className="font-mono font-medium text-slate-800 text-[11px]">CDR_Karim_Ansari_Jan2024.csv</span>
+                    <span className="font-mono font-medium text-slate-500 text-[11px]">No CDR files uploaded</span>
                   </div>
                   <div className="flex items-center gap-3 text-[11px] text-slate-500">
-                    <span>8,419 records</span>
-                    <span>4.2 MB</span>
+                    <span>0 records</span>
+                    <span>—</span>
                     <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
                   </div>
                 </div>
@@ -153,11 +153,11 @@ export default function ChainOfCustodyPage() {
                 <div className="flex items-center justify-between p-2 rounded-lg bg-slate-50 border border-slate-200">
                   <div className="flex items-center gap-2">
                     <FileSpreadsheet className="w-4 h-4 text-emerald-600 shrink-0" />
-                    <span className="font-mono font-medium text-slate-800 text-[11px]">IPDR_Burner_9812XXXXXX.xlsx</span>
+                    <span className="font-mono font-medium text-slate-500 text-[11px]">No IPDR files uploaded</span>
                   </div>
                   <div className="flex items-center gap-3 text-[11px] text-slate-500">
-                    <span>2,341 records</span>
-                    <span>1.6 MB</span>
+                    <span>0 records</span>
+                    <span>—</span>
                     <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
                   </div>
                 </div>
@@ -165,11 +165,11 @@ export default function ChainOfCustodyPage() {
                 <div className="flex items-center justify-between p-2 rounded-lg bg-slate-50 border border-slate-200">
                   <div className="flex items-center gap-2">
                     <FileSpreadsheet className="w-4 h-4 text-emerald-600 shrink-0" />
-                    <span className="font-mono font-medium text-slate-800 text-[11px]">TowerDump_SadarBazar_Jan.csv</span>
+                    <span className="font-mono font-medium text-slate-500 text-[11px]">No tower data uploaded</span>
                   </div>
                   <div className="flex items-center gap-3 text-[11px] text-slate-500">
-                    <span>24,880 records</span>
-                    <span>12.1 MB</span>
+                    <span>0 records</span>
+                    <span>—</span>
                     <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
                   </div>
                 </div>
@@ -258,7 +258,7 @@ export default function ChainOfCustodyPage() {
                 <div className="flex items-center justify-between p-2 rounded-lg bg-slate-50 border border-slate-200">
                   <div className="flex items-center gap-2">
                     <FileSpreadsheet className="w-4 h-4 text-emerald-600 shrink-0" />
-                    <span className="font-mono font-medium text-slate-800 text-[11px]">UPI_Logs_PhonePe_Karim.xlsx</span>
+                    <span className="font-mono font-medium text-slate-500 text-[11px]">No UPI files uploaded</span>
                   </div>
                   <div className="flex items-center gap-3 text-[11px]">
                     <span className="text-slate-500">890 KB</span>
@@ -301,7 +301,7 @@ export default function ChainOfCustodyPage() {
             <div className="bg-red-50 border border-red-200 rounded-lg p-2.5 flex items-start gap-2 text-xs text-red-900">
               <AlertTriangle className="w-4 h-4 text-red-600 shrink-0 mt-0.5" />
               <div className="text-[11px] leading-tight">
-                <strong className="text-red-700 font-bold">FIU-IND Alert:</strong> ₹4.7 Cr flagged across 9 shell accounts — Suspicious Transaction Report #STR-2024-00881 filed.
+                <strong className="text-slate-700 font-bold">FININT status:</strong> No financial intelligence records available.
               </div>
             </div>
 
@@ -382,7 +382,7 @@ export default function ChainOfCustodyPage() {
                   <div className="w-10 h-10 rounded-full bg-slate-700 text-white flex items-center justify-center font-bold text-xs mb-1">
                     KA
                   </div>
-                  <span className="text-[11px] font-bold text-slate-900 leading-tight">Karim Ansari</span>
+                  <span className="text-[11px] font-bold text-slate-500 leading-tight">No suspect record</span>
                   <span className="mt-1 px-1.5 py-0.2 rounded bg-red-100 text-red-700 text-[9px] font-bold uppercase">
                     SUSPECT
                   </span>
@@ -393,7 +393,7 @@ export default function ChainOfCustodyPage() {
                   <div className="w-10 h-10 rounded-full bg-indigo-700 text-white flex items-center justify-center font-bold text-xs mb-1">
                     RD
                   </div>
-                  <span className="text-[11px] font-bold text-slate-900 leading-tight">Rajan Dubey</span>
+                  <span className="text-[11px] font-bold text-slate-500 leading-tight">No suspect record</span>
                   <span className="mt-1 px-1.5 py-0.2 rounded bg-red-100 text-red-700 text-[9px] font-bold uppercase">
                     SUSPECT
                   </span>
@@ -404,7 +404,7 @@ export default function ChainOfCustodyPage() {
                   <div className="w-10 h-10 rounded-full bg-teal-700 text-white flex items-center justify-center font-bold text-xs mb-1">
                     PM
                   </div>
-                  <span className="text-[11px] font-bold text-slate-900 leading-tight">Priya Malhotra</span>
+                  <span className="text-[11px] font-bold text-slate-500 leading-tight">No suspect record</span>
                   <span className="mt-1 px-1.5 py-0.2 rounded bg-red-100 text-red-700 text-[9px] font-bold uppercase">
                     SUSPECT
                   </span>
@@ -484,7 +484,7 @@ export default function ChainOfCustodyPage() {
                           KA
                         </div>
                       </td>
-                      <td className="py-2 px-2.5 font-bold text-slate-900">Karim Ansari</td>
+                      <td className="py-2 px-2.5 font-bold text-slate-500">No suspect record</td>
                       <td className="py-2 px-2.5 font-mono text-[11px] text-slate-600">XXXX-XXXX-4291</td>
                       <td className="py-2 px-2.5 font-mono text-[11px] text-slate-600">+91-98XXX-41122</td>
                       <td className="py-2 px-2.5 text-right">
@@ -501,7 +501,7 @@ export default function ChainOfCustodyPage() {
                           RD
                         </div>
                       </td>
-                      <td className="py-2 px-2.5 font-bold text-slate-900">Rajan Dubey</td>
+                      <td className="py-2 px-2.5 font-bold text-slate-500">No suspect record</td>
                       <td className="py-2 px-2.5 font-mono text-[11px] text-slate-600">Voter: DL/02/XXX/8812</td>
                       <td className="py-2 px-2.5 font-mono text-[11px] text-slate-600">+91-97XXX-91003</td>
                       <td className="py-2 px-2.5 text-right">
@@ -518,7 +518,7 @@ export default function ChainOfCustodyPage() {
                           PM
                         </div>
                       </td>
-                      <td className="py-2 px-2.5 font-bold text-slate-900">Priya Malhotra</td>
+                      <td className="py-2 px-2.5 font-bold text-slate-500">No suspect record</td>
                       <td className="py-2 px-2.5 font-mono text-[11px] text-slate-600">XXXX-XXXX-7733</td>
                       <td className="py-2 px-2.5 font-mono text-[11px] text-slate-600">+91-88XXX-20411</td>
                       <td className="py-2 px-2.5 text-right">
@@ -584,19 +584,19 @@ export default function ChainOfCustodyPage() {
           <div className="flex items-center gap-3 sm:gap-5 flex-wrap text-xs text-slate-700 font-medium">
             <div className="flex items-center gap-1.5 text-emerald-700 font-semibold">
               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-              <span>CDR — 3 files · 35,640 records</span>
+              <span>CDR — 0 files · 0 records</span>
             </div>
             <div className="flex items-center gap-1.5 text-emerald-700 font-semibold">
               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-              <span>FININT — 2 files · ₹4.7Cr flagged</span>
+              <span>FININT — 0 files · No flagged amount</span>
             </div>
             <div className="flex items-center gap-1.5 text-amber-700 font-semibold">
               <Clock className="w-3.5 h-3.5 text-amber-600" />
-              <span>Surveillance — 17 files · hashing...</span>
+              <span>Surveillance — 0 files</span>
             </div>
             <div className="flex items-center gap-1.5 text-emerald-700 font-semibold">
               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-              <span>Suspects — 5 registered</span>
+              <span>Suspects — 0 registered</span>
             </div>
           </div>
 
