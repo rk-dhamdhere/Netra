@@ -5,31 +5,59 @@ import {
   ReactFlow, 
   Background, 
   Controls, 
-  MiniMap,
   useNodesState, 
-  useEdgesState 
+  useEdgesState,
+  type Node,
+  type Edge
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 import PersonNode from "./PersonNode";
-import { RefreshCw, Database, Sparkles, CheckCircle2, AlertCircle } from "lucide-react";
+import { RefreshCw, Database } from "lucide-react";
 
 const nodeTypes = {
   person: PersonNode,
 };
 
-const emptyNodes: any[] = [];
-const emptyEdges: any[] = [];
+const emptyNodes: Node[] = [];
+const emptyEdges: Edge[] = [];
 
-function calculateRadialLayout(nodes: any[]) {
+interface RawNodeData {
+  name?: string;
+  label?: string;
+  value?: string;
+  type?: string;
+  identifier_value?: string;
+  visual_weight?: string;
+  tier?: number;
+  risk_score?: number;
+  is_kingpin?: boolean;
+}
+
+interface RawNode {
+  id: string | number;
+  type?: string;
+  position?: { x: number; y: number };
+  data?: RawNodeData;
+}
+
+interface RawEdge {
+  id?: string;
+  source: string | number;
+  target: string | number;
+  label?: string;
+  type?: string;
+  data?: Record<string, unknown>;
+}
+
+function calculateRadialLayout(nodes: Node[]): Node[] {
   const count = nodes.length;
   if (count <= 1) return nodes;
-  
+
   const centerX = 380;
   const centerY = 200;
   const radius = Math.max(160, Math.min(300, count * 35));
 
   return nodes.map((node, index) => {
-    // If the node already has varied layout, keep it
     if (node.position && (node.position.x !== 100 || node.position.y !== 100)) {
       return node;
     }
@@ -43,7 +71,7 @@ function calculateRadialLayout(nodes: any[]) {
   });
 }
 
-function processBackendNode(rawNode: any) {
+function processBackendNode(rawNode: RawNode): Node {
   const nodeData = rawNode.data || {};
   const visualWeight = nodeData.visual_weight || "standard";
   const isPerson = 
@@ -66,9 +94,8 @@ function processBackendNode(rawNode: any) {
     };
   }
 
-  // Determine styling based on Object type
   const objType = nodeData.type?.toLowerCase() || "";
-  let style = { 
+  let style: React.CSSProperties = { 
     border: "1px solid #64748b", 
     borderRadius: "8px", 
     padding: "8px 12px", 
@@ -116,7 +143,6 @@ export default function NetworkGraph() {
   const [edgeCount, setEdgeCount] = useState(0);
 
   const fetchGraphData = useCallback(async () => {
-    setIsLoading(true);
     const backendUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
     
     try {
@@ -132,11 +158,14 @@ export default function NetworkGraph() {
       const data = await res.json();
 
       if (data && Array.isArray(data.nodes) && data.nodes.length > 0) {
-        const parsedNodes = data.nodes.map(processBackendNode);
+        const parsedNodes = (data.nodes as RawNode[]).map(processBackendNode);
         const layoutedNodes = calculateRadialLayout(parsedNodes);
 
-        const nodeWeights = new Map(layoutedNodes.map((node: any) => [node.id, node.data?.visual_weight]));
-        const parsedEdges = (data.edges || []).map((edge: any) => {
+        const nodeWeights = new Map(
+          layoutedNodes.map((node) => [node.id, (node.data as RawNodeData)?.visual_weight])
+        );
+
+        const parsedEdges: Edge[] = (data.edges as RawEdge[] || []).map((edge) => {
           const sourceWeight = nodeWeights.get(String(edge.source));
           return {
             id: String(edge.id || `${edge.source}-${edge.target}`),
@@ -158,15 +187,13 @@ export default function NetworkGraph() {
         setEdgeCount(parsedEdges.length);
         setIsLive(true);
       } else {
-        // Backend connected but no nodes yet: keep the graph empty.
         setNodes([]);
         setEdges([]);
         setNodeCount(0);
         setEdgeCount(0);
         setIsLive(false);
       }
-    } catch (_err) {
-      // Backend unavailable: gracefully stay empty.
+    } catch {
       setNodes([]);
       setEdges([]);
       setNodeCount(0);
@@ -178,12 +205,27 @@ export default function NetworkGraph() {
   }, [setNodes, setEdges]);
 
   useEffect(() => {
-    fetchGraphData();
+    let isSubscribed = true;
+
+    async function loadInitialGraph() {
+      if (!isSubscribed) return;
+      await fetchGraphData();
+    }
+
+    void loadInitialGraph();
+
+    return () => {
+      isSubscribed = false;
+    };
   }, [fetchGraphData]);
 
+  const handleManualRefresh = () => {
+    setIsLoading(true);
+    void fetchGraphData();
+  };
+
   return (
-    <div className="w-full h-full min-h-[380px] bg-slate-50/70 rounded-xl overflow-hidden border border-slate-200 relative flex flex-col">
-      {/* Live Connection & Controls HUD */}
+    <div className="w-full h-full min-h-95 bg-slate-50/70 rounded-xl overflow-hidden border border-slate-200 relative flex flex-col">
       <div className="absolute top-2.5 right-2.5 z-20 flex items-center gap-2">
         <div 
           className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[10px] font-bold shadow-xs border transition-all backdrop-blur-md ${
@@ -207,10 +249,10 @@ export default function NetworkGraph() {
 
         <button
           type="button"
-          onClick={fetchGraphData}
+          onClick={handleManualRefresh}
           disabled={isLoading}
           className="p-1.5 rounded-md bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 shadow-xs transition-colors cursor-pointer disabled:opacity-50"
-          title="Refresh Graph from Neo4j / Taswi's API"
+          title="Refresh Graph from Neo4j"
         >
           <RefreshCw className={`w-3.5 h-3.5 ${isLoading ? "animate-spin text-blue-600" : ""}`} />
         </button>

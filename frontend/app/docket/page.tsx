@@ -7,36 +7,31 @@ import {
   UploadCloud, 
   Plus, 
   X, 
-  Check, 
   Clock, 
-  Tag, 
   User, 
   MapPin, 
   Car, 
-  Building, 
-  Phone, 
   Sparkles, 
-  ShieldCheck, 
   ArrowRight, 
-  Bold, 
-  Italic, 
-  Underline, 
-  Strikethrough, 
-  List, 
-  ListOrdered, 
-  Quote, 
   FileCheck2,
-  Calendar
+  Loader2
 } from "lucide-react";
 import GlobalHeader from "../../components/GlobalHeader";
 import StepperNav from "../../components/StepperNav";
-import { API_BASE_URL, parseApiError } from "../../lib/api";
+import { api } from "../../lib/api";
+
+type EntityCategory = "person" | "location" | "vehicle" | "organization" | "general";
+
+interface ExtractedEntity {
+  name: string;
+  category: EntityCategory;
+}
 
 export default function CaseDocketPage() {
-  const [jurisdiction, setJurisdiction] = useState("");
+  const [jurisdiction, setJurisdiction] = useState("Delhi NCR — Special Cell / Federal");
   const [firNumber, setFirNumber] = useState("");
   const [ioId, setIoId] = useState("");
-  const [priority, setPriority] = useState("");
+  const [priority, setPriority] = useState("CRITICAL");
   const [firDate, setFirDate] = useState("");
   const [offenseDate, setOffenseDate] = useState("");
 
@@ -48,6 +43,12 @@ export default function CaseDocketPage() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [uploadState, setUploadState] = useState<"idle" | "uploading" | "success" | "error">("idle");
   const [uploadMessage, setUploadMessage] = useState("");
+
+  // AI Extraction States
+  const [narrative, setNarrative] = useState("");
+  const [isExtracting, setIsExtracting] = useState(false);
+  const [extractionError, setExtractionError] = useState("");
+  const [extractedEntities, setExtractedEntities] = useState<ExtractedEntity[]>([]);
 
   const removeSection = (secToRemove: string) => {
     setSections(sections.filter((s) => s !== secToRemove));
@@ -67,35 +68,112 @@ export default function CaseDocketPage() {
     setUploadState("uploading");
     setUploadMessage("");
 
-    const formData = new FormData();
-    formData.append("file", file);
     try {
-      const response = await fetch(`${API_BASE_URL}/api/v1/upload-case-file`, {
-        method: "POST",
-        body: formData,
-      });
-      if (!response.ok) throw new Error(await parseApiError(response));
-      const result = await response.json();
+      const result = await api.uploadDocketFile(file);
       setUploadState("success");
-      setUploadMessage(result.message || "File accepted for AI extraction.");
+      setUploadMessage(result?.message || "File accepted for AI extraction.");
     } catch (error) {
       setUploadState("error");
       setUploadMessage(error instanceof Error ? error.message : "Upload failed.");
     }
   };
 
+  const handleExtractIntelligence = async () => {
+    if (!narrative.trim()) return;
+    setIsExtracting(true);
+    setExtractionError("");
+
+    try {
+      const response = await api.extractNarrative(narrative);
+
+      // Save raw response payload to sessionStorage for downstream pages (Steps 4 & 5)
+      if (typeof window !== "undefined") {
+        sessionStorage.setItem("netra_extracted_data", JSON.stringify(response));
+      }
+
+      const parseEntityName = (item: unknown): string => {
+        if (!item) return "Unknown";
+        if (typeof item === "string") return item;
+        if (typeof item === "object") {
+          const obj = item as Record<string, unknown>;
+          return (obj.name || obj.text || obj.identifier_value || obj.id || JSON.stringify(obj)) as string;
+        }
+        return String(item);
+      };
+
+      const entities: ExtractedEntity[] = [];
+
+      // Parse Persons
+      if (Array.isArray(response?.persons)) {
+        response.persons.forEach((item: unknown) => {
+          entities.push({ name: parseEntityName(item), category: "person" });
+        });
+      }
+      if (Array.isArray(response?.suspects)) {
+        response.suspects.forEach((item: unknown) => {
+          entities.push({ name: parseEntityName(item), category: "person" });
+        });
+      }
+
+      // Parse Locations
+      if (Array.isArray(response?.locations)) {
+        response.locations.forEach((item: unknown) => {
+          entities.push({ name: parseEntityName(item), category: "location" });
+        });
+      }
+
+      // Parse Vehicles & Objects (Ensures White Scorpio / License Plate is caught dynamically)
+      if (Array.isArray(response?.vehicles)) {
+        response.vehicles.forEach((item: unknown) => {
+          entities.push({ name: parseEntityName(item), category: "vehicle" });
+        });
+      }
+      if (Array.isArray(response?.objects)) {
+        response.objects.forEach((item: unknown) => {
+          const obj = item as Record<string, unknown>;
+          const label = obj.identifier_value ? `${obj.type || "Vehicle"}: ${obj.identifier_value}` : parseEntityName(item);
+          entities.push({ name: label, category: "vehicle" });
+        });
+      }
+
+      // General Fallbacks
+      if (Array.isArray(response?.entities)) {
+        response.entities.forEach((item: unknown) => {
+          entities.push({ name: parseEntityName(item), category: "general" });
+        });
+      }
+
+      // Sections array parsing
+      if (Array.isArray(response?.sections)) {
+        const parsedSections = response.sections.map((s: unknown) => {
+          if (typeof s === "string") return s;
+          if (typeof s === "object" && s !== null) {
+            const obj = s as Record<string, unknown>;
+            return String(obj.section || obj.code || obj.name || "");
+          }
+          return String(s);
+        }).filter(Boolean);
+
+        setSections((prev) => Array.from(new Set([...prev, ...parsedSections])));
+      }
+
+      setExtractedEntities(entities);
+    } catch (err) {
+      setExtractionError(err instanceof Error ? err.message : "Extraction failed");
+    } finally {
+      setIsExtracting(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#f1f5f9] flex flex-col antialiased text-slate-800">
-      {/* Global Top Bar */}
       <GlobalHeader classification="CONFIDENTIAL" />
 
-      {/* Stepper Navigation */}
       <StepperNav 
         currentStep={2} 
         caseSubtitle="Case will be auto-assigned Docket ID upon verification" 
       />
 
-      {/* Subheader / Banner */}
       <div className="bg-white border-b border-slate-200 px-4 sm:px-6 py-2 shadow-xs">
         <div className="max-w-[1920px] mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-2">
           <div className="flex items-center gap-2.5">
@@ -119,14 +197,11 @@ export default function CaseDocketPage() {
         </div>
       </div>
 
-      {/* Main Form Workspace */}
       <main className="flex-1 max-w-[1920px] w-full mx-auto p-4 sm:p-5">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 items-start">
           
-          {/* LEFT PANEL: Case Metadata & Document Upload (5 Cols) */}
+          {/* LEFT PANEL: Case Metadata & Document Upload */}
           <div className="lg:col-span-1 bg-white rounded-xl border border-slate-200 shadow-xs p-4 sm:p-5 space-y-4">
-            
-            {/* Header */}
             <div className="flex items-center justify-between pb-3 border-b border-slate-100">
               <h2 className="text-xs font-bold text-slate-900 uppercase tracking-wide">
                 Case Metadata &amp; Document Upload
@@ -137,7 +212,6 @@ export default function CaseDocketPage() {
               </span>
             </div>
 
-            {/* Jurisdiction Dropdown */}
             <div className="space-y-1">
               <label className="block text-[11px] font-bold text-slate-700 uppercase">
                 Jurisdiction
@@ -155,7 +229,6 @@ export default function CaseDocketPage() {
               </select>
             </div>
 
-            {/* FIR Number */}
             <div className="space-y-1">
               <label className="block text-[11px] font-bold text-slate-700 uppercase">
                 FIR Number
@@ -164,7 +237,7 @@ export default function CaseDocketPage() {
                 type="text"
                 value={firNumber}
                 onChange={(e) => setFirNumber(e.target.value)}
-                placeholder="FIR / ___ / 2024 / DL"
+                placeholder="FIR / ___ / 2026 / DL"
                 className="w-full text-xs font-mono font-semibold bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-slate-900 focus:bg-white focus:outline-none focus:ring-1 focus:ring-blue-600"
               />
               <span className="block text-[10px] text-slate-500">
@@ -172,12 +245,11 @@ export default function CaseDocketPage() {
               </span>
             </div>
 
-            {/* IPC / BNS Sections Applied */}
             <div className="space-y-1.5">
               <label className="block text-[11px] font-bold text-slate-700 uppercase">
                 IPC / BNS Sections Applied
               </label>
-              <div className="flex flex-wrap gap-1.5 items-center p-2 rounded-lg bg-slate-50 border border-slate-200 min-h-[44px]">
+              <div className="flex flex-wrap gap-1.5 items-center p-2 rounded-lg bg-slate-50 border border-slate-200 min-h-11">
                 {sections.map((sec) => (
                   <span
                     key={sec}
@@ -226,7 +298,6 @@ export default function CaseDocketPage() {
               </div>
             </div>
 
-            {/* Assigned IO & Priority Level */}
             <div className="grid grid-cols-2 gap-3">
               <div className="space-y-1">
                 <label className="block text-[11px] font-bold text-slate-700 uppercase">
@@ -256,46 +327,44 @@ export default function CaseDocketPage() {
               </div>
             </div>
 
-            {/* FIR Date & Offense Date */}
             <div className="grid grid-cols-2 gap-3">
               <div className="space-y-1">
                 <label className="block text-[11px] font-bold text-slate-700 uppercase">
                   FIR Date
                 </label>
-                <div className="relative">
-                  <input
-                    type="date"
-                    value={firDate}
-                    onChange={(e) => setFirDate(e.target.value)}
-                    className="w-full text-xs font-medium bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-slate-800 focus:bg-white focus:outline-none focus:ring-1 focus:ring-blue-600"
-                  />
-                </div>
+                <input
+                  type="date"
+                  value={firDate}
+                  onChange={(e) => setFirDate(e.target.value)}
+                  className="w-full text-xs font-medium bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-slate-800 focus:bg-white focus:outline-none focus:ring-1 focus:ring-blue-600"
+                />
               </div>
 
               <div className="space-y-1">
                 <label className="block text-[11px] font-bold text-slate-700 uppercase">
                   Offense Date
                 </label>
-                <div className="relative">
-                  <input
-                    type="date"
-                    value={offenseDate}
-                    onChange={(e) => setOffenseDate(e.target.value)}
-                    className="w-full text-xs font-medium bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-slate-800 focus:bg-white focus:outline-none focus:ring-1 focus:ring-blue-600"
-                  />
-                </div>
+                <input
+                  type="date"
+                  value={offenseDate}
+                  onChange={(e) => setOffenseDate(e.target.value)}
+                  className="w-full text-xs font-medium bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-slate-800 focus:bg-white focus:outline-none focus:ring-1 focus:ring-blue-600"
+                />
               </div>
             </div>
 
-            {/* Document Upload Section */}
             <div className="space-y-2 pt-1 border-t border-slate-100">
               <label className="block text-[11px] font-bold text-slate-700 uppercase">
                 Document Upload
               </label>
 
-              {/* Drag and drop box */}
               <label className="border-2 border-dashed border-slate-300 hover:border-blue-500 rounded-xl p-4 text-center bg-slate-50/60 hover:bg-blue-50/30 transition-all flex flex-col items-center justify-center cursor-pointer">
-                <input type="file" className="sr-only" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" onChange={(event) => handleFirUpload(event.target.files?.[0])} />
+                <input 
+                  type="file" 
+                  className="sr-only" 
+                  accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" 
+                  onChange={(event) => handleFirUpload(event.target.files?.[0])} 
+                />
                 <div className="w-9 h-9 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center mb-1.5">
                   <UploadCloud className="w-5 h-5" />
                 </div>
@@ -305,17 +374,17 @@ export default function CaseDocketPage() {
                 <div className="text-[10px] text-slate-500 mt-0.5">
                   Scanned FIR (PDF), Witness Statements (PDF/DOCX/JPG)
                 </div>
-                <div className="text-[9px] text-slate-400 mt-0.5">
-                  Max 50MB per file · Encrypted upload via NIC gateway
-                </div>
                 <span className="mt-2.5 px-3 py-1 bg-[#0c162c] hover:bg-[#152342] text-white text-xs font-semibold rounded-md shadow-xs transition-colors">
                   Browse Files
                 </span>
                 {selectedFile && <span className="mt-2 text-[10px] font-semibold text-slate-600">{selectedFile.name}</span>}
-                {uploadMessage && <span className={`mt-1 text-[10px] font-semibold ${uploadState === "error" ? "text-red-600" : "text-emerald-700"}`}>{uploadMessage}</span>}
+                {uploadMessage && (
+                  <span className={`mt-1 text-[10px] font-semibold ${uploadState === "error" ? "text-red-600" : "text-emerald-700"}`}>
+                    {uploadMessage}
+                  </span>
+                )}
               </label>
 
-              {/* Uploaded Files list */}
               <div className="space-y-1.5 pt-1">
                 {selectedFile ? (
                   <div className="flex items-center justify-between p-2 rounded-lg bg-slate-50 border border-slate-200 text-xs">
@@ -323,7 +392,13 @@ export default function CaseDocketPage() {
                       <FileCheck2 className="w-4 h-4 text-blue-600" />
                       <span className="font-semibold text-slate-800">{selectedFile.name}</span>
                     </div>
-                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded border ${uploadState === "error" ? "text-red-700 bg-red-50 border-red-200" : uploadState === "success" ? "text-emerald-700 bg-emerald-50 border-emerald-200" : "text-amber-700 bg-amber-50 border-amber-200"}`}>
+                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded border ${
+                      uploadState === "error" 
+                        ? "text-red-700 bg-red-50 border-red-200" 
+                        : uploadState === "success" 
+                          ? "text-emerald-700 bg-emerald-50 border-emerald-200" 
+                          : "text-amber-700 bg-amber-50 border-amber-200"
+                    }`}>
                       {uploadState === "success" ? "Uploaded" : uploadState === "error" ? "Upload failed" : "Uploading..."}
                     </span>
                   </div>
@@ -332,9 +407,7 @@ export default function CaseDocketPage() {
                 )}
               </div>
 
-              {/* Toggles */}
               <div className="pt-2 space-y-2 border-t border-slate-100">
-                {/* OCR Toggle */}
                 <div className="flex items-center justify-between text-xs">
                   <span className="font-semibold text-slate-700 flex items-center gap-1.5">
                     <Sparkles className="w-3.5 h-3.5 text-blue-600" />
@@ -354,96 +427,48 @@ export default function CaseDocketPage() {
                     />
                   </button>
                 </div>
-
               </div>
-
             </div>
-
           </div>
 
-          {/* RIGHT PANEL: Field Notes & Informant Narrative (7 Cols) */}
+          {/* RIGHT PANEL: Field Notes & Informant Narrative */}
           <div className="lg:col-span-1 bg-white rounded-xl border border-slate-200 shadow-xs p-4 sm:p-5 flex flex-col space-y-3.5">
-            
-            {/* Header with Quick Tag Shortcuts */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-slate-100 gap-2">
               <h2 className="text-xs font-bold text-slate-900 uppercase tracking-wide">
                 Field Notes &amp; Informant Narrative
               </h2>
-              <div className="flex items-center gap-2 text-[11px] text-slate-400 font-medium">
-                <span className="hidden sm:inline">Alt+P Person</span>
-                <span className="hidden sm:inline">·</span>
-                <span className="hidden sm:inline">Alt+L Location</span>
-                <span className="hidden sm:inline">·</span>
-                <span className="hidden sm:inline">Alt+V Vehicle</span>
-                <span className="hidden sm:inline">·</span>
-                <span className="text-slate-500 font-semibold">↻ Auto-saving...</span>
-              </div>
+              <button
+                type="button"
+                onClick={handleExtractIntelligence}
+                disabled={isExtracting || !narrative.trim()}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-700 hover:bg-blue-800 disabled:bg-slate-300 text-white rounded-md text-xs font-bold shadow-xs transition-colors cursor-pointer"
+              >
+                {isExtracting ? (
+                  <>
+                    <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                    <span>Extracting...</span>
+                  </>
+                ) : (
+                  <>
+                    <Sparkles className="w-3.5 h-3.5 text-blue-200" />
+                    <span>Run AI Extraction</span>
+                  </>
+                )}
+              </button>
             </div>
 
-            {/* Rich Editor Toolbar */}
-            <div className="flex items-center justify-between flex-wrap gap-2 p-1.5 rounded-lg bg-slate-50 border border-slate-200 text-xs">
-              {/* Basic Formatting */}
-              <div className="flex items-center gap-0.5 border-r border-slate-300 pr-2">
-                <button type="button" className="p-1 rounded hover:bg-slate-200 text-slate-700 font-bold">
-                  <Bold className="w-3.5 h-3.5" />
-                </button>
-                <button type="button" className="p-1 rounded hover:bg-slate-200 text-slate-700">
-                  <Italic className="w-3.5 h-3.5" />
-                </button>
-                <button type="button" className="p-1 rounded hover:bg-slate-200 text-slate-700">
-                  <Underline className="w-3.5 h-3.5" />
-                </button>
-                <button type="button" className="p-1 rounded hover:bg-slate-200 text-slate-700">
-                  <Strikethrough className="w-3.5 h-3.5" />
-                </button>
-                <span className="w-px h-4 bg-slate-300 mx-1" />
-                <button type="button" className="p-1 rounded hover:bg-slate-200 text-slate-700">
-                  <List className="w-3.5 h-3.5" />
-                </button>
-                <button type="button" className="p-1 rounded hover:bg-slate-200 text-slate-700">
-                  <ListOrdered className="w-3.5 h-3.5" />
-                </button>
-                <button type="button" className="p-1 rounded hover:bg-slate-200 text-slate-700">
-                  <Quote className="w-3.5 h-3.5" />
-                </button>
-              </div>
-
-              {/* Tagging Buttons */}
-              <div className="flex items-center gap-1.5">
-                <button
-                  type="button"
-                  className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-blue-50 text-blue-800 text-[11px] font-bold border border-blue-300 hover:bg-blue-100 transition-colors"
-                >
-                  <User className="w-3 h-3 text-blue-600" />
-                  <span>Tag Person</span>
-                </button>
-                <button
-                  type="button"
-                  className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-amber-50 text-amber-900 text-[11px] font-bold border border-amber-300 hover:bg-amber-100 transition-colors"
-                >
-                  <MapPin className="w-3 h-3 text-amber-600" />
-                  <span>Tag Location</span>
-                </button>
-                <button
-                  type="button"
-                  className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-emerald-50 text-emerald-900 text-[11px] font-bold border border-emerald-300 hover:bg-emerald-100 transition-colors"
-                >
-                  <Car className="w-3 h-3 text-emerald-600" />
-                  <span>Tag Vehicle</span>
-                </button>
-              </div>
-            </div>
-
-            {/* Narrative Text Container with Highlighting */}
-            <div className="p-4 rounded-xl bg-slate-50/70 border border-slate-200 text-xs leading-relaxed text-slate-800 space-y-3 font-normal max-h-[380px] overflow-y-auto">
-              
-              {/* Header metadata tag */}
-              <div className="font-mono text-[10px] text-slate-500 pb-1 border-b border-slate-200 flex items-center gap-2">
-                <FileText className="w-3 h-3" />
-                <span>CASE NARRATIVE — No case narrative available</span>
-              </div>
-              <p className="text-slate-500">Enter or upload case information to populate the narrative.</p>
-
+            {/* Narrative Input Textarea */}
+            <div className="space-y-1.5">
+              <textarea
+                value={narrative}
+                onChange={(e) => setNarrative(e.target.value)}
+                placeholder="Paste the FIR summary, informant statement, or intelligence field narrative here..."
+                rows={10}
+                className="w-full text-xs font-mono p-3 bg-slate-50 border border-slate-300 rounded-lg text-slate-800 focus:bg-white focus:outline-none focus:ring-1 focus:ring-blue-600 leading-relaxed resize-y"
+              />
+              {extractionError && (
+                <p className="text-[11px] text-red-600 font-semibold">{extractionError}</p>
+              )}
             </div>
 
             {/* Auto-Extracted Entities Cloud Box */}
@@ -451,24 +476,46 @@ export default function CaseDocketPage() {
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <Sparkles className="w-3.5 h-3.5 text-blue-600" />
-                  <span className="text-xs font-bold text-slate-900">Auto-Extracted Entities</span>
+                  <span className="text-xs font-bold text-slate-900">Auto-Extracted Intelligence</span>
                 </div>
                 <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#0c162c] text-white">
-                  0 entities found
+                  {extractedEntities.length} entities found
                 </span>
               </div>
 
-              <div className="text-xs text-slate-500">No entities available</div>
+              {extractedEntities.length === 0 ? (
+                <div className="text-xs text-slate-500 italic">
+                  Run extraction on a narrative above to identify persons, locations, and vehicles automatically.
+                </div>
+              ) : (
+                <div className="flex flex-wrap gap-2 pt-1">
+                  {extractedEntities.map((entity, idx) => (
+                    <span
+                      key={idx}
+                      className={`inline-flex items-center gap-1.5 px-2 py-1 rounded text-xs font-semibold border ${
+                        entity.category === "person"
+                          ? "bg-blue-50 text-blue-800 border-blue-200"
+                          : entity.category === "location"
+                          ? "bg-amber-50 text-amber-800 border-amber-200"
+                          : entity.category === "vehicle"
+                          ? "bg-emerald-50 text-emerald-800 border-emerald-200"
+                          : "bg-slate-100 text-slate-700 border-slate-200"
+                      }`}
+                    >
+                      {entity.category === "person" && <User className="w-3 h-3 text-blue-600" />}
+                      {entity.category === "location" && <MapPin className="w-3 h-3 text-amber-600" />}
+                      {entity.category === "vehicle" && <Car className="w-3 h-3 text-emerald-600" />}
+                      <span>{entity.name}</span>
+                    </span>
+                  ))}
+                </div>
+              )}
             </div>
-
           </div>
-
         </div>
 
         {/* Bottom Sticky Action Bar */}
         <div className="mt-4 bg-white rounded-xl border border-slate-200 p-3.5 shadow-md flex flex-col sm:flex-row items-center justify-between gap-3">
-          
-          {/* Status checklist */}
           <div className="flex items-center gap-4 flex-wrap text-xs text-slate-600 font-medium">
             <div className="flex items-center gap-1.5 text-slate-500 font-semibold">
               <FileCheck2 className="w-4 h-4 text-slate-400" />
@@ -476,11 +523,10 @@ export default function CaseDocketPage() {
             </div>
             <div className="flex items-center gap-1.5 text-blue-700 font-semibold">
               <Sparkles className="w-4 h-4 text-blue-600" />
-              <span>0 entities tagged for graph analysis</span>
+              <span>{extractedEntities.length} entities tagged for graph analysis</span>
             </div>
           </div>
 
-          {/* Action Buttons */}
           <div className="flex items-center gap-2.5 w-full sm:w-auto justify-end">
             <button
               type="button"
@@ -496,9 +542,7 @@ export default function CaseDocketPage() {
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
-
         </div>
-
       </main>
     </div>
   );

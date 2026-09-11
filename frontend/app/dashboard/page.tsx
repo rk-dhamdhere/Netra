@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { 
   Search, 
@@ -9,15 +9,13 @@ import {
   ShieldCheck, 
   Users, 
   Activity, 
-  Lock, 
-  PhoneCall, 
-  Building2, 
-  Camera, 
   ChevronRight,
-  Sparkles
+  Wifi,
+  WifiOff
 } from "lucide-react";
 import GlobalHeader from "../../components/GlobalHeader";
 import StepperNav from "../../components/StepperNav";
+import { api } from "@/lib/api";
 
 interface CaseItem {
   firNumber: string;
@@ -38,6 +36,20 @@ const casesData: CaseItem[] = [];
 export default function DashboardPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [filterRisk, setFilterRisk] = useState<string>("ALL");
+  const [backendOnline, setBackendOnline] = useState<boolean | null>(null);
+  const [backendInfo, setBackendInfo] = useState<string>("Checking engine connection...");
+
+  useEffect(() => {
+    api.checkHealth()
+      .then((data) => {
+        setBackendOnline(true);
+        setBackendInfo(`${data.system || "NETRA Engine"} (${data.status || "online"})`);
+      })
+      .catch(() => {
+        setBackendOnline(false);
+        setBackendInfo("NETRA Engine Offline (Port 8000)");
+      });
+  }, []);
 
   const filteredCases = casesData.filter((c) => {
     const matchesSearch =
@@ -61,6 +73,32 @@ export default function DashboardPage() {
       {/* Main Container */}
       <main className="flex-1 max-w-[1920px] w-full mx-auto p-4 sm:p-6 space-y-4">
         
+        {/* Backend Status Notification Strip */}
+        <div className="flex items-center justify-between px-4 py-2 bg-white rounded-xl border border-slate-200 shadow-xs text-xs">
+          <div className="flex items-center gap-2">
+            <span className="font-bold text-slate-700 uppercase tracking-wider text-[10px]">System Telemetry:</span>
+            <span className="text-slate-600 font-mono">{backendInfo}</span>
+          </div>
+          <div className="flex items-center gap-1.5 font-semibold text-[11px]">
+            {backendOnline === null ? (
+              <span className="text-amber-600 flex items-center gap-1">
+                <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
+                Connecting...
+              </span>
+            ) : backendOnline ? (
+              <span className="text-emerald-600 flex items-center gap-1">
+                <Wifi className="w-3.5 h-3.5 text-emerald-600" />
+                Live Link Established
+              </span>
+            ) : (
+              <span className="text-red-600 flex items-center gap-1">
+                <WifiOff className="w-3.5 h-3.5 text-red-600" />
+                Disconnected (Verify FastAPI is running)
+              </span>
+            )}
+          </div>
+        </div>
+
         {/* 2-Column Main Workspace */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
           
@@ -87,9 +125,9 @@ export default function DashboardPage() {
                   <span>Active Dockets</span>
                   <FileText className="w-4 h-4 text-blue-600" />
                 </div>
-                <div className="text-2xl font-black text-slate-900">0</div>
+                <div className="text-2xl font-black text-slate-900">{filteredCases.length}</div>
                 <div className="text-[10px] text-emerald-600 font-semibold mt-1 flex items-center gap-1">
-                  <span>No new dockets</span>
+                  <span>{filteredCases.length === 0 ? "No new dockets" : "Live stream synchronized"}</span>
                 </div>
               </div>
 
@@ -258,102 +296,93 @@ export default function DashboardPage() {
                         </td>
                       </tr>
                     )}
-                    {filteredCases.map((item) => {
-                      return (
-                        <tr
-                          key={item.firNumber}
-                          className="hover:bg-slate-50/80 transition-colors group"
-                        >
-                          {/* FIR & Jurisdiction */}
-                          <td className="py-3 px-3.5">
-                            <div className="font-bold text-slate-900 font-mono">
-                              {item.firNumber}
-                            </div>
-                            <div className="text-[10px] text-slate-500 font-normal">
-                              {item.jurisdiction}
-                            </div>
-                          </td>
+                    {filteredCases.map((item) => (
+                      <tr
+                        key={item.firNumber}
+                        className="hover:bg-slate-50/80 transition-colors group"
+                      >
+                        <td className="py-3 px-3.5">
+                          <div className="font-bold text-slate-900 font-mono">
+                            {item.firNumber}
+                          </div>
+                          <div className="text-[10px] text-slate-500 font-normal">
+                            {item.jurisdiction}
+                          </div>
+                        </td>
 
-                          {/* Target & Alias */}
-                          <td className="py-3 px-3.5">
-                            <div className="font-bold text-slate-800">
-                              {item.targetName}
-                            </div>
-                            <div className="text-[10px] text-slate-500 italic">
-                              "{item.alias}"
-                            </div>
-                          </td>
+                        <td className="py-3 px-3.5">
+                          <div className="font-bold text-slate-800">
+                            {item.targetName}
+                          </div>
+                          <div className="text-[10px] text-slate-500 italic">
+                            &quot;{item.alias}&quot;
+                          </div>
+                        </td>
 
-                          {/* Sections */}
-                          <td className="py-3 px-3.5">
-                            <div className="flex flex-wrap gap-1 max-w-[170px]">
-                              {item.sections.map((sec) => (
-                                <span
-                                  key={sec}
-                                  className="px-1.5 py-0.5 rounded bg-slate-100 text-slate-700 text-[10px] font-medium border border-slate-200"
-                                >
-                                  {sec}
-                                </span>
-                              ))}
-                            </div>
-                          </td>
-
-                          {/* Risk Score */}
-                          <td className="py-3 px-3.5">
-                            {item.riskLevel === "CRITICAL" && (
-                              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-red-100 text-red-800 font-black text-[11px] border border-red-200">
-                                <span className="w-1.5 h-1.5 rounded-full bg-red-600 animate-ping" />
-                                CRITICAL ({item.riskScore})
+                        <td className="py-3 px-3.5">
+                          <div className="flex flex-wrap gap-1 max-w-42.5">
+                            {item.sections.map((sec) => (
+                              <span
+                                key={sec}
+                                className="px-1.5 py-0.5 rounded bg-slate-100 text-slate-700 text-[10px] font-medium border border-slate-200"
+                              >
+                                {sec}
                               </span>
-                            )}
-                            {item.riskLevel === "HIGH" && (
-                              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 font-bold text-[11px] border border-amber-200">
-                                <span className="w-1.5 h-1.5 rounded-full bg-amber-600" />
-                                HIGH ({item.riskScore})
+                            ))}
+                          </div>
+                        </td>
+
+                        <td className="py-3 px-3.5">
+                          {item.riskLevel === "CRITICAL" && (
+                            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-red-100 text-red-800 font-black text-[11px] border border-red-200">
+                              <span className="w-1.5 h-1.5 rounded-full bg-red-600 animate-ping" />
+                              CRITICAL ({item.riskScore})
+                            </span>
+                          )}
+                          {item.riskLevel === "HIGH" && (
+                            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 font-bold text-[11px] border border-amber-200">
+                              <span className="w-1.5 h-1.5 rounded-full bg-amber-600" />
+                              HIGH ({item.riskScore})
+                            </span>
+                          )}
+                          {item.riskLevel === "MEDIUM" && (
+                            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 font-semibold text-[11px] border border-slate-200">
+                              <span className="w-1.5 h-1.5 rounded-full bg-slate-400" />
+                              MEDIUM ({item.riskScore})
+                            </span>
+                          )}
+                        </td>
+
+                        <td className="py-3 px-3.5">
+                          <div className="flex flex-col gap-0.5">
+                            {item.intelSources.map((src, i) => (
+                              <span key={i} className="text-[10px] text-slate-600 font-medium">
+                                • {src}
                               </span>
-                            )}
-                            {item.riskLevel === "MEDIUM" && (
-                              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 font-semibold text-[11px] border border-slate-200">
-                                <span className="w-1.5 h-1.5 rounded-full bg-slate-400" />
-                                MEDIUM ({item.riskScore})
-                              </span>
-                            )}
-                          </td>
+                            ))}
+                          </div>
+                        </td>
 
-                          {/* Intel Sources */}
-                          <td className="py-3 px-3.5">
-                            <div className="flex flex-col gap-0.5">
-                              {item.intelSources.map((src, i) => (
-                                <span key={i} className="text-[10px] text-slate-600 font-medium">
-                                  • {src}
-                                </span>
-                              ))}
-                            </div>
-                          </td>
+                        <td className="py-3 px-3.5">
+                          <div className="text-[11px] font-semibold text-slate-800">
+                            {item.status}
+                          </div>
+                          <div className="text-[9px] text-slate-400">
+                            Updated {item.lastUpdated}
+                          </div>
+                        </td>
 
-                          {/* Status */}
-                          <td className="py-3 px-3.5">
-                            <div className="text-[11px] font-semibold text-slate-800">
-                              {item.status}
-                            </div>
-                            <div className="text-[9px] text-slate-400">
-                              Updated {item.lastUpdated}
-                            </div>
-                          </td>
-
-                          {/* Action */}
-                          <td className="py-3 px-3.5 text-right">
-                            <Link
-                              href={`/review?case=${encodeURIComponent(item.firNumber)}`}
-                              className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-slate-100 group-hover:bg-[#0c162c] text-slate-700 group-hover:text-white text-xs font-semibold border border-slate-200 group-hover:border-transparent transition-all"
-                            >
-                              <span>Open</span>
-                              <ChevronRight className="w-3.5 h-3.5" />
-                            </Link>
-                          </td>
-                        </tr>
-                      );
-                    })}
+                        <td className="py-3 px-3.5 text-right">
+                          <Link
+                            href={`/review?case=${encodeURIComponent(item.firNumber)}`}
+                            className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-slate-100 group-hover:bg-[#0c162c] text-slate-700 group-hover:text-white text-xs font-semibold border border-slate-200 group-hover:border-transparent transition-all"
+                          >
+                            <span>Open</span>
+                            <ChevronRight className="w-3.5 h-3.5" />
+                          </Link>
+                        </td>
+                      </tr>
+                    ))}
                   </tbody>
                 </table>
               </div>
