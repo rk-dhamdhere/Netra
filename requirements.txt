@@ -7,3 +7,4 @@ pgvector
 requests
 google-genai
 neo4j
+Pillow

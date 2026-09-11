@@ -38,12 +38,22 @@ import GlobalHeader from "../../components/GlobalHeader";
 import { NetraTargetIcon } from "../../components/NetraLogo";
 import NetworkGraph from "../../components/NetworkGraph";
 import StepperNav from "../../components/StepperNav";
+import dynamic from "next/dynamic";
+
+const LiveHeatmap = dynamic(() => import("../../components/LiveHeatmap"), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-[380px] rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-xs font-mono text-slate-400">
+      <div className="flex items-center gap-2">
+        <div className="w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
+        <span>Initializing Leaflet Tactical Basemap...</span>
+      </div>
+    </div>
+  ),
+});
 
 const evidenceSlides = [
-  ["05-04-2024 Sat 20:17:35", "CAM-42", "94%", "#TGT-1193", "2026-09-02 14:32:11 · Andheri East", "Camera 03", "CCTV-Cam-42", "2026-09-02 14:32"],
-  ["05-04-2024 Sat 20:19:08", "CAM-42", "91%", "#TGT-1193", "2026-09-02 14:34:06 · Andheri East", "Camera 03", "CCTV-Cam-42", "2026-09-02 14:34"],
-  ["05-04-2024 Sat 20:21:42", "CAM-42", "89%", "#TGT-1193", "2026-09-02 14:36:40 · Andheri East", "Camera 03", "CCTV-Cam-42", "2026-09-02 14:36"],
-  ["05-04-2024 Sat 20:24:17", "CAM-42", "86%", "#TGT-1193", "2026-09-02 14:39:15 · Andheri East", "Camera 03", "CCTV-Cam-42", "2026-09-02 14:39"],
+  ["No evidence", "—", "—", "—", "No evidence available", "—", "—", "—"],
 ] as const;
 
 export default function EvidenceReviewPage() {
@@ -84,14 +94,14 @@ export default function EvidenceReviewPage() {
     <div className="min-h-screen bg-[#f1f5f9] flex flex-col antialiased text-slate-800 relative">
       {/* Global Header */}
       <GlobalHeader 
-        caseId="Case FIR-2026-08417" 
+        caseId="" 
         classification="CONFIDENTIAL" 
       />
 
       {/* Shared NETRA Workflow Navigation */}
       <StepperNav 
         currentStep={5} 
-        caseSubtitle="Case FIR-2026-08417 · Multi-Agency AI Tactical Intelligence Graph" 
+        caseSubtitle="No active case selected · Multi-Agency AI Tactical Intelligence Graph" 
       />
 
       {/* Subheader Banner */}
@@ -119,7 +129,7 @@ export default function EvidenceReviewPage() {
             </div>
             <div className="flex items-center gap-1.5 text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200 shadow-2xs font-bold">
               <Check className="w-3.5 h-3.5 text-emerald-600 stroke-[3]" />
-              <span>Risk Score: 87 — High</span>
+              <span>Risk Score: No data</span>
             </div>
           </div>
 
@@ -141,7 +151,7 @@ export default function EvidenceReviewPage() {
                   INVESTIGATION MODULES
                 </span>
                 <span className="text-xs font-bold text-slate-700 font-mono">
-                  Case FIR-2026-08417
+                  No active case selected
                 </span>
               </div>
 
@@ -161,7 +171,7 @@ export default function EvidenceReviewPage() {
                     <div>
                       <div className="leading-tight">Suspects — by Risk</div>
                       <div className={`text-[10px] ${activeModule === "suspects" ? "text-slate-300" : "text-slate-400"}`}>
-                        14 flagged
+                        0 flagged
                       </div>
                     </div>
                   </div>
@@ -183,7 +193,7 @@ export default function EvidenceReviewPage() {
                     <div>
                       <div className="leading-tight">Network Knowledge Graph</div>
                       <div className={`text-[10px] ${activeModule === "graph" ? "text-slate-300" : "text-slate-400"}`}>
-                        86 nodes · Interactive
+                        0 nodes · Interactive
                       </div>
                     </div>
                   </div>
@@ -307,7 +317,7 @@ export default function EvidenceReviewPage() {
                     
                     <div className="absolute bottom-6 right-6 w-36 h-24 bg-slate-800/80 rounded-lg border border-slate-700/50 flex flex-col items-center justify-center text-[10px] font-mono text-slate-400">
                       <div className="w-12 h-6 bg-amber-500/20 rounded-t border border-amber-500/40 mb-1" />
-                      <span>Auto MH-02</span>
+                      <span>Auto review</span>
                     </div>
 
                     <div className="absolute bottom-10 left-6 w-24 h-16 bg-slate-800/60 rounded border border-slate-700/40 flex items-center justify-center text-[9px] font-mono text-slate-500">
@@ -401,15 +411,15 @@ export default function EvidenceReviewPage() {
                     </div>
 
                     <div className="flex items-center justify-between text-[10px] text-slate-500 font-mono pb-1 border-b border-slate-50">
-                      <span>Entity ID: ENT-2026-1193 · Confidence 96.2%</span>
-                      <span className="font-semibold text-blue-600">5 sources</span>
+                      <span>Entity ID: — · Confidence unavailable</span>
+                      <span className="font-semibold text-blue-600">0 sources</span>
                     </div>
 
                     <div className="space-y-2 text-xs">
                       <div className="flex items-center justify-between py-1 border-b border-slate-50">
                         <span className="text-slate-500">Legal Name</span>
                         <div className="flex items-center gap-1.5 font-bold text-slate-900">
-                          <span>Vikram alias Vicky</span>
+                          <span>No entity data</span>
                           <Eye className="w-3.5 h-3.5 text-slate-400" />
                           <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
                         </div>
@@ -418,7 +428,7 @@ export default function EvidenceReviewPage() {
                       <div className="flex items-center justify-between py-1 border-b border-slate-50">
                         <span className="text-slate-500">Aadhaar / PAN Match</span>
                         <div className="flex items-center gap-1.5 font-mono font-semibold text-slate-800">
-                          <span>XXXX-XXXX-4921</span>
+                          <span>—</span>
                           <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
                         </div>
                       </div>
@@ -426,7 +436,7 @@ export default function EvidenceReviewPage() {
                       <div className="flex items-center justify-between py-1 border-b border-slate-50">
                         <span className="text-slate-500">Primary IMEI / IMSI</span>
                         <div className="flex items-center gap-1.5 font-mono font-semibold text-slate-800">
-                          <span>86392004XXXXX</span>
+                          <span>—</span>
                           <Eye className="w-3.5 h-3.5 text-slate-400" />
                           <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
                         </div>
@@ -434,18 +444,18 @@ export default function EvidenceReviewPage() {
 
                       <div className="flex items-center justify-between py-1 border-b border-slate-50">
                         <span className="text-slate-500">Last Cell Tower Ping</span>
-                        <span className="font-semibold text-slate-900">Cell-ID: 40291 (Andheri East)</span>
+                        <span className="font-semibold text-slate-500">—</span>
                       </div>
 
                       <div className="flex items-center justify-between py-1 border-b border-slate-50">
                         <span className="text-slate-500">Associated Vehicles</span>
-                        <span className="font-semibold text-slate-900">MH-02-AB-1234 (White Honda)</span>
+                        <span className="font-semibold text-slate-500">—</span>
                       </div>
 
                       <div className="flex items-center justify-between py-1">
                         <span className="text-slate-500">FIR Linkages</span>
                         <div className="flex items-center gap-1.5 font-bold text-slate-900">
-                          <span>3 FIRs · 2 States</span>
+                          <span>0 FIRs · 0 States</span>
                           <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
                         </div>
                       </div>
@@ -468,7 +478,7 @@ export default function EvidenceReviewPage() {
                   <Network className="w-4 h-4 text-indigo-600" />
                   <span className="text-xs font-bold text-slate-900">Multi-Agency AI Knowledge Graph Visualization</span>
                   <span className="px-2 py-0.5 rounded bg-indigo-50 text-indigo-700 text-[10px] font-bold border border-indigo-200">
-                    86 Entities Linked
+                    0 Entities Linked
                   </span>
                 </div>
                 <div className="text-[11px] text-slate-500">Drag to pan · Scroll to zoom</div>
@@ -485,51 +495,15 @@ export default function EvidenceReviewPage() {
                   <MapPin className="w-4 h-4 text-amber-600" />
                   <span className="text-xs font-bold text-slate-900">Geospatial Hotspot Map &amp; Cell Tower Clusters</span>
                   <span className="px-2 py-0.5 rounded bg-amber-50 text-amber-700 text-[10px] font-bold border border-amber-200">
-                    8,419 Pings Plotted
+                    0 Pings Plotted
                   </span>
                 </div>
-                <span className="text-[11px] text-slate-500 font-mono">Accuracy: 25m Radius</span>
+                <span className="text-[11px] text-slate-500 font-mono">Accuracy: 25m Radius · Tactical Dark Grid</span>
               </div>
 
-              {/* Mock Map view */}
-              <div className="w-full h-[360px] rounded-xl bg-slate-900 relative overflow-hidden border border-slate-800 p-4 flex flex-col justify-between">
-                <div className="absolute inset-0 bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:20px_20px] opacity-70" />
-                
-                {/* Hotspot 1: Andheri East */}
-                <div className="absolute top-16 left-1/4 z-10 flex flex-col items-center">
-                  <span className="w-12 h-12 rounded-full bg-red-600/30 animate-ping absolute" />
-                  <div className="w-5 h-5 rounded-full bg-red-600 text-white font-bold text-[10px] flex items-center justify-center border-2 border-white shadow-lg">
-                    1
-                  </div>
-                  <div className="bg-slate-950/90 text-red-300 font-mono text-[10px] px-2 py-0.5 rounded border border-red-500/50 mt-1">
-                    Andheri East (Cell-40291)
-                  </div>
-                </div>
-
-                {/* Hotspot 2: Sadar Bazar */}
-                <div className="absolute bottom-20 right-1/3 z-10 flex flex-col items-center">
-                  <div className="w-4 h-4 rounded-full bg-amber-500 text-white font-bold text-[9px] flex items-center justify-center border-2 border-white shadow-lg">
-                    2
-                  </div>
-                  <div className="bg-slate-950/90 text-amber-300 font-mono text-[10px] px-2 py-0.5 rounded border border-amber-500/50 mt-1">
-                    Sadar Bazar Hawala Point
-                  </div>
-                </div>
-
-                {/* Hotspot 3: Cyber Hub */}
-                <div className="absolute top-28 right-16 z-10 flex flex-col items-center">
-                  <div className="w-4 h-4 rounded-full bg-blue-500 text-white font-bold text-[9px] flex items-center justify-center border-2 border-white shadow-lg">
-                    3
-                  </div>
-                  <div className="bg-slate-950/90 text-blue-300 font-mono text-[10px] px-2 py-0.5 rounded border border-blue-500/50 mt-1">
-                    Cyber Hub Gurugram
-                  </div>
-                </div>
-
-                <div className="relative z-10 flex items-center justify-between text-xs font-mono text-slate-300">
-                  <span>GPS Center: 19.1136° N, 72.8697° E</span>
-                  <span className="bg-black/70 px-2 py-1 rounded text-emerald-400">Layer: Heatmap + RF Vectors</span>
-                </div>
+              {/* Live Tactical Leaflet Heatmap */}
+              <div className="w-full">
+                <LiveHeatmap />
               </div>
             </section>
 
@@ -547,31 +521,31 @@ export default function EvidenceReviewPage() {
               <div className="space-y-2 max-h-[360px] overflow-y-auto pr-1 text-xs">
                 <div className="p-3 rounded-lg bg-slate-50 border border-slate-200">
                   <div className="flex justify-between font-bold text-slate-900">
-                    <span>08 Jan 2024 · 06:14 IST</span>
+                    <span>No timeline records</span>
                     <span className="text-blue-600">Surveillance Log</span>
                   </div>
                   <p className="text-slate-600 mt-1">
-                    Vehicle DL-3C-AB-9214 spotted at Sadar Bazar drop location. IMEI 86392004XXXXX registered on tower DEL-40291.
+                    No dossier timeline data available.
                   </p>
                 </div>
 
                 <div className="p-3 rounded-lg bg-slate-50 border border-slate-200">
                   <div className="flex justify-between font-bold text-slate-900">
-                    <span>10 Jan 2024 · 14:32 IST</span>
+                    <span>No financial records</span>
                     <span className="text-amber-600">Financial Intercept</span>
                   </div>
                   <p className="text-slate-600 mt-1">
-                    FIU-IND alert triggered: ₹47.3 Lakhs transferred in 14 micro-bursts across 9 shell accounts within 40 minutes.
+                    No financial intelligence data available.
                   </p>
                 </div>
 
                 <div className="p-3 rounded-lg bg-slate-50 border border-slate-200">
                   <div className="flex justify-between font-bold text-slate-900">
-                    <span>12 Jan 2024 · 20:17 IST</span>
+                    <span>No evidence records</span>
                     <span className="text-red-600">CCTV Facial Verification</span>
                   </div>
                   <p className="text-slate-600 mt-1">
-                    Exhibit A-04 captured at Andheri East market. AI facial matching confirms 94% vector alignment with suspect Vikram alias Vicky.
+                    No evidence analysis data available.
                   </p>
                 </div>
               </div>
@@ -590,19 +564,19 @@ export default function EvidenceReviewPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                 <div className="p-3 rounded-lg bg-slate-50 border border-slate-200">
-                  <div className="font-bold text-slate-900">FIR/001/2024/DL</div>
-                  <div className="text-[10px] text-slate-500">Delhi Special Cell</div>
-                  <div className="mt-2 text-xs text-slate-700">Primary Hawala Nexus &amp; SIM Onboarding loop.</div>
+                  <div className="font-bold text-slate-500">No linked case</div>
+                  <div className="text-[10px] text-slate-500">No jurisdiction</div>
+                  <div className="mt-2 text-xs text-slate-500">No linkage data available.</div>
                 </div>
                 <div className="p-3 rounded-lg bg-slate-50 border border-slate-200">
-                  <div className="font-bold text-slate-900">FIR-2026-08417</div>
-                  <div className="text-[10px] text-slate-500">Mumbai Crime Branch</div>
-                  <div className="mt-2 text-xs text-slate-700">Cash drop &amp; mule account distribution cluster.</div>
+                  <div className="font-bold text-slate-500">No linked case</div>
+                  <div className="text-[10px] text-slate-500">No jurisdiction</div>
+                  <div className="mt-2 text-xs text-slate-500">No linkage data available.</div>
                 </div>
                 <div className="p-3 rounded-lg bg-slate-50 border border-slate-200">
-                  <div className="font-bold text-slate-900">FIR/112/2024/KA</div>
-                  <div className="text-[10px] text-slate-500">Bengaluru CCB</div>
-                  <div className="mt-2 text-xs text-slate-700">VoIP international proxy gateway controller.</div>
+                  <div className="font-bold text-slate-500">No linked case</div>
+                  <div className="text-[10px] text-slate-500">No jurisdiction</div>
+                  <div className="mt-2 text-xs text-slate-500">No linkage data available.</div>
                 </div>
               </div>
             </section>
@@ -641,17 +615,17 @@ export default function EvidenceReviewPage() {
           <div className="p-4 sm:p-6 space-y-3.5 text-xs text-slate-700 leading-relaxed">
             <p>
               <strong className="text-slate-900 font-bold">Modus Operandi (MO):</strong>{" "}
-              Subject operates a layered hawala ring across Andheri–Kurla corridor. FIRs 08417, 07902 and 07155 show identical pattern: SIM-swap onboarding via forged Aadhaar e-KYC, followed by sub-₹50,000 UPI bursts to 14 mule accounts within 40 minutes of tower ping at Cell-ID 40291. CCTV-Cam-42 places subject at cash handoff point 22 minutes before fund dispersal.
+              No case intelligence is available.
             </p>
 
             <p>
               <strong className="text-slate-900 font-bold">Network Hierarchy:</strong>{" "}
-              Graph centrality (betweenness 0.78) positions Vikram alias Vicky as mid-level money launderer reporting to handler node ENT-1188 (&quot;Salim Bhai&quot;). Financial logs show ₹47.3L routed through his IMEI-linked wallets in 60 days; 3 downstream mules and 1 vehicle (MH-02-AB-1234) are exclusively tied to his cluster. No direct link to top-tier controller yet.
+              No entity relationships are available.
             </p>
 
             <p>
               <strong className="text-slate-900 font-bold">Recommended Action:</strong>{" "}
-              Detain for interrogation under Sec 41A CrPC within 48 hrs; prioritise CDR triangulation of associates ENT-1194 and ENT-1201. Freeze mule accounts flagged in linkage L-33. Forward Exhibit A-04 + hash manifest to FSL Kalina for Sec 65B certification before filing remand application.
+              Add case evidence and analysis before recommendations can be generated.
             </p>
           </div>
 
@@ -749,11 +723,11 @@ export default function EvidenceReviewPage() {
                 GOVERNMENT OF INDIA • FORENSIC SCIENCE LABORATORY
               </div>
               <p>
-                I, Insp. Rajesh Sharma, IPS (Badge #IN-9842), hereby certify under Section 65B of the Indian Evidence Act, 1872 that Exhibit A-04 (CCTV-Cam-42 footage hash SHA256: 8f9b2...e4a) and CDR Matrix (35,640 records) were produced by digital systems operating under regular lawful custody without alteration or compromise.
+                No evidence is available for certification.
               </p>
               <div className="pt-2 flex justify-between font-mono text-[11px] text-slate-600 border-t border-slate-200">
                 <span>Hash: SHA-256 Verified</span>
-                <span>Digitally Signed: 2026-09-08 00:30 IST</span>
+                <span>Digitally Signed: —</span>
               </div>
             </div>
 
@@ -803,12 +777,10 @@ export default function EvidenceReviewPage() {
 
             <div className="space-y-3 text-xs text-slate-700">
               <p>
-                Dispatching tactical operational alert to <strong>Field Special Operations Group (Mumbai &amp; Delhi NCR)</strong> for target <strong>Vikram alias Vicky</strong>.
+                No field intelligence is available for dispatch.
               </p>
               <div className="p-3 bg-emerald-50 rounded-lg border border-emerald-200 text-emerald-900 text-[11px]">
-                ✓ Live Cell-ID triangulation (Andheri East) attached<br />
-                ✓ Vehicle DL-3C-AB-9214 APPR notice broadcasted<br />
-                ✓ Remand arrest authorization approved under Sec 41A CrPC
+                No dispatch attachments available.
               </div>
             </div>
 

@@ -33,74 +33,7 @@ interface AuditEntry {
   status: "VERIFIED" | "SEALED" | "DISPATCHED";
 }
 
-const auditLogs: AuditEntry[] = [
-  {
-    id: "AUD-9821",
-    timestamp: "2026-09-08 00:39:14 IST",
-    officer: "Insp. Rajesh Sharma",
-    officerId: "IN-9842",
-    action: "Generated & Digitally Signed Sec 65B Certificate",
-    exhibitId: "EX-65B-CERT-01",
-    sha256Hash: "8f9b2d3e4a5c6b7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e",
-    ipAddress: "10.142.12.90 (NIC-VPN)",
-    status: "SEALED",
-  },
-  {
-    id: "AUD-9820",
-    timestamp: "2026-09-08 00:36:12 IST",
-    officer: "System AI Engine",
-    officerId: "SYS-AUTO",
-    action: "ANPR Plate Match MH-02-AB-1234 (98.6% Conf)",
-    exhibitId: "ANPR-CAM-09",
-    sha256Hash: "4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d",
-    ipAddress: "10.142.18.45 (Gateway)",
-    status: "VERIFIED",
-  },
-  {
-    id: "AUD-9819",
-    timestamp: "2026-09-08 00:25:01 IST",
-    officer: "System AI Engine",
-    officerId: "SYS-AUTO",
-    action: "AI Facial Vector Match 94% on Exhibit A-04",
-    exhibitId: "CCTV-Cam-42",
-    sha256Hash: "1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b",
-    ipAddress: "10.142.18.45 (Gateway)",
-    status: "VERIFIED",
-  },
-  {
-    id: "AUD-9818",
-    timestamp: "2026-09-08 00:18:44 IST",
-    officer: "Insp. Rajesh Sharma",
-    officerId: "IN-9842",
-    action: "Locked 4-Quadrant Evidence Staging to Vault",
-    exhibitId: "CUS-2024-001-A",
-    sha256Hash: "9a8b7c6d5e4f3a2b1c0d9e8f7a6b5c4d3e2f1a0b9c8d7e6f5a4b3c2d1e0f9a8b",
-    ipAddress: "10.142.12.90 (NIC-VPN)",
-    status: "SEALED",
-  },
-  {
-    id: "AUD-9817",
-    timestamp: "2026-09-08 00:15:30 IST",
-    officer: "System AI Engine",
-    officerId: "SYS-AUTO",
-    action: "OCR & Named Entity Extraction (14 entities mapped)",
-    exhibitId: "FIR_DL_001_2024",
-    sha256Hash: "2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c",
-    ipAddress: "10.142.18.45 (Gateway)",
-    status: "VERIFIED",
-  },
-  {
-    id: "AUD-9816",
-    timestamp: "2026-09-08 00:09:20 IST",
-    officer: "Insp. Rajesh Sharma",
-    officerId: "IN-9842",
-    action: "Terminal Session Authenticated (Level-4 SCI Clearance)",
-    exhibitId: "AUTH-LOGIN",
-    sha256Hash: "5f6e7d8c9b0a1f2e3d4c5b6a7f8e9d0c1b2a3f4e5d6c7b8a9f0e1d2c3b4a5f6e",
-    ipAddress: "10.142.12.90 (NIC-VPN)",
-    status: "VERIFIED",
-  },
-];
+const auditLogs: AuditEntry[] = [];
 
 export default function AuditTrailPage() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -122,7 +55,7 @@ export default function AuditTrailPage() {
       {/* Stepper Navigation */}
       <StepperNav 
         currentStep={1} 
-        caseSubtitle="Case CID-2024-001 · National Investigation Audit & Cryptographic Hash Ledger" 
+        caseSubtitle="No active case selected · National Investigation Audit & Cryptographic Hash Ledger"
       />
 
       {/* Subheader Banner */}
@@ -168,13 +101,13 @@ export default function AuditTrailPage() {
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           <div className="bg-white rounded-xl border border-slate-200 p-3 shadow-xs">
             <span className="text-[10px] uppercase font-bold text-slate-500">Sealed Exhibits</span>
-            <div className="text-xl font-black text-slate-900 mt-0.5">17 Files</div>
+            <div className="text-xl font-black text-slate-900 mt-0.5">0 Files</div>
             <div className="text-[10px] text-emerald-700 font-semibold mt-0.5">SHA-256 Hashed</div>
           </div>
 
           <div className="bg-white rounded-xl border border-slate-200 p-3 shadow-xs">
             <span className="text-[10px] uppercase font-bold text-slate-500">Audit Events</span>
-            <div className="text-xl font-black text-blue-700 mt-0.5">42 Operations</div>
+            <div className="text-xl font-black text-blue-700 mt-0.5">0 Operations</div>
             <div className="text-[10px] text-blue-600 font-medium mt-0.5">Realtime Logged</div>
           </div>
 
@@ -186,8 +119,8 @@ export default function AuditTrailPage() {
 
           <div className="bg-white rounded-xl border border-slate-200 p-3 shadow-xs">
             <span className="text-[10px] uppercase font-bold text-slate-500">NIC Vault Status</span>
-            <div className="text-xl font-black text-slate-900 mt-0.5">Online</div>
-            <div className="text-[10px] text-slate-500 font-mono mt-0.5">DEL-SRV-09</div>
+            <div className="text-xl font-black text-slate-900 mt-0.5">Unavailable</div>
+            <div className="text-[10px] text-slate-500 font-mono mt-0.5">No active vault</div>
           </div>
         </div>
 
@@ -231,6 +164,13 @@ export default function AuditTrailPage() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
+                {filteredLogs.length === 0 && (
+                  <tr>
+                    <td colSpan={6} className="py-10 px-3 text-center text-slate-500">
+                      No audit records available
+                    </td>
+                  </tr>
+                )}
                 {filteredLogs.map((log) => (
                   <tr key={log.id} className="hover:bg-slate-50/70 transition-colors">
                     <td className="py-2.5 px-3">

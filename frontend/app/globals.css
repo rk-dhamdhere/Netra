@@ -1,8 +1,10 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f1f5f9;
+  --foreground: #0f172a;
+  --netra-card-radius: 12px;
+  --netra-panel-radius: 14px;
 }
 
 @theme inline {
@@ -16,6 +18,84 @@
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+  }
+}
+
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .rounded-lg {
+    border-radius: 10px !important;
+  }
+
+  .rounded-xl {
+    border-radius: var(--netra-card-radius) !important;
+  }
+
+  .rounded-2xl {
+    border-radius: var(--netra-panel-radius) !important;
+  }
+
+  .rounded-\[20px\] {
+    border-radius: 14px !important;
+  }
+
+  .space-y-4 > :not([hidden]) ~ :not([hidden]) {
+    margin-top: 0.75rem !important;
+  }
+
+  .space-y-3 > :not([hidden]) ~ :not([hidden]) {
+    margin-top: 0.5rem !important;
+  }
+
+  .space-y-2 > :not([hidden]) ~ :not([hidden]) {
+    margin-top: 0.375rem !important;
+  }
+
+  .gap-5 {
+    gap: 0.75rem !important;
+  }
+
+  .gap-4 {
+    gap: 0.625rem !important;
+  }
+
+  .gap-3 {
+    gap: 0.5rem !important;
+  }
+
+  .gap-2 {
+    gap: 0.375rem !important;
+  }
+
+  .p-4 {
+    padding: 0.875rem !important;
+  }
+
+  .p-3\.5 {
+    padding: 0.75rem !important;
+  }
+
+  .p-3 {
+    padding: 0.75rem !important;
+  }
+
+  .px-4 {
+    padding-left: 0.875rem !important;
+    padding-right: 0.875rem !important;
+  }
+
+  .py-2\.5 {
+    padding-top: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
   }
 }
 

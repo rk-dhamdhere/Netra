@@ -11,12 +11,15 @@ NEO4J_URI = os.getenv("NEO4J_URI", "bolt://localhost:7687")
 NEO4J_USER = os.getenv("NEO4J_USER", "neo4j")
 NEO4J_PASSWORD = os.getenv("NEO4J_PASSWORD", "dev_password")
 
-driver = GraphDatabase.driver(NEO4J_URI, auth=(NEO4J_USER, NEO4J_PASSWORD))
+try:
+    driver = GraphDatabase.driver(NEO4J_URI, auth=(NEO4J_USER, NEO4J_PASSWORD))
+except Exception:
+    driver = None
 
 @router.get("/graph-data")
 async def get_graph_data():
     """
-    Fetches the POLE+O graph topology for the React Flow frontend.
+    Fetches the POLE+O graph topology for the React Flow frontend with offline fallback.
     """
     cypher_query = """
     MATCH (n)
@@ -25,6 +28,9 @@ async def get_graph_data():
     """
     
     try:
+        if driver is None:
+            raise Exception("Neo4j driver is not initialized.")
+            
         with driver.session() as session:
             result = session.run(cypher_query)
             record = result.single()
@@ -39,7 +45,16 @@ async def get_graph_data():
             nodes = [
                 {
                     "id": str(node.get("id", node.element_id)),
-                    "data": dict(node),
+                    "data": {
+                        **dict(node),
+                        "labels": list(node.labels),
+                        "node_type": next(iter(node.labels), "Entity"),
+                        "visual_weight": (
+                            "kingpin" if node.get("is_kingpin") or str(node.get("tier") or "").lower() == "kingpin"
+                            else "mule" if str(node.get("tier") or "").lower() in {"mule", "low-level", "low_level"}
+                            else "standard"
+                        ),
+                    },
                     "position": {"x": 100, "y": 100}
                 }
                 for node in raw_nodes
@@ -63,4 +78,23 @@ async def get_graph_data():
             }
 
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Database connection failed: {str(e)}")
+        print(f"[WARNING] Neo4j graph retrieval bypassed: {e}")
+        return {
+            "status": "bypassed",
+            "message": "Neo4j offline; returning mock graph schema for dry run.",
+            "nodes": [
+                {
+                    "id": "suspect_vikram_shinde_01",
+                    "data": {
+                        "name": "Vikram Shinde",
+                        "risk_score": 90,
+                        "tier": "Primary",
+                        "labels": ["Person"],
+                        "node_type": "Person",
+                        "visual_weight": "kingpin"
+                    },
+                    "position": {"x": 100, "y": 100}
+                }
+            ],
+            "edges": []
+        }

@@ -1,0 +1,47 @@
+[
+  {
+    "case_id": "case_001",
+    "success": true,
+    "response": {
+      "status": "processing",
+      "filename": "case_001.txt",
+      "message": "File received. AI extraction running in background."
+    }
+  },
+  {
+    "case_id": "case_002",
+    "success": true,
+    "response": {
+      "status": "processing",
+      "filename": "case_002.txt",
+      "message": "File received. AI extraction running in background."
+    }
+  },
+  {
+    "case_id": "case_003",
+    "success": true,
+    "response": {
+      "status": "processing",
+      "filename": "case_003.txt",
+      "message": "File received. AI extraction running in background."
+    }
+  },
+  {
+    "case_id": "case_004",
+    "success": true,
+    "response": {
+      "status": "processing",
+      "filename": "case_004.txt",
+      "message": "File received. AI extraction running in background."
+    }
+  },
+  {
+    "case_id": "case_005",
+    "success": true,
+    "response": {
+      "status": "processing",
+      "filename": "case_005.txt",
+      "message": "File received. AI extraction running in background."
+    }
+  }
+]

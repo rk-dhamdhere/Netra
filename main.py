@@ -6,6 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 # Cleaned up imports
 from backend.app.routes import graph_routes
 from backend.app.routes import search_routes
+from backend.app.routes import ai_routes
 from backend.app.services.gemini_service import extract_fir_data
 from backend.app.services.neo4j_service import write_to_neo4j
 
@@ -25,6 +26,7 @@ app.add_middleware(
 # Attach your new routes here!
 app.include_router(graph_routes.router, prefix="/api/v1")
 app.include_router(search_routes.router, prefix="/api/v1")
+app.include_router(ai_routes.router)
 
 def process_file_task(filename: str, file_bytes: bytes):
     try:
