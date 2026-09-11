@@ -7,6 +7,7 @@ from pydantic import BaseModel
 from backend.app.schemas.extraction import GraphExtraction
 from backend.app.services.gemini_service import extract_fir_data, extract_128d_face_vector
 from backend.app.services.neo4j_service import write_to_neo4j
+from backend.app.services.file_service import parse_uploaded_file
 
 try:
     from backend.app.services.vector_service import insert_facial_embedding
@@ -62,7 +63,6 @@ async def process_mugshot_endpoint(
                 detail="Unable to extract facial biometrics from image."
             )
             
-        # Gracefully handle offline database so your AI testing succeeds instantly
         if insert_facial_embedding:
             try:
                 insert_facial_embedding(face_vector, suspect_id)
@@ -75,6 +75,35 @@ async def process_mugshot_endpoint(
             "dimensions": len(face_vector),
             "message": "128D facial vector extracted and processed successfully"
         }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+    finally:
+        if os.path.exists(temp_path):
+            os.remove(temp_path)
+
+
+@router.post("/upload-intelligence-file", response_model=GraphExtraction)
+async def upload_intelligence_file_endpoint(
+    file: UploadFile = File(...),
+    suspect_id: str = Form("suspect_primary")
+):
+    temp_path = f"temp_doc_{file.filename}"
+    try:
+        with open(temp_path, "wb") as buffer:
+            shutil.copyfileobj(file.file, buffer)
+        
+        extracted_text = parse_uploaded_file(temp_path, file.filename)
+        if not extracted_text:
+            raise HTTPException(
+                status_code=422,
+                detail="Could not extract text or call records from the uploaded file format."
+            )
+            
+        result = extract_fir_data(extracted_text)
+        graph_dict = result.model_dump()
+        write_to_neo4j(graph_dict)
+        
+        return result
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
     finally:
