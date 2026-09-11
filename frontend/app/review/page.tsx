@@ -38,6 +38,19 @@ import GlobalHeader from "../../components/GlobalHeader";
 import { NetraTargetIcon } from "../../components/NetraLogo";
 import NetworkGraph from "../../components/NetworkGraph";
 import StepperNav from "../../components/StepperNav";
+import dynamic from "next/dynamic";
+
+const LiveHeatmap = dynamic(() => import("../../components/LiveHeatmap"), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-[380px] rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-xs font-mono text-slate-400">
+      <div className="flex items-center gap-2">
+        <div className="w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
+        <span>Initializing Leaflet Tactical Basemap...</span>
+      </div>
+    </div>
+  ),
+});
 
 const evidenceSlides = [
   ["05-04-2024 Sat 20:17:35", "CAM-42", "94%", "#TGT-1193", "2026-09-02 14:32:11 · Andheri East", "Camera 03", "CCTV-Cam-42", "2026-09-02 14:32"],
@@ -488,48 +501,12 @@ export default function EvidenceReviewPage() {
                     8,419 Pings Plotted
                   </span>
                 </div>
-                <span className="text-[11px] text-slate-500 font-mono">Accuracy: 25m Radius</span>
+                <span className="text-[11px] text-slate-500 font-mono">Accuracy: 25m Radius · Tactical Dark Grid</span>
               </div>
 
-              {/* Mock Map view */}
-              <div className="w-full h-[360px] rounded-xl bg-slate-900 relative overflow-hidden border border-slate-800 p-4 flex flex-col justify-between">
-                <div className="absolute inset-0 bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:20px_20px] opacity-70" />
-                
-                {/* Hotspot 1: Andheri East */}
-                <div className="absolute top-16 left-1/4 z-10 flex flex-col items-center">
-                  <span className="w-12 h-12 rounded-full bg-red-600/30 animate-ping absolute" />
-                  <div className="w-5 h-5 rounded-full bg-red-600 text-white font-bold text-[10px] flex items-center justify-center border-2 border-white shadow-lg">
-                    1
-                  </div>
-                  <div className="bg-slate-950/90 text-red-300 font-mono text-[10px] px-2 py-0.5 rounded border border-red-500/50 mt-1">
-                    Andheri East (Cell-40291)
-                  </div>
-                </div>
-
-                {/* Hotspot 2: Sadar Bazar */}
-                <div className="absolute bottom-20 right-1/3 z-10 flex flex-col items-center">
-                  <div className="w-4 h-4 rounded-full bg-amber-500 text-white font-bold text-[9px] flex items-center justify-center border-2 border-white shadow-lg">
-                    2
-                  </div>
-                  <div className="bg-slate-950/90 text-amber-300 font-mono text-[10px] px-2 py-0.5 rounded border border-amber-500/50 mt-1">
-                    Sadar Bazar Hawala Point
-                  </div>
-                </div>
-
-                {/* Hotspot 3: Cyber Hub */}
-                <div className="absolute top-28 right-16 z-10 flex flex-col items-center">
-                  <div className="w-4 h-4 rounded-full bg-blue-500 text-white font-bold text-[9px] flex items-center justify-center border-2 border-white shadow-lg">
-                    3
-                  </div>
-                  <div className="bg-slate-950/90 text-blue-300 font-mono text-[10px] px-2 py-0.5 rounded border border-blue-500/50 mt-1">
-                    Cyber Hub Gurugram
-                  </div>
-                </div>
-
-                <div className="relative z-10 flex items-center justify-between text-xs font-mono text-slate-300">
-                  <span>GPS Center: 19.1136° N, 72.8697° E</span>
-                  <span className="bg-black/70 px-2 py-1 rounded text-emerald-400">Layer: Heatmap + RF Vectors</span>
-                </div>
+              {/* Live Tactical Leaflet Heatmap */}
+              <div className="w-full">
+                <LiveHeatmap />
               </div>
             </section>
 
