@@ -1,7 +1,9 @@
-fastapi==0.103.1
+fastapi>=0.110.0
 uvicorn==0.23.2
-pydantic==2.3.0
-# Add your LLM SDKs here (e.g., openai, langchain)
+pydantic>=2.9.0
 python-multipart
 psycopg2-binary
 pgvector
+requests
+google-genai
+neo4j
