@@ -317,33 +317,19 @@ export default function CaseDocketPage() {
 
               {/* Uploaded Files list */}
               <div className="space-y-1.5 pt-1">
-                {/* File 1 */}
-                <div className="flex items-center justify-between p-2 rounded-lg bg-slate-50 border border-slate-200 text-xs">
-                  <div className="flex items-center gap-2">
-                    <FileCheck2 className="w-4 h-4 text-blue-600" />
-                    <div>
-                      <span className="font-semibold text-slate-500">No case document uploaded</span>
-                      <span className="text-[10px] text-slate-400 ml-1.5">2.4 MB</span>
+                {selectedFile ? (
+                  <div className="flex items-center justify-between p-2 rounded-lg bg-slate-50 border border-slate-200 text-xs">
+                    <div className="flex items-center gap-2">
+                      <FileCheck2 className="w-4 h-4 text-blue-600" />
+                      <span className="font-semibold text-slate-800">{selectedFile.name}</span>
                     </div>
+                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded border ${uploadState === "error" ? "text-red-700 bg-red-50 border-red-200" : uploadState === "success" ? "text-emerald-700 bg-emerald-50 border-emerald-200" : "text-amber-700 bg-amber-50 border-amber-200"}`}>
+                      {uploadState === "success" ? "Uploaded" : uploadState === "error" ? "Upload failed" : "Uploading..."}
+                    </span>
                   </div>
-                  <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
-                    Uploaded
-                  </span>
-                </div>
-
-                {/* File 2 */}
-                <div className="flex items-center justify-between p-2 rounded-lg bg-slate-50 border border-slate-200 text-xs">
-                  <div className="flex items-center gap-2">
-                    <FileText className="w-4 h-4 text-amber-600" />
-                    <div>
-                      <span className="font-semibold text-slate-800">Witness_Statement_Arora.pdf</span>
-                      <span className="text-[10px] text-slate-400 ml-1.5">1.1 MB</span>
-                    </div>
-                  </div>
-                  <span className="text-[10px] font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded border border-amber-200 animate-pulse">
-                    Uploading...
-                  </span>
-                </div>
+                ) : (
+                  <div className="p-2 text-center text-xs text-slate-500">No files uploaded</div>
+                )}
               </div>
 
               {/* Toggles */}
@@ -484,9 +470,9 @@ export default function CaseDocketPage() {
           
           {/* Status checklist */}
           <div className="flex items-center gap-4 flex-wrap text-xs text-slate-600 font-medium">
-            <div className="flex items-center gap-1.5 text-emerald-700 font-semibold">
-              <Check className="w-4 h-4 text-emerald-600" />
-              <span>FIR uploaded &amp; OCR complete</span>
+            <div className="flex items-center gap-1.5 text-slate-500 font-semibold">
+              <FileCheck2 className="w-4 h-4 text-slate-400" />
+              <span>{uploadState === "success" ? "Document uploaded" : "No document uploaded"}</span>
             </div>
             <div className="flex items-center gap-1.5 text-blue-700 font-semibold">
               <Sparkles className="w-4 h-4 text-blue-600" />
