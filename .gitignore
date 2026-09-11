@@ -1,3 +1,19 @@
-.env
+# Python
 venv/
 __pycache__/
+*.pyc
+
+# Node
+node_modules/
+.next/
+
+# Env secrets
+.env
+.env.local
+
+# Generated data (regenerate locally, don't commit large files)
+data/raw/
+data/manifest/case_bundles/
+
+# OS junk
+.DS_Store
