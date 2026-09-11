@@ -6,11 +6,11 @@ from pgvector.psycopg2 import register_vector
 load_dotenv()
 
 # Load PostgreSQL credentials from your .env
-PG_HOST = os.getenv("PG_HOST", "localhost")
-PG_PORT = os.getenv("PG_PORT", "5432")
-PG_DB = os.getenv("PG_DB", "investigraph_db")
-PG_USER = os.getenv("PG_USER", "dev_user")
-PG_PASSWORD = os.getenv("PG_PASSWORD", "dev_password")
+PG_HOST = os.getenv("POSTGRES_HOST", "localhost")
+PG_PORT = os.getenv("POSTGRES_PORT", "5432")
+PG_DB = os.getenv("POSTGRES_DB", "investigraph_db")
+PG_USER = os.getenv("POSTGRES_USER", "dev_user")
+PG_PASSWORD = os.getenv("POSTGRES_PASSWORD", "dev_password")
 
 def get_db_connection():
     """Establishes a connection to PostgreSQL and registers the pgvector type."""
