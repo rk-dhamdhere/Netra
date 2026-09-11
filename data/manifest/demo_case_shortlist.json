@@ -1,0 +1,30 @@
+{
+  "strongest_flagship": {
+    "case_id": "case_004",
+    "bridge_count": 5,
+    "reason": "Tier 3 case with the most planted bridge connections \u2014 richest single-case story"
+  },
+  "reveal_pair": {
+    "minor_case_id": "case_051",
+    "major_case_id": "case_004",
+    "reason": "A small Tier 1 case secretly linked to a major Tier 3 case \u2014 the core 'hidden connection' demo moment"
+  },
+  "financial_pattern_case": {
+    "case_id": "case_001",
+    "suspicious_transaction_count": 2,
+    "reason": "Contains a planted circular money-laundering pattern \u2014 demonstrates suspicious pattern detection"
+  },
+  "face_match_pair": {
+    "shared_person_id": "p_012",
+    "person_name": "Lajita Chatterjee",
+    "case_ids": [
+      "case_025",
+      "case_010"
+    ],
+    "reason": "Same person's photo appears in two different cases \u2014 demonstrates cross-case facial recognition"
+  },
+  "mundane_control_case": {
+    "case_id": "case_060",
+    "reason": "Genuinely isolated Tier 1 case \u2014 demonstrates the system correctly finds NO false connection"
+  }
+}
