@@ -39,7 +39,16 @@ async def get_graph_data():
             nodes = [
                 {
                     "id": str(node.get("id", node.element_id)),
-                    "data": dict(node),
+                    "data": {
+                        **dict(node),
+                        "labels": list(node.labels),
+                        "node_type": next(iter(node.labels), "Entity"),
+                        "visual_weight": (
+                            "kingpin" if node.get("is_kingpin") or str(node.get("tier") or "").lower() == "kingpin"
+                            else "mule" if str(node.get("tier") or "").lower() in {"mule", "low-level", "low_level"}
+                            else "standard"
+                        ),
+                    },
                     "position": {"x": 100, "y": 100}
                 }
                 for node in raw_nodes

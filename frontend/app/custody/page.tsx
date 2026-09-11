@@ -25,11 +25,35 @@ import {
 } from "lucide-react";
 import GlobalHeader from "../../components/GlobalHeader";
 import StepperNav from "../../components/StepperNav";
+import { API_BASE_URL, parseApiError } from "../../lib/api";
 
 export default function ChainOfCustodyPage() {
   const [operator, setOperator] = useState("Reliance Jio");
   const [warrantNo, setWarrantNo] = useState("LI/DL/2024/00441");
   const [bankName, setBankName] = useState("HDFC Bank — Corporate Banking Division");
+  const [mugshotFile, setMugshotFile] = useState<File | null>(null);
+  const [mugshotState, setMugshotState] = useState<"idle" | "processing" | "success" | "error">("idle");
+  const [mugshotMessage, setMugshotMessage] = useState("");
+
+  const handleMugshotUpload = async (file: File | undefined) => {
+    if (!file) return;
+    setMugshotFile(file);
+    setMugshotState("processing");
+    setMugshotMessage("");
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("suspect_id", "suspect_primary");
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/ai/process-mugshot`, { method: "POST", body: formData });
+      if (!response.ok) throw new Error(await parseApiError(response));
+      const result = await response.json();
+      setMugshotState("success");
+      setMugshotMessage(result.message || "Mugshot processed successfully.");
+    } catch (error) {
+      setMugshotState("error");
+      setMugshotMessage(error instanceof Error ? error.message : "Mugshot processing failed.");
+    }
+  };
 
   return (
     <div className="min-h-screen bg-[#f1f5f9] flex flex-col antialiased text-slate-800">
@@ -387,13 +411,13 @@ export default function ChainOfCustodyPage() {
                 </div>
 
                 {/* Add Mugshot */}
-                <button
-                  type="button"
-                  className="flex flex-col items-center justify-center p-2 rounded-lg border-2 border-dashed border-slate-300 hover:border-blue-400 hover:bg-blue-50/50 text-slate-500 hover:text-blue-700 transition-colors cursor-pointer"
-                >
+                <label className="flex flex-col items-center justify-center p-2 rounded-lg border-2 border-dashed border-slate-300 hover:border-blue-400 hover:bg-blue-50/50 text-slate-500 hover:text-blue-700 transition-colors cursor-pointer">
+                  <input type="file" className="sr-only" accept="image/*" onChange={(event) => handleMugshotUpload(event.target.files?.[0])} />
                   <UserPlus className="w-5 h-5 mb-1" />
                   <span className="text-[10px] font-bold">Add Mugshot</span>
-                </button>
+                  {mugshotFile && <span className="mt-1 max-w-full truncate text-[9px]">{mugshotFile.name}</span>}
+                  {mugshotMessage && <span className={`mt-1 text-[9px] text-center ${mugshotState === "error" ? "text-red-600" : "text-emerald-700"}`}>{mugshotMessage}</span>}
+                </label>
               </div>
             </div>
 

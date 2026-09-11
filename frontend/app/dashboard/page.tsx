@@ -457,7 +457,7 @@ export default function DashboardPage() {
                           {/* Action */}
                           <td className="py-3 px-3.5 text-right">
                             <Link
-                              href="/docket"
+                              href={`/review?case=${encodeURIComponent(item.firNumber)}`}
                               className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-slate-100 group-hover:bg-[#0c162c] text-slate-700 group-hover:text-white text-xs font-semibold border border-slate-200 group-hover:border-transparent transition-all"
                             >
                               <span>Open</span>

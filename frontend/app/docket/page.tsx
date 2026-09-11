@@ -30,6 +30,7 @@ import {
 } from "lucide-react";
 import GlobalHeader from "../../components/GlobalHeader";
 import StepperNav from "../../components/StepperNav";
+import { API_BASE_URL, parseApiError } from "../../lib/api";
 
 export default function CaseDocketPage() {
   const [jurisdiction, setJurisdiction] = useState("Delhi NCR — Special Cell / Federal");
@@ -52,6 +53,9 @@ export default function CaseDocketPage() {
   const [showAddSection, setShowAddSection] = useState(false);
 
   const [runOcr, setRunOcr] = useState(true);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [uploadState, setUploadState] = useState<"idle" | "uploading" | "success" | "error">("idle");
+  const [uploadMessage, setUploadMessage] = useState("");
 
   const removeSection = (secToRemove: string) => {
     setSections(sections.filter((s) => s !== secToRemove));
@@ -62,6 +66,29 @@ export default function CaseDocketPage() {
       setSections([...sections, newSection.trim()]);
       setNewSection("");
       setShowAddSection(false);
+    }
+  };
+
+  const handleFirUpload = async (file: File | undefined) => {
+    if (!file) return;
+    setSelectedFile(file);
+    setUploadState("uploading");
+    setUploadMessage("");
+
+    const formData = new FormData();
+    formData.append("file", file);
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/v1/upload-case-file`, {
+        method: "POST",
+        body: formData,
+      });
+      if (!response.ok) throw new Error(await parseApiError(response));
+      const result = await response.json();
+      setUploadState("success");
+      setUploadMessage(result.message || "File accepted for AI extraction.");
+    } catch (error) {
+      setUploadState("error");
+      setUploadMessage(error instanceof Error ? error.message : "Upload failed.");
     }
   };
 
@@ -275,7 +302,8 @@ export default function CaseDocketPage() {
               </label>
 
               {/* Drag and drop box */}
-              <div className="border-2 border-dashed border-slate-300 hover:border-blue-500 rounded-xl p-4 text-center bg-slate-50/60 hover:bg-blue-50/30 transition-all flex flex-col items-center justify-center">
+              <label className="border-2 border-dashed border-slate-300 hover:border-blue-500 rounded-xl p-4 text-center bg-slate-50/60 hover:bg-blue-50/30 transition-all flex flex-col items-center justify-center cursor-pointer">
+                <input type="file" className="sr-only" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" onChange={(event) => handleFirUpload(event.target.files?.[0])} />
                 <div className="w-9 h-9 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center mb-1.5">
                   <UploadCloud className="w-5 h-5" />
                 </div>
@@ -288,13 +316,12 @@ export default function CaseDocketPage() {
                 <div className="text-[9px] text-slate-400 mt-0.5">
                   Max 50MB per file · Encrypted upload via NIC gateway
                 </div>
-                <button
-                  type="button"
-                  className="mt-2.5 px-3 py-1 bg-[#0c162c] hover:bg-[#152342] text-white text-xs font-semibold rounded-md shadow-xs transition-colors cursor-pointer"
-                >
+                <span className="mt-2.5 px-3 py-1 bg-[#0c162c] hover:bg-[#152342] text-white text-xs font-semibold rounded-md shadow-xs transition-colors">
                   Browse Files
-                </button>
-              </div>
+                </span>
+                {selectedFile && <span className="mt-2 text-[10px] font-semibold text-slate-600">{selectedFile.name}</span>}
+                {uploadMessage && <span className={`mt-1 text-[10px] font-semibold ${uploadState === "error" ? "text-red-600" : "text-emerald-700"}`}>{uploadMessage}</span>}
+              </label>
 
               {/* Uploaded Files list */}
               <div className="space-y-1.5 pt-1">

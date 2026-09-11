@@ -91,6 +91,7 @@ function calculateRadialLayout(nodes: any[]) {
 
 function processBackendNode(rawNode: any) {
   const nodeData = rawNode.data || {};
+  const visualWeight = nodeData.visual_weight || "standard";
   const isPerson = 
     rawNode.type === "person" || 
     nodeData.tier !== undefined || 
@@ -106,6 +107,7 @@ function processBackendNode(rawNode: any) {
       data: {
         ...nodeData,
         label: nodeData.name || nodeData.label || `Suspect ${rawNode.id}`,
+        visual_weight: visualWeight,
       },
     };
   }
@@ -145,6 +147,7 @@ function processBackendNode(rawNode: any) {
     data: {
       ...nodeData,
       label: `${labelPrefix}${label}`,
+      visual_weight: visualWeight,
     },
     style,
   };
@@ -178,15 +181,22 @@ export default function NetworkGraph() {
         const parsedNodes = data.nodes.map(processBackendNode);
         const layoutedNodes = calculateRadialLayout(parsedNodes);
 
-        const parsedEdges = (data.edges || []).map((edge: any) => ({
-          id: String(edge.id || `${edge.source}-${edge.target}`),
-          source: String(edge.source),
-          target: String(edge.target),
-          label: edge.label || edge.type || "RELATED_TO",
-          animated: true,
-          style: { stroke: "#6366f1", strokeWidth: 2 },
-          data: edge.data,
-        }));
+        const nodeWeights = new Map(layoutedNodes.map((node: any) => [node.id, node.data?.visual_weight]));
+        const parsedEdges = (data.edges || []).map((edge: any) => {
+          const sourceWeight = nodeWeights.get(String(edge.source));
+          return {
+            id: String(edge.id || `${edge.source}-${edge.target}`),
+            source: String(edge.source),
+            target: String(edge.target),
+            label: edge.label || edge.type || "RELATED_TO",
+            animated: sourceWeight === "kingpin",
+            style: {
+              stroke: sourceWeight === "kingpin" ? "#b91c1c" : sourceWeight === "mule" ? "#d97706" : "#6366f1",
+              strokeWidth: sourceWeight === "kingpin" ? 4 : sourceWeight === "mule" ? 1 : 2,
+            },
+            data: edge.data,
+          };
+        });
 
         setNodes(layoutedNodes);
         setEdges(parsedEdges);
@@ -262,4 +272,4 @@ export default function NetworkGraph() {
       </div>
     </div>
   );
-}
+}
