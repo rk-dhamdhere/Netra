@@ -47,7 +47,7 @@ data, only references it by ID.
 
 | Method | Endpoint | Purpose |
 |---|---|---|
-| `POST` | `/api/v1/upload-case-file` | Accepts a case file (FIR text/PDF), runs AI extraction in the background, writes results to Neo4j |
+| `POST` | `/api/v1/upload-case-file` | Accepts a case file (FIR PDF, CDR/financial spreadsheet), runs AI extraction in the background, writes results to Neo4j |
 | `POST` | `/api/v1/search-face` | Facial recognition search via pgvector nearest-neighbor matching |
 | `GET` | `/api/v1/graph-data` | Returns the full graph topology, shaped for the React Flow frontend |
 
@@ -83,10 +83,17 @@ generated.
   integrity, entity references, tier rules, bridge consistency, and file completeness
   end-to-end — the dataset is verified internally consistent, not just assumed to be.
 
-**Verified against the live system:** a pilot batch of 5 real generated FIR files was
+**Verified against the live system:** a pilot batch of real generated FIR files was
 uploaded through the actual `/api/v1/upload-case-file` endpoint and accepted successfully
 end-to-end, confirming the synthetic dataset is compatible with the live ingestion
 pipeline, not just internally valid on its own.
+
+**Curated demo package:** 5 cases were hand-selected from the full 200 — algorithmically
+identified as the strongest examples of a richly-evidenced flagship case, a "hidden
+connection" between a minor and a major case, a planted financial anomaly, and
+cross-case facial recognition — and packaged with formatted FIR documents and real
+CDR/financial evidence, ready for live demonstration (`data/demo_package/`, walkthrough
+notes in `docs/Demo_Walkthrough.md`).
 
 This design means the demo doesn't just show a system that *could* work — it can prove,
 on request, that a specific planted connection between two "unrelated" cases was
@@ -101,24 +108,24 @@ actually found by the system, not staged after the fact.
 ![Database](https://img.shields.io/badge/Database-70%25-yellow)
 ![AI%2FNLP Backend](https://img.shields.io/badge/AI%2FNLP%20Backend-80%25-yellow)
 ![Frontend](https://img.shields.io/badge/Frontend-60%25-yellow)
-![Integration](https://img.shields.io/badge/Integration-30%25-red)
+![Integration](https://img.shields.io/badge/Integration-40%25-yellow)
 
 | Segment | Working On It | Notes |
 |---|---|---|
 | Planning & App Flow | Team | Done |
 | UI/UX Mockups | Sohan Darde | Done |
-| Data Generation | Rishikesh Dhamdhere | Complete: master graph, manifest, FIR/CDR/financial data, photos, JSON exports, automated validation, and a working bulk-upload test script — all verified end-to-end |
+| Data Generation | Rishikesh Dhamdhere | Complete: master graph, manifest, FIR/CDR/financial data, photos, JSON exports, automated validation, live-endpoint verification, and a curated 5-case demo package with formatted FIR documents |
 | Database (Neo4j + Supabase) | Tanmay Madhavi | Docker infra live, Neo4j ingestion and fallback schema working; each teammate runs their own local instance |
 | AI/NLP Backend | Rohan Ayare & Taswi Tawde | Gemini extraction pipeline (with PDF/audio multimodal support and local failover logic) integrated with FastAPI and Neo4j; face-search via pgvector working |
 | Frontend | Shubham Jadhav | Full Next.js app scaffolded with dashboard, docket, custody, audit, intel, review, and settings pages; graph visualization component in place |
-| Integration & Demo Prep | Taswi Tawde | Full pipeline (upload → extraction → Neo4j → graph) confirmed reachable; end-to-end verification against real synthetic data in progress |
+| Integration & Demo Prep | Taswi Tawde | Upload pipeline confirmed working end-to-end with real synthetic data; frontend-backend connection and full live demo run-through still pending |
 
 Update the badge percentages as work progresses — red under 30%, yellow 30–79%, green
 80% and above. Each badge is just a URL, so editing the number is a one-line change:
 
 ```
-https://img.shields.io/badge/Database-70%25-yellow
-                                ^label ^%   ^color
+https://img.shields.io/badge/Integration-40%25-yellow
+                                ^label      ^%    ^color
 ```
 
 ---
@@ -129,9 +136,9 @@ https://img.shields.io/badge/Database-70%25-yellow
 netra/
 ├── frontend/     → Next.js dashboard (multi-page: dashboard, docket, custody, intel, etc.)
 ├── backend/      → FastAPI AI/NLP microservice (Gemini extraction, Neo4j, pgvector, geocoding)
-├── data/         → dummy data generators, case manifest, raw files
+├── data/         → dummy data generators, case manifest, raw files, curated demo package
 ├── db/           → Neo4j schema/seed scripts, Supabase migrations
-├── docs/         → project reference docs + diagrams
+├── docs/         → project reference docs, diagrams, demo walkthrough
 ├── scripts/      → setup/dev utilities
 └── docker-compose.yml → local Neo4j + Postgres/pgvector setup
 ```
@@ -206,6 +213,10 @@ npm run dev
 ```
 
 Once running, visit `http://localhost:8000/docs` for the live backend API reference.
+
+**Demo:** a curated 5-case package (FIR PDFs + real CDR/financial evidence) is available
+in `data/demo_package/`, ready to upload through `/api/v1/upload-case-file` via the
+Swagger UI. See `docs/Demo_Walkthrough.md` for the presentation script.
 
 ---
 
