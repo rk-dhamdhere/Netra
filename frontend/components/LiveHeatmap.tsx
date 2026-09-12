@@ -88,9 +88,16 @@ export default function LiveHeatmap() {
         mapInstanceRef.current = null;
       }
 
-      const centerCoord = hotspots.length > 0 ? [hotspots[0].lat, hotspots[0].lng] : [19.1860, 72.9759];
+      let centerCoord: [number, number] = [19.1860, 72.9759]; // Default city fallback (Mumbai)
+      if (hotspots.length > 0) {
+        const firstValidHotspot = hotspots.find(h => h.lat !== 0.0 || h.lng !== 0.0);
+        if (firstValidHotspot) {
+          centerCoord = [firstValidHotspot.lat, firstValidHotspot.lng];
+        }
+      }
+
       const map = L.map(mapContainerRef.current, {
-        center: centerCoord as [number, number],
+        center: centerCoord,
         zoom: 14,
         zoomControl: false,
         attributionControl: false,

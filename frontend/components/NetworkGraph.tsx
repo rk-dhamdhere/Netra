@@ -31,6 +31,7 @@ interface RawNodeData {
   tier?: number;
   risk_score?: number;
   is_kingpin?: boolean;
+  is_burner?: boolean;
 }
 
 interface RawNode {
@@ -47,6 +48,48 @@ interface RawEdge {
   label?: string;
   type?: string;
   data?: Record<string, unknown>;
+}
+
+// Extracted Interfaces for Session Storage
+interface ExtractedPerson {
+  id: string;
+  name: string;
+  risk_score?: number;
+  hierarchy_tier?: string;
+  is_kingpin?: boolean;
+}
+
+interface ExtractedObject {
+  id: string;
+  type: string;
+  identifier_value: string;
+  is_burner?: boolean;
+}
+
+interface ExtractedLocation {
+  id: string;
+  name: string;
+  activity_type?: string;
+  latitude?: number;
+  longitude?: number;
+}
+
+interface ExtractedRelationship {
+  source_id: string;
+  target_id: string;
+  relation_type: string;
+  properties?: {
+    timestamp?: string;
+    duration?: number;
+    amount?: number;
+  };
+}
+
+interface GraphExtractionPayload {
+  persons?: ExtractedPerson[];
+  objects?: ExtractedObject[];
+  locations?: ExtractedLocation[];
+  relationships?: ExtractedRelationship[];
 }
 
 function calculateRadialLayout(nodes: Node[]): Node[] {
@@ -106,7 +149,7 @@ function processBackendNode(rawNode: RawNode): Node {
   };
   let labelPrefix = "";
 
-  if (objType.includes("phone") || objType.includes("imei")) {
+  if (objType.includes("phone") || objType.includes("imei") || nodeData.is_burner) {
     style = { border: "1px solid #0284c7", borderRadius: "8px", padding: "8px 12px", background: "#f0f9ff", color: "#0369a1", fontSize: "11px", fontWeight: "600" };
     labelPrefix = "📱 ";
   } else if (objType.includes("vehicle") || objType.includes("car")) {
@@ -118,6 +161,9 @@ function processBackendNode(rawNode: RawNode): Node {
   } else if (objType.includes("location") || objType.includes("place")) {
     style = { border: "1px solid #d97706", borderRadius: "8px", padding: "8px 12px", background: "#fffbeb", color: "#92400e", fontSize: "11px", fontWeight: "600" };
     labelPrefix = "📍 ";
+  } else if (objType.includes("weapon")) {
+    style = { border: "1px solid #475569", borderRadius: "8px", padding: "8px 12px", background: "#f1f5f9", color: "#334155", fontSize: "11px", fontWeight: "600" };
+    labelPrefix = "🔫 ";
   }
 
   const label = nodeData.value || nodeData.name || nodeData.identifier_value || nodeData.label || rawNode.id;
@@ -142,36 +188,98 @@ export default function NetworkGraph() {
   const [nodeCount, setNodeCount] = useState(0);
   const [edgeCount, setEdgeCount] = useState(0);
 
-  const fetchGraphData = useCallback(async () => {
-    const backendUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+  const fetchGraphData = useCallback(() => {
+    setIsLoading(true);
     
     try {
-      const res = await fetch(`${backendUrl}/api/v1/graph-data`, {
-        cache: "no-store",
-        headers: { "Accept": "application/json" }
-      });
-
-      if (!res.ok) {
-        throw new Error(`HTTP ${res.status}: ${res.statusText}`);
+      if (typeof window === "undefined") {
+        throw new Error("Window not defined");
+      }
+      
+      const cached = sessionStorage.getItem("netra_extracted_data");
+      if (!cached) {
+        throw new Error("No extracted data found in sessionStorage");
+      }
+      
+      const payload: GraphExtractionPayload = JSON.parse(cached);
+      
+      const rawNodes: RawNode[] = [];
+      const rawEdges: RawEdge[] = [];
+      
+      if (payload.persons) {
+        payload.persons.forEach(p => {
+          rawNodes.push({
+            id: p.id || `person-${Math.random()}`,
+            type: "person",
+            position: { x: 100, y: 100 },
+            data: {
+              name: p.name,
+              risk_score: p.risk_score,
+              tier: p.hierarchy_tier === "Leader" ? 1 : 2,
+              is_kingpin: p.is_kingpin || p.hierarchy_tier === "Leader",
+              visual_weight: (p.is_kingpin || p.hierarchy_tier === "Leader") ? "kingpin" : "standard"
+            }
+          });
+        });
+      }
+      
+      if (payload.objects) {
+        payload.objects.forEach(o => {
+          rawNodes.push({
+            id: o.id || `object-${Math.random()}`,
+            type: o.type.toLowerCase(),
+            position: { x: 100, y: 100 },
+            data: {
+              type: o.type,
+              identifier_value: o.identifier_value,
+              name: o.identifier_value,
+              is_burner: o.is_burner
+            }
+          });
+        });
+      }
+      
+      if (payload.locations) {
+        payload.locations.forEach(l => {
+          rawNodes.push({
+            id: l.id || `location-${Math.random()}`,
+            type: "location",
+            position: { x: 100, y: 100 },
+            data: {
+              name: l.name,
+              type: "location",
+              identifier_value: l.activity_type
+            }
+          });
+        });
+      }
+      
+      if (payload.relationships) {
+        payload.relationships.forEach(r => {
+          rawEdges.push({
+            source: r.source_id,
+            target: r.target_id,
+            label: r.relation_type,
+            data: r.properties as Record<string, unknown>
+          });
+        });
       }
 
-      const data = await res.json();
-
-      if (data && Array.isArray(data.nodes) && data.nodes.length > 0) {
-        const parsedNodes = (data.nodes as RawNode[]).map(processBackendNode);
+      if (rawNodes.length > 0) {
+        const parsedNodes = rawNodes.map(processBackendNode);
         const layoutedNodes = calculateRadialLayout(parsedNodes);
 
         const nodeWeights = new Map(
           layoutedNodes.map((node) => [node.id, (node.data as RawNodeData)?.visual_weight])
         );
 
-        const parsedEdges: Edge[] = (data.edges as RawEdge[] || []).map((edge) => {
+        const parsedEdges: Edge[] = rawEdges.map((edge) => {
           const sourceWeight = nodeWeights.get(String(edge.source));
           return {
             id: String(edge.id || `${edge.source}-${edge.target}`),
             source: String(edge.source),
             target: String(edge.target),
-            label: edge.label || edge.type || "RELATED_TO",
+            label: edge.label || "RELATED_TO",
             animated: sourceWeight === "kingpin",
             style: {
               stroke: sourceWeight === "kingpin" ? "#b91c1c" : sourceWeight === "mule" ? "#d97706" : "#6366f1",
@@ -193,7 +301,8 @@ export default function NetworkGraph() {
         setEdgeCount(0);
         setIsLive(false);
       }
-    } catch {
+    } catch (e) {
+      console.warn("Graph data parsing issue:", e);
       setNodes([]);
       setEdges([]);
       setNodeCount(0);
@@ -207,12 +316,12 @@ export default function NetworkGraph() {
   useEffect(() => {
     let isSubscribed = true;
 
-    async function loadInitialGraph() {
+    function loadInitialGraph() {
       if (!isSubscribed) return;
-      await fetchGraphData();
+      fetchGraphData();
     }
 
-    void loadInitialGraph();
+    loadInitialGraph();
 
     return () => {
       isSubscribed = false;
@@ -220,8 +329,7 @@ export default function NetworkGraph() {
   }, [fetchGraphData]);
 
   const handleManualRefresh = () => {
-    setIsLoading(true);
-    void fetchGraphData();
+    fetchGraphData();
   };
 
   return (
@@ -237,7 +345,7 @@ export default function NetworkGraph() {
           {isLive ? (
             <>
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
-              <span>Neo4j Live Sync ({nodeCount}N / {edgeCount}E)</span>
+              <span>Neo4j Extracted Source ({nodeCount}N / {edgeCount}E)</span>
             </>
           ) : (
             <>
@@ -252,7 +360,7 @@ export default function NetworkGraph() {
           onClick={handleManualRefresh}
           disabled={isLoading}
           className="p-1.5 rounded-md bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 shadow-xs transition-colors cursor-pointer disabled:opacity-50"
-          title="Refresh Graph from Neo4j"
+          title="Refresh Graph from Data"
         >
           <RefreshCw className={`w-3.5 h-3.5 ${isLoading ? "animate-spin text-blue-600" : ""}`} />
         </button>
