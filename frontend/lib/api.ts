@@ -13,23 +13,28 @@ export const api = {
     try {
       const response = await fetch(`${API_BASE_URL}/`, {
         cache: "no-store",
-        headers: { "Accept": "application/json" },
+        headers: { 
+          "Accept": "application/json",
+          "ngrok-skip-browser-warning": "true" 
+        },
       });
       if (!response.ok) throw new Error(`Health check failed: ${response.statusText}`);
       return await response.json();
     } catch (error) {
-      console.error("API checkHealth error:", error);
+      console.warn("API checkHealth offline or unreachable:", error);
       throw error;
     }
   },
 
   async extractNarrative(text: string) {
     try {
+      // Fixed: Pointing to the correct text extraction route
       const response = await fetch(`${API_BASE_URL}/api/ai/extract-fir`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           "Accept": "application/json",
+          "ngrok-skip-browser-warning": "true"
         },
         body: JSON.stringify({ text }),
       });
@@ -69,8 +74,11 @@ export const api = {
     formData.append("file", file);
 
     try {
-      const response = await fetch(`${API_BASE_URL}/api/ai/upload-intelligence-file`, {
+      const response = await fetch(`${API_BASE_URL}/api/v1/upload-case-file`, {
         method: "POST",
+        headers: {
+          "ngrok-skip-browser-warning": "true"
+        },
         body: formData,
       });
 
@@ -106,7 +114,10 @@ export const api = {
     try {
       const response = await fetch(`${API_BASE_URL}/api/v1/graph-data`, {
         cache: "no-store",
-        headers: { "Accept": "application/json" },
+        headers: { 
+            "Accept": "application/json",
+            "ngrok-skip-browser-warning": "true"
+        },
       });
 
       if (!response.ok) throw new Error(`Failed to fetch graph data: ${response.statusText}`);
