@@ -202,6 +202,12 @@ docker compose up -d
 uvicorn main:app --reload
 ```
 
+After the databases are healthy, import the generated 200-case manifest:
+
+```bash
+python scripts/import_cases.py
+```
+
 Copy `.env.example` to `.env` and fill in your local Neo4j and Postgres credentials before
 starting — each teammate runs their own local database via Docker, not a shared instance.
 

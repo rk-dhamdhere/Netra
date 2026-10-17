@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 # Import your custom vector logic!
 from backend.app.services.vector_service import search_nearest_faces
@@ -8,30 +8,13 @@ router = APIRouter()
 
 # Define the expected JSON payload from the frontend
 class FaceSearchQuery(BaseModel):
-    embedding: list[float]
-    limit: int = 5
+    embedding: list[float] = Field(min_length=1)
+    limit: int = Field(default=5, ge=1, le=100)
 
 @router.post("/search-face")
-async def search_face(payload: dict):
-    """
-    Searches for matching face embeddings in PostgreSQL with offline fallback.
-    """
+async def search_face(payload: FaceSearchQuery):
     try:
-        # Your existing PostgreSQL / pgvector connection and query execution code goes here
-        # with psycopg2.connect(...) as conn:
-        #     ...
-        raise Exception("Database offline simulation") # Remove this line when real DB is up
+        matches = search_nearest_faces(payload.embedding, payload.limit)
+        return {"status": "success", "matches": matches}
     except Exception as e:
-        print(f"[WARNING] PostgreSQL vector search bypassed: {e}")
-        return {
-            "status": "bypassed",
-            "message": "PostgreSQL offline; returning mock match result for dry run.",
-            "matches": [
-                {
-                    "suspect_id": "suspect_vikram_shinde_01",
-                    "name": "Vikram Shinde",
-                    "confidence_score": 0.985,
-                    "tier": "Primary"
-                }
-            ]
-        }
+        raise HTTPException(status_code=503, detail=f"Face search database unavailable: {e}") from e

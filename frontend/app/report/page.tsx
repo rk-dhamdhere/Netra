@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { 
   FileText, 
@@ -10,7 +10,6 @@ import {
   ShieldAlert,
   ArrowLeft,
   Sparkles,
-  CheckCircle2
 } from "lucide-react";
 import GlobalHeader from "../../components/GlobalHeader";
 import dynamic from "next/dynamic";
@@ -19,30 +18,33 @@ const NetworkGraph = dynamic(() => import("../../components/NetworkGraph"), { ss
 const LiveHeatmap = dynamic(() => import("../../components/LiveHeatmap"), { ssr: false });
 
 export default function TechnicalReportPage() {
-  const [hasNewIntel, setHasNewIntel] = useState(false);
-  
-  const [metrics, setMetrics] = useState({ persons: 0, objects: 0, locations: 0, relationships: 0 });
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setHasNewIntel(sessionStorage.getItem("netra_new_intel_added") === "true");
-      
-      const cached = sessionStorage.getItem("netra_extracted_data");
-      if (cached) {
-        try {
-          const parsed = JSON.parse(cached);
-          setMetrics({
-            persons: parsed.persons?.length || 0,
-            objects: parsed.objects?.length || 0,
-            locations: parsed.locations?.length || 0,
-            relationships: parsed.relationships?.length || 0,
-          });
-        } catch (e) {
-          console.error(e);
-        }
-      }
+  const [hasNewIntel] = useState(() =>
+    typeof window !== "undefined" &&
+    sessionStorage.getItem("netra_new_intel_added") === "true"
+  );
+  const [metrics] = useState(() => {
+    if (typeof window === "undefined") {
+      return { persons: 0, objects: 0, locations: 0, relationships: 0 };
     }
-  }, []);
+
+    const cached = sessionStorage.getItem("netra_extracted_data");
+    if (!cached) {
+      return { persons: 0, objects: 0, locations: 0, relationships: 0 };
+    }
+
+    try {
+      const parsed = JSON.parse(cached);
+      return {
+        persons: parsed.persons?.length || 0,
+        objects: parsed.objects?.length || 0,
+        locations: parsed.locations?.length || 0,
+        relationships: parsed.relationships?.length || 0,
+      };
+    } catch (error) {
+      console.error("Unable to read cached extraction data:", error);
+      return { persons: 0, objects: 0, locations: 0, relationships: 0 };
+    }
+  });
 
   return (
     <div className="min-h-screen bg-[#f1f5f9] flex flex-col antialiased text-slate-800">

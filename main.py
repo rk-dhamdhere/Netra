@@ -23,10 +23,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Attach your new routes here!
 app.include_router(graph_routes.router, prefix="/api/v1")
 app.include_router(search_routes.router, prefix="/api/v1")
-app.include_router(ai_routes.router)
+app.include_router(ai_routes.router, prefix="/api/ai")
 
 def process_file_task(filename: str, file_bytes: bytes):
     try:

@@ -87,7 +87,7 @@ async def process_mugshot_endpoint(
             
         if insert_facial_embedding:
             try:
-                insert_facial_embedding(face_vector, suspect_id)
+                insert_facial_embedding(suspect_id, face_vector)
             except Exception as db_err:
                 print(f"[WARNING] Database insertion bypassed: {db_err}")
             
